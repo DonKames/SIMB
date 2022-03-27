@@ -2,17 +2,27 @@
 import { Button, Card, CardBody, CardTitle, Col, Container, Form, Input } from "reactstrap";
 
 export const LoginScreen = () => {
+
+    const dispatch = useDispatch();
+
+    const { loading } = useSelector(state => state.ui);
+
+    const [formValues, handleInputChange] = useForm({
+        email: 'camilo@hotmail.com',
+        password: '123456'
+    });
+
     return (
         <Container
             className='vh-100 d-flex justify-content-center align-items-center bg-primary'
             fluid
         >
-            <Col className='col-12 col-md-4 col-xxl-2'>
+            <Col className='col-10 col-md-4 col-xxl-2'>
                 <Card
-                    className='text-center d-flex justify-content-center'
+                    className='d-flex justify-content-center'
                 >
                     <CardBody>
-                        <CardTitle tag="h5">
+                        <CardTitle className='text-center' tag="h5">
                             Login
                         </CardTitle>
                         <Form
@@ -23,7 +33,7 @@ export const LoginScreen = () => {
                                 placeholder='E-mail'
                                 name='email'
                                 autoComplete='off'
-                                className='mb-3 border-top-0 border-end-0 border-start-0'
+                                className='mb-3'
                             /*value={email}*/
                             /*onChange={handleInputChange}*/
                             />
@@ -48,17 +58,15 @@ export const LoginScreen = () => {
                             <hr />
                             <div className='auth__social-networks'>
                                 <p>Ingresa con tu cuenta de:</p>
-                                <div
-                                    className="google-btn"
+                                <Card
+                                    className="google-btn bg-primary"
                                 /*onClick={handleGoogleLogin}*/
                                 >
-                                    <div className="google-icon-wrapper">
-                                        <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />
+                                    <div className='d-flex align-items-center'>
+                                        <img className="google-icon bg-white h-100 rounded p-1" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />
+                                        <span className='mb-n1 flex-fill fw-bold text-center align-middle text-white'>Ingresar con GOOGLE</span>
                                     </div>
-                                    <p className="btn-text">
-                                        <b>Ingresar con GOOGLE</b>
-                                    </p>
-                                </div>
+                                </Card>
                             </div>
                             <Link
                                 className='link'

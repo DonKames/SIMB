@@ -6,6 +6,9 @@ import App from './App';
 import { SimbApp } from './SimbApp';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import './styles/styles.scss';
+//import './styles/stylesCss.css';
+
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 const rootElement = document.getElementById('root');

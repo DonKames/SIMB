@@ -1,13 +1,13 @@
 ﻿import React from 'react';
-//import { Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 
 import { AppRouter } from './components/routers/AppRouter';
-//import { store } from './store/store';
+import { store } from './store/store';
 
 export const SimbApp = () => {
     return (
-        //<Provider store={store}>
+        <Provider store={store}>
             <AppRouter />
-        //</Provider>
+        </Provider>
     )
 };
