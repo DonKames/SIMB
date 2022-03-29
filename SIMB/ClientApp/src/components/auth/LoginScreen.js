@@ -1,5 +1,8 @@
-﻿import { Link } from "react-router-dom";
+﻿import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { Button, Card, CardBody, CardTitle, Col, Container, Form, Input } from "reactstrap";
+
+import { useForm } from '../../hooks/useForm';
 
 export const LoginScreen = () => {
 
@@ -11,6 +14,8 @@ export const LoginScreen = () => {
         email: 'camilo@hotmail.com',
         password: '123456'
     });
+
+    const { email, password } = formValues;
 
     return (
         <Container
@@ -34,8 +39,8 @@ export const LoginScreen = () => {
                                 name='email'
                                 autoComplete='off'
                                 className='mb-3'
-                            /*value={email}*/
-                            /*onChange={handleInputChange}*/
+                                value={email}
+                                onChange={handleInputChange}
                             />
                             <Input
                                 type='password'
@@ -43,20 +48,20 @@ export const LoginScreen = () => {
                                 name='password'
                                 autoComplete='current-password'
                                 className='mb-3'
-                            /*value={password}*/
-                            /*onChange={handleInputChange}*/
+                                value={password}
+                                onChange={handleInputChange}
                             />
                             <div className='d-grid'>
                                 <Button
                                     color='primary'
                                     block
-                                /*disabled={loading}*/
+                                    disabled={loading}
                                 >
                                     Ingresar
                                 </Button>
                             </div>
                             <hr />
-                            <div className='auth__social-networks'>
+                            <div>
                                 <p>Ingresa con tu cuenta de:</p>
                                 <Card
                                     className="google-btn bg-primary"
