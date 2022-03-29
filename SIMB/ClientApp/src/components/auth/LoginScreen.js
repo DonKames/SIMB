@@ -2,6 +2,8 @@
 import { Link } from "react-router-dom";
 import { Button, Card, CardBody, CardTitle, Col, Container, Form, Input } from "reactstrap";
 
+
+import { /*startGoogleLogin,*/ startLoginEmailPassword } from '../../actions/auth';
 import { useForm } from '../../hooks/useForm';
 
 export const LoginScreen = () => {
@@ -10,12 +12,17 @@ export const LoginScreen = () => {
 
     const { loading } = useSelector(state => state.ui);
 
-    const [formValues, handleInputChange] = useForm({
+    const [ formValues, handleInputChange ] = useForm({
         email: 'camilo@hotmail.com',
         password: '123456'
     });
 
     const { email, password } = formValues;
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        dispatch( startLoginEmailPassword( email, password ) );
+    };
 
     return (
         <Container
@@ -31,7 +38,7 @@ export const LoginScreen = () => {
                             Login
                         </CardTitle>
                         <Form
-                        /*onSubmit={handleLogin}*/
+                            onSubmit={handleLogin}
                         >
                             <Input
                                 type='email'
@@ -68,7 +75,7 @@ export const LoginScreen = () => {
                                 /*onClick={handleGoogleLogin}*/
                                 >
                                     <div className='d-flex align-items-center'>
-                                        <img className="google-icon bg-white h-100 rounded p-1" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />
+                                        <img className="google-icon bg-white h-auto rounded p-1" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />
                                         <span className='mb-n1 flex-fill fw-bold text-center align-middle text-white'>Ingresar con GOOGLE</span>
                                     </div>
                                 </Card>
