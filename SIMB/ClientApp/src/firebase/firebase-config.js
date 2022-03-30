@@ -2,7 +2,7 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
-console.log(process.env)
+//console.log(process.env)
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_APIKEY,

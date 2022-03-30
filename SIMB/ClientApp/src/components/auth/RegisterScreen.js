@@ -1,7 +1,59 @@
-﻿import { Link } from "react-router-dom";
-import { Button, Card, CardBody, CardTitle, Col, Container, Form, Input } from "reactstrap"
+﻿import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Button, Card, CardBody, CardTitle, Col, Container, Form, Input } from 'reactstrap';
+import validator from 'validator';
+
+import { removeError, setError } from '../../actions/ui';
+import { startRegisterNameEmailPass } from '../../actions/auth';
+import { useForm } from '../../hooks/useForm';
 
 export const RegisterScreen = () => {
+
+    const dispatch = useDispatch();
+
+    const { msgError } = useSelector(state => state.ui);
+
+    const [formValues, handleInputChange] = useForm({
+        name: 'kames',
+        email: 'camilo@hotmail.com',
+        password: '123456',
+        repassword: '123456'
+    });
+
+    const { name, email, password, repassword } = formValues;
+
+    const handleRegister = (e) => {
+        e.preventDefault();
+        if ( isFormValid() ) {
+            dispatch( startRegisterNameEmailPass( name, email, password ) );
+        };
+    };
+
+    const isFormValid = () => {
+        if (name.trim().length === 0) {
+
+            const msgError = 'El nombre es Requerido';
+            dispatch(setError(msgError));
+            return false;
+
+        } else if (!validator.isEmail(email)) {
+
+            const msgError = 'Email Invalido';
+            dispatch(setError(msgError));
+            return false;
+
+        } else if (password !== repassword || password.length < 5) {
+
+            const msgError = 'Las passwords no son iguales o tienen menos de 6 caracteres.';
+            dispatch(setError(msgError));
+            return false;
+
+        }
+
+        dispatch(removeError());
+        return true;
+    }
+
     return (
         <Container
             className='vh-100 d-flex justify-content-center align-items-center bg-primary'
@@ -13,10 +65,11 @@ export const RegisterScreen = () => {
                 >
                     <CardBody>
                         <CardTitle tag="h5">
-                            Registrar
+                            Registro
                         </CardTitle>
                         <Form
-                        /*onSubmit={handleLogin}*/
+                            onSubmit={handleRegister}
+                            className='animate__animated animate__fadeIn animate__faster'
                         >
                             <Input
                                 type='text'
@@ -24,8 +77,8 @@ export const RegisterScreen = () => {
                                 name='name'
                                 autoComplete='off'
                                 className='mb-3 border-top-0 border-end-0 border-start-0'
-                            /*value={name}*/
-                            /*onChange={handleInputChange}*/
+                                value={name}
+                                onChange={handleInputChange}
                             />
                             <Input
                                 type='text'
@@ -33,8 +86,8 @@ export const RegisterScreen = () => {
                                 name='email'
                                 className='mb-3 border-top-0 border-end-0 border-start-0'
                                 autoComplete='off'
-                                /*value={email}*/
-                                /*onChange={handleInputChange}*/
+                                value={email}
+                                onChange={handleInputChange}
                             />
                             <Input
                                 type='password'
@@ -42,8 +95,8 @@ export const RegisterScreen = () => {
                                 name='password'
                                 className='mb-3 border-top-0 border-end-0 border-start-0'
                                 autoComplete='current-password'
-                                /*value={password}*/
-                                /*onChange={handleInputChange}*/
+                                value={password}
+                                onChange={handleInputChange}
                             />
                             <Input
                                 type='password'
@@ -51,15 +104,14 @@ export const RegisterScreen = () => {
                                 name='repassword'
                                 className='mb-3 border-top-0 border-end-0 border-start-0'
                                 autoComplete='current-password'
-                                /*value={repassword}*/
-                                /*onChange={handleInputChange}*/
+                                value={repassword}
+                                onChange={handleInputChange}
                             />
                             <div className='d-grid'>
                                 <Button
                                     type='submit'
                                     color='primary'
                                     block
-                                /*disabled={loading}*/
                                 >
                                     Registrar
                                 </Button>

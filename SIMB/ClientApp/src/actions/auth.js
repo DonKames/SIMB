@@ -14,22 +14,22 @@ import {
 
 const auth = getAuth();
 
-//export const startRegisterNameEmailPass = (name, email, password) => {
-//    return (dispatch) => {
-//        createUserWithEmailAndPassword(auth, email, password)
-//            .then(async ({ user }) => {
-//                await updateProfile(user, {
-//                    displayName: name
-//                });
-//                dispatch(
-//                    login(user.uid, user.displayName)
-//                );
-//            })
-//            .catch(e => {
-//                Swal.fire('Error', 'Error en el registro', 'error');
-//            });
-//    }
-//};
+export const startRegisterNameEmailPass = (name, email, password) => {
+    return (dispatch) => {
+        createUserWithEmailAndPassword(auth, email, password)
+            .then(async ({ user }) => {
+                await updateProfile(user, {
+                    displayName: name
+                });
+                dispatch(
+                    login(user.uid, user.displayName)
+                );
+            })
+            .catch(e => {
+                Swal.fire('Error', 'Error en el registro', 'error');
+            });
+    }
+};
 
 export const startLoginEmailPassword = (email, password) => {
     return (dispatch) => {
