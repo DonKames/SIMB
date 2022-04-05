@@ -58,17 +58,17 @@ export const startLoginEmailPassword = (email, password) => {
     };
 };
 
-//export const startGoogleLogin = () => {
-//    return (dispatch) => {
-//        signInWithPopup(auth, googleAuthProvider)
-//            .then(({ user }) => {
-//                const { displayName, uid } = user;
-//                dispatch(
-//                    login(uid, displayName)
-//                )
-//            })
-//    }
-//}
+export const startGoogleLogin = () => {
+    return (dispatch) => {
+        signInWithPopup(auth, googleAuthProvider)
+            .then(({ user }) => {
+                const { displayName, uid } = user;
+                dispatch(
+                    login(uid, displayName)
+                )
+            })
+    }
+};
 
 export const login = (uid, displayName) => ({
     type: types.login,
@@ -78,14 +78,13 @@ export const login = (uid, displayName) => ({
     }
 });
 
-//export const logout = () => ({
-//    type: types.logout
-//})
+export const logout = () => ({
+    type: types.logout
+})
 
-//export const startLogout = () => {
-//    return async (dispatch) => {
-//        await signOut(auth);
-//        dispatch(logout());
-//        dispatch(notesLogout())
-//    };
-//};
+export const startLogout = () => {
+    return async (dispatch) => {
+        await signOut(auth);
+        dispatch(logout());
+    };
+};

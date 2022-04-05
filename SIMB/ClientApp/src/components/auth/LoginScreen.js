@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button, Card, CardBody, CardTitle, Col, Container, Form, Input } from "reactstrap";
 
 
-import { /*startGoogleLogin,*/ startLoginEmailPassword } from '../../actions/auth';
+import { startGoogleLogin, startLoginEmailPassword } from '../../actions/auth';
 import { useForm } from '../../hooks/useForm';
 
 export const LoginScreen = () => {
@@ -22,6 +22,10 @@ export const LoginScreen = () => {
     const handleLogin = (e) => {
         e.preventDefault();
         dispatch( startLoginEmailPassword( email, password ) );
+    };
+
+    const handleGoogleLogin = () => {
+        dispatch(startGoogleLogin());
     };
 
     return (
@@ -72,7 +76,7 @@ export const LoginScreen = () => {
                                 <p>Ingresa con tu cuenta de:</p>
                                 <Card
                                     className="google-btn bg-primary"
-                                /*onClick={handleGoogleLogin}*/
+                                    onClick={handleGoogleLogin}
                                 >
                                     <div className='d-flex align-items-center'>
                                         <img className="google-icon bg-white h-auto rounded p-1" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />
