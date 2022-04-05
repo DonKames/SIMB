@@ -1,9 +1,12 @@
-﻿
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+﻿import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
+
 import { login } from '../../actions/auth';
+import { Layout } from '../ui/Layout';
+import { NavBar } from '../ui/NavBar';
+import { HomeScreen } from '../warehouse/HomeScreen'
 import { PrivateRoutes } from './PrivateRoutes';
 import { PublicRoutes } from './PublicRoutes';
 
@@ -52,9 +55,12 @@ export const AppRouter = () => {
 
     return (
             <Routes>
-                <Route path='/auth/*' element={<PublicRoutes isLoggedIn={isLoggedIn} />} />
-                <Route path='/' element={<PrivateRoutes isLoggedIn={isLoggedIn} />} />
-                <Route path='*' element={<Navigate to='/auth/login' />} />
+                {/*<Route path='/auth/*' element={<PublicRoutes isLoggedIn={isLoggedIn} />} />*/}
+                {/*<Route path='/' element={<PrivateRoutes isLoggedIn={isLoggedIn} />} />*/}
+                {/*<Route path='*' element={<Navigate to='/auth/login' />} />*/}
+                <Route path='/' element={<Layout />} >
+                    <Route index element={ <HomeScreen /> } />
+                </Route>
             </Routes>
     );
 };
