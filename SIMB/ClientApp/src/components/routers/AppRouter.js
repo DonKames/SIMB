@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { login } from '../../actions/auth';
+import { LoginScreen } from '../auth/LoginScreen';
+import { RegisterScreen } from '../auth/RegisterScreen';
 import { Layout } from '../ui/Layout';
 import { NavBar } from '../ui/NavBar';
 import { HomeScreen } from '../warehouse/HomeScreen'
@@ -54,13 +56,16 @@ export const AppRouter = () => {
     }
 
     return (
-            <Routes>
-                {/*<Route path='/auth/*' element={<PublicRoutes isLoggedIn={isLoggedIn} />} />*/}
-                {/*<Route path='/' element={<PrivateRoutes isLoggedIn={isLoggedIn} />} />*/}
-                {/*<Route path='*' element={<Navigate to='/auth/login' />} />*/}
-                <Route path='/' element={<Layout />} >
-                    <Route index element={ <HomeScreen /> } />
-                </Route>
-            </Routes>
+        <Routes>
+            {/*<Route path='/auth/*' element={<PublicRoutes isLoggedIn={isLoggedIn} />} />*/}
+            {/*<Route path='/' element={<PrivateRoutes isLoggedIn={isLoggedIn} />} />*/}
+            {/*<Route path='*' element={<Navigate to='/auth/login' />} />*/}
+            <Route path='/' element={<Layout />} >
+                <Route index element={<HomeScreen />} />
+                <Route path='login' element={<LoginScreen />} />
+                <Route path='register' element={<RegisterScreen />} />
+                <Route path='*' element={<Navigate to='/' />} />
+            </Route>
+        </Routes>
     );
 };

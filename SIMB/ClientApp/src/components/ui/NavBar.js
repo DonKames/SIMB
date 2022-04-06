@@ -1,5 +1,7 @@
-﻿import {
+﻿import React from 'react';
+import {
     Collapse,
+    Container,
     DropdownItem,
     DropdownMenu,
     DropdownToggle,
@@ -11,45 +13,49 @@
     NavItem,
     NavLink,
     UncontrolledDropdown
-} from "reactstrap";
+} from 'reactstrap';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
 export const NavBar = () => {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <div className="container-fluid">
-                <a className="navbar-brand" href="#">Navbar</a>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">Link</a>
-                        </li>
-                        <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a className="dropdown-item" href="#">Action</a></li>
-                                <li><a className="dropdown-item" href="#">Another action</a></li>
-                                <li><hr className="dropdown-divider"/></li>
-                                <li><a className="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link disabled" href="#" tabIndex="-1" aria-disabled="true">Disabled</a>
-                        </li>
-                    </ul>
-                    <form className="d-flex">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"></input>
-                        <button className="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
-            </div>
-        </nav>
+        <Navbar
+            color="light"
+            expand="md"
+            container="md"
+            fixed="top"
+            light
+        >
+            <Container>
+                <NavbarBrand href="/" className='me-auto'>
+                    SIMB
+                </NavbarBrand>
+                <NavbarToggler onClick={function noRefCheck() { }} />
+                <Collapse navbar>
+                    <Nav
+                        className="ms-auto"
+                        navbar
+                    >
+                        <FontAwesomeIcon icon={faSun} className='my-auto' />
+                        <div className="form-check form-switch my-auto d-flex justify-content-center">
+                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"></input>
+                        </div>
+                        <FontAwesomeIcon icon={faMoon} className='my-auto' />
+                        <NavItem>
+                            <NavLink href="/login/">
+                                Ingresar
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="/register/">
+                                Registrarse
+                            </NavLink>
+                        </NavItem>
+                    </Nav>
+                </Collapse>
+            </Container>
+        </Navbar>
+
     )
 }
