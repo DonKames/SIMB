@@ -1,11 +1,11 @@
 ﻿import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button, Card, CardBody, CardTitle, Col, Container, Form, Input } from 'reactstrap';
 import validator from 'validator';
 
 import { removeError, setError } from '../../actions/ui';
 import { startRegisterNameEmailPass } from '../../actions/auth';
 import { useForm } from '../../hooks/useForm';
+import { Card, Col, Container, Form, Button } from 'react-bootstrap';
 
 export const RegisterScreen = () => {
 
@@ -63,15 +63,15 @@ export const RegisterScreen = () => {
                 <Card
                     className='text-center d-flex justify-content-center'
                 >
-                    <CardBody>
-                        <CardTitle tag="h5">
+                    <Card.Body>
+                        <Card.Title tag="h5">
                             Registro
-                        </CardTitle>
+                        </Card.Title>
                         <Form
                             onSubmit={handleRegister}
                             className='animate__animated animate__fadeIn animate__faster'
                         >
-                            <Input
+                            <Form.Control
                                 type='text'
                                 placeholder='Nombre'
                                 name='name'
@@ -80,7 +80,7 @@ export const RegisterScreen = () => {
                                 value={name}
                                 onChange={handleInputChange}
                             />
-                            <Input
+                            <Form.Control
                                 type='text'
                                 placeholder='E-mail'
                                 name='email'
@@ -89,7 +89,7 @@ export const RegisterScreen = () => {
                                 value={email}
                                 onChange={handleInputChange}
                             />
-                            <Input
+                            <Form.Control
                                 type='password'
                                 placeholder='Contraseña'
                                 name='password'
@@ -98,7 +98,7 @@ export const RegisterScreen = () => {
                                 value={password}
                                 onChange={handleInputChange}
                             />
-                            <Input
+                            <Form.Control
                                 type='password'
                                 placeholder='Re-Contraseña'
                                 name='repassword'
@@ -111,7 +111,6 @@ export const RegisterScreen = () => {
                                 <Button
                                     type='submit'
                                     color='primary'
-                                    block
                                 >
                                     Registrar
                                 </Button>
@@ -124,7 +123,7 @@ export const RegisterScreen = () => {
                                 Ya registrado?
                             </Link>
                         </Form>
-                    </CardBody>
+                    </Card.Body>
                 </Card>
             </Col>
         </Container>

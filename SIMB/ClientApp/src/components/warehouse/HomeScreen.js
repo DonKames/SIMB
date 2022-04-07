@@ -1,4 +1,6 @@
-﻿import { Container } from "reactstrap"
+﻿//import { Container } from "reactstrap";
+
+import { Container } from "react-bootstrap"
 
 export const HomeScreen = () => {
     return (

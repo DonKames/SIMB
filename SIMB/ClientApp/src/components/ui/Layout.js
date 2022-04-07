@@ -3,9 +3,9 @@ import { NavBar } from './NavBar';
 
 export const Layout = () => {
     return(
-        <>
-            <NavBar />
-            <Outlet />
-        </>
+        <div className='vh-100'>
+            <NavBar className=''/>
+            <Outlet className='h-100'/>
+        </div>
         )
 }
