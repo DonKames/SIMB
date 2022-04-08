@@ -118,7 +118,7 @@ export const RegisterScreen = () => {
                             <div className='mb-5'></div>
                             <Link
                                 className='link mt-5'
-                                to="/auth/login"
+                                to="/login"
                             >
                                 Ya registrado?
                             </Link>

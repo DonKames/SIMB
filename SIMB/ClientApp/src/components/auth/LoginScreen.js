@@ -58,7 +58,8 @@ export const LoginScreen = () => {
                             onChange={handleInputChange}
                         />
                         <div className='d-grid'>
-                            <Button
+                        <Button
+                                type='submit'
                                 color='primary'
                                 disabled={loading}
                             >
