@@ -30,7 +30,7 @@ export const LoginScreen = () => {
 
     return (
             <Card
-                className='position-absolute top-50 start-50 translate-middle col-10 col-md-4 col-xxl-2'
+            className='shadow position-absolute top-50 start-50 translate-middle col-10 col-md-4 col-xxl-2 animate__animated animate__fadeIn animate__faster'
             >
                 <Card.Body>
                     <Card.Title className='text-center' tag="h5">

@@ -42,6 +42,7 @@ export const HomeScreen = () => {
                         </Carousel.Caption>
                     </Carousel.Item>
                 </Carousel>
+                <>Se vienen Cositas UwU</>
             </Container>
         </>
     )

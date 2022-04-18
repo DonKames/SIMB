@@ -8,7 +8,9 @@ export const NavBar = () => {
     return (
         <Navbar bg="light" expand="lg">
             <Container>
-                <Link to="/">SIMB</Link>
+                <Navbar.Brand>
+                    <Link to="/">SIMB</Link>
+                </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">

@@ -6,6 +6,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { login } from '../../actions/auth';
 import { LoginScreen } from '../auth/LoginScreen';
 import { RegisterScreen } from '../auth/RegisterScreen';
+import { SubscribeScreen } from '../auth/SubscribeScreen';
 import { Layout } from '../ui/Layout';
 import { NavBar } from '../ui/NavBar';
 import { HomeScreen } from '../warehouse/HomeScreen'
@@ -64,6 +65,7 @@ export const AppRouter = () => {
                 <Route index element={<HomeScreen />} />
                 <Route path='login' element={<LoginScreen />} />
                 <Route path='register' element={<RegisterScreen />} />
+                <Route path='subscribe' element={<SubscribeScreen />} />
                 <Route path='*' element={<Navigate to='/' />} />
             </Route>
         </Routes>
