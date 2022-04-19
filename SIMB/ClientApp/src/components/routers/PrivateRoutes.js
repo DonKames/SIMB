@@ -1,8 +1,8 @@
 ﻿import { Navigate } from 'react-router-dom';
-import { WareHouseScreen } from '../warehouse/WareHouseScreen';
+import { PrivateRouter } from './PrivateRouter';
 
 export const PrivateRoutes = ({ isLoggedIn }) => {
     return (
-        isLoggedIn ? <WareHouseScreen /> : <Navigate to="../pbl/login" />
+        isLoggedIn ? <PrivateRouter /> : <Navigate to="../pbl/login" />
     )
 }
