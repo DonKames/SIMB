@@ -110,7 +110,6 @@ export const RegisterScreen = () => {
                             Registrar
                         </Button>
                     </div>
-                    <div className='mb-5'></div>
                     <Link
                         className='link mt-5'
                         to="/login"

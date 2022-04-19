@@ -1,32 +1,44 @@
-﻿import { Row, Col, Card, Container } from 'react-bootstrap';
+﻿import { Row, Col, Card, Container, Button } from 'react-bootstrap';
 
 export const SubscribeScreen = () => {
 
     return (
         <Container className="mt-2">
             <h1 className="text-center mb-1">Suscribir</h1>
-            <Row>
-                <Col xs={12} md={4}>
-                    <Card>
+            <Row className="justify-content-center">
+                <Col xs={12} md={8} lg={4}>
+                    <Card className="mb-3">
                         <Card.Body>
-                            <Card.Title>El Titulo del Card</Card.Title>
-                            <Card.Img variant="top" src="https://via.placeholder.com/800x400/20232a" />
+                            <Card.Title className="text-center">El Titulo del Card</Card.Title>
+                            <Card.Img src="https://via.placeholder.com/400x600/20232a" />
+                            <Card.Text className="mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem dui. Aenean et ex tempus, lobortis ante non, fringilla.</Card.Text>
+                            <div className="text-end">
+                                <Button variant="primary">Suscribir</Button>
+                            </div>
                         </Card.Body>
                     </Card>
                 </Col>
-                <Col>
-                    <Card>
+                <Col xs={12} md={8} lg={4}>
+                    <Card className="mb-3">
                         <Card.Body>
-                            <Card.Title>El Titulo del Card</Card.Title>
-                            <Card.Img variant="top" src="https://via.placeholder.com/800x400/20232a" />
+                            <Card.Title className="text-center">El Titulo del Card</Card.Title>
+                            <Card.Img src="https://via.placeholder.com/400x600/20232a" />
+                            <Card.Text className="mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem dui. Aenean et ex tempus, lobortis ante non, fringilla.</Card.Text>
+                            <div className="text-end">
+                                <Button variant="primary">Suscribir</Button>
+                            </div>
                         </Card.Body>
                     </Card>
                 </Col>
-                <Col>
-                    <Card>
+                <Col xs={12} md={8} lg={4}>
+                    <Card className="mb-3">
                         <Card.Body>
-                            <Card.Title>El Titulo del Card</Card.Title>
-                            <Card.Img variant="top" src="https://via.placeholder.com/800x400/20232a" />
+                            <Card.Title className="text-center">El Titulo del Card</Card.Title>
+                            <Card.Img src="https://via.placeholder.com/400x600/20232a" />
+                            <Card.Text className="mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem dui. Aenean et ex tempus, lobortis ante non, fringilla.</Card.Text>
+                            <div className="text-end">
+                                <Button variant="primary">Suscribir</Button>
+                            </div>
                         </Card.Body>
                     </Card>
                 </Col>

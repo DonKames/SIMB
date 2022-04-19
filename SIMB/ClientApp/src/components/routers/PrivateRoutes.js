@@ -3,6 +3,6 @@ import { WareHouseScreen } from '../warehouse/WareHouseScreen';
 
 export const PrivateRoutes = ({ isLoggedIn }) => {
     return (
-        isLoggedIn ? <WareHouseScreen /> : <Navigate to="auth/login" />
+        isLoggedIn ? <WareHouseScreen /> : <Navigate to="../pbl/login" />
     )
 }

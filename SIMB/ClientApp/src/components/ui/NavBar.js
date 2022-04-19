@@ -17,8 +17,8 @@ export const NavBar = () => {
                         <FontAwesomeIcon icon={faSun} className='my-auto' />
                         <Form.Switch className='d-flex justify-content-center' />
                         <FontAwesomeIcon icon={faMoon} className='my-auto' />
-                        <Link to="login" className='link-secondary me-1'>Ingresar</Link>
-                        <Link to="register" className='link-secondary'>Registrar</Link>
+                        <Link to="pbl/login" className='link-secondary me-1'>Ingresar</Link>
+                        <Link to="pbl/register" className='link-secondary'>Registrar</Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

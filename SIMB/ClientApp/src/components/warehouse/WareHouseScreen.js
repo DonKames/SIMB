@@ -1,5 +1,5 @@
 ﻿//import { Button } from 'reactstrap';
-import { Button } from 'bootstrap';
+import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { startLogout } from '../../actions/auth';
