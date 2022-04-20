@@ -112,7 +112,7 @@ export const RegisterScreen = () => {
                     </div>
                     <Link
                         className='link mt-5'
-                        to="/login"
+                        to="/pbl/login"
                     >
                         Ya registrado?
                     </Link>

@@ -81,7 +81,7 @@ export const LoginScreen = () => {
                         </div>
                         <Link
                             className='link'
-                            to="/register"
+                            to="/pbl/register"
                         >
                             Crear nueva Cuenta
                         </Link>
