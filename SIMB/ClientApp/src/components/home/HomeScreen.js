@@ -3,7 +3,7 @@
 export const HomeScreen = () => {
     return (
         <>
-            <Container className='bg-light'>
+            <Container className='bg-light animate__animated animate__fadeIn animate__faster'>
                 <h1 className='text-center'>Ah no pueo poner un h1?</h1>
                 <Carousel fade>
                     <Carousel.Item>

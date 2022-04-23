@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { login } from '../../actions/auth';
 import { Layout } from '../ui/Layout';
-import { HomeScreen } from '../warehouse/HomeScreen'
+import { HomeScreen } from '../home/HomeScreen'
 import { PrivateRoutes } from './PrivateRoutes';
 import { PublicRoutes } from './PublicRoutes';
 
