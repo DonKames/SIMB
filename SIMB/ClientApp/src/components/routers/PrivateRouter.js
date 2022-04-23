@@ -1,12 +1,16 @@
-﻿import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { SubscribeScreen } from "../auth/SubscribeScreen";
-import { WareHouseScreen } from "../warehouse/WareHouseScreen";
+import { ModulesScreen } from "../modules/ModulesScreen";
+import { WarehouseScreen } from "../modules/warehouse/WarehouseScreen";
+import { LogoutScreen } from "../modules/warehouse/LogoutScreen";
+import { ModulesRouter } from "./ModulesRouter";
 
 export const PrivateRouter = () => {
     return (
-        <Routes>
-            <Route path="subscribe" element={<SubscribeScreen />} />
-            <Route path="*" element={ <WareHouseScreen /> } />
-        </Routes>
+      <Routes>
+        <Route path="subscribe" element={<SubscribeScreen />} />
+        <Route path="modules/*" element={<ModulesRouter />} />
+        <Route path="*" element={<LogoutScreen />} />
+      </Routes>
     );
-}
+};

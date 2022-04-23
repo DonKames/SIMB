@@ -1,13 +1,9 @@
 ﻿import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
-import { ControlRouter } from './ControlRouter';
 import { login } from '../../actions/auth';
-import { LoginScreen } from '../auth/LoginScreen';
-import { RegisterScreen } from '../auth/RegisterScreen';
-import { SubscribeScreen } from '../auth/SubscribeScreen';
 import { Layout } from '../ui/Layout';
 import { HomeScreen } from '../warehouse/HomeScreen'
 import { PrivateRoutes } from './PrivateRoutes';

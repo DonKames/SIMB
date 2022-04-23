@@ -2,9 +2,9 @@
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import { startLogout } from '../../actions/auth';
+import { startLogout } from '../../../actions/auth';
 
-export const WareHouseScreen = () => {
+export const LogoutScreen = () => {
 
     const dispatch = useDispatch();
 
@@ -16,7 +16,7 @@ export const WareHouseScreen = () => {
     return (
         <>
             <h1>
-                WareHouseScreen
+                LogoutScreen
             </h1>
             <Button
                 color='primary'
