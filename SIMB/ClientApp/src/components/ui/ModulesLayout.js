@@ -1,10 +1,10 @@
 ﻿import { Outlet } from 'react-router-dom';
 import { NavBar } from './NavBar';
 
-export const Layout = () => {
+export const ModulesLayout = () => {
     return(
-        <div className='min-vh-100 container-fluid'>
-            <NavBar className=''/>
+        <div className='container-fluid'>
+            <NavBar />
             <Outlet />
         </div>
         );

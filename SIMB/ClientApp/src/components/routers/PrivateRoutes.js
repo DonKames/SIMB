@@ -1,4 +1,4 @@
-﻿import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { PrivateRouter } from './PrivateRouter';
 
 export const PrivateRoutes = ({ isLoggedIn }) => {

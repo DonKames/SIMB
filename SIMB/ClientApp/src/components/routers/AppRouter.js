@@ -1,4 +1,4 @@
-﻿import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
@@ -54,10 +54,6 @@ export const AppRouter = () => {
 
     return (
         <Routes>
-            {/*<Route path='/auth/*' element={<PublicRoutes isLoggedIn={isLoggedIn} />} />*/}
-            {/*<Route path='/' element={<PrivateRoutes isLoggedIn={isLoggedIn} />} />*/}
-            {/*<Route path='*' element={<Navigate to='/auth/login' />} />*/}
-
             {/*FUNCANDO*/}
             {/*<Route path='/' element={<Layout />} >*/}
             {/*    <Route index element={<HomeScreen />} />*/}

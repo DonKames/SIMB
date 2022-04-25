@@ -1,17 +1,17 @@
-﻿import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import validator from 'validator';
 
 import { removeError, setError } from '../../actions/ui';
 import { startRegisterNameEmailPass } from '../../actions/auth';
 import { useForm } from '../../hooks/useForm';
-import { Card, Col, Container, Form, Button } from 'react-bootstrap';
+import { Card, Form, Button } from 'react-bootstrap';
 
 export const RegisterScreen = () => {
 
     const dispatch = useDispatch();
 
-    const { msgError } = useSelector(state => state.ui);
+    //const { msgError } = useSelector(state => state.ui);
 
     const [formValues, handleInputChange] = useForm({
         name: 'kames',

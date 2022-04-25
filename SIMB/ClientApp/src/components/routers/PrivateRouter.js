@@ -1,9 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { SubscribeScreen } from "../auth/SubscribeScreen";
-import { ModulesScreen } from "../modules/ModulesScreen";
-import { WarehouseScreen } from "../modules/warehouse/WarehouseScreen";
 import { LogoutScreen } from "../modules/warehouse/LogoutScreen";
-import { ModulesRouter } from "./ModulesRouter";
+import { ModulesRouter } from "../modules/routers/ModulesRouter";
 
 export const PrivateRouter = () => {
     return (

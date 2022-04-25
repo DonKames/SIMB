@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Col, Row } from "react-bootstrap";
 
 export const ProfileNavBar = () => {
 
