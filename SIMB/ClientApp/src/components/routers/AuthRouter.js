@@ -1,4 +1,4 @@
-﻿import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { LoginScreen } from '../auth/LoginScreen';
 import { RegisterScreen } from '../auth/RegisterScreen';
 

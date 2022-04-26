@@ -1,4 +1,4 @@
-﻿import { Carousel, Container } from "react-bootstrap"
+import { Carousel, Container } from "react-bootstrap"
 
 export const HomeScreen = () => {
     return (
