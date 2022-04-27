@@ -8,7 +8,7 @@ import { ProfileNavBar } from './ProfileNavBar';
 export const NavBar = () => {
     return (
       <Row>
-        <Navbar bg="secondary" expand="lg">
+        <Navbar bg="secondary" expand="lg" className="bg-gradient">
           <Container>
             <Navbar.Brand>
               <Link to="/" className="navbar-brand">

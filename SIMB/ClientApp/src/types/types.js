@@ -16,5 +16,9 @@ export const types = {
     notesDelete: '[Notes] Delete note',
     notesLogoutCleaning: '[Notes] Logout Cleaning',
 
+    //Module Warehouse
     warehouseAddNew: '[Warehouse] Add New Warehouse',
+    warehousesLoad: '[Warehouse] Load Warehouses',
+
+    employeeAddNew: '[Employee] Add New Employee',
 };
