@@ -30,6 +30,11 @@ export const warehouseReducer = (state = initialState, action) => {
                 ...state,
                 employees: [ action.payload, ...state.employees ],
             };
+        case types.employeesLoad:
+            return {
+                ...state,
+                employees: action.payload,
+            };
         default:
             return state;
     }

@@ -21,4 +21,5 @@ export const types = {
     warehousesLoad: '[Warehouse] Load Warehouses',
 
     employeeAddNew: '[Employee] Add New Employee',
+    employeesLoad: '[Employee] Load Employees',
 };

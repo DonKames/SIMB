@@ -40,13 +40,10 @@ export const startLoadingWarehouses = () => {
 
 		const warehouses = [];
 
-		console.log("estamos pidiendo los datos");
 		const { uid } = getState().auth;
 		try {
-			console.log("estamos pidiendo los datos");
 			const warehousesSnapshot = await getDocs( collection( db, uid, "warehouse", "warehouses" ) );
 			warehousesSnapshot.forEach((doc) => {
-				console.log(doc.id);
 				warehouses.push({
 					id: doc.id,
 					...doc.data(),
@@ -110,7 +107,7 @@ export const startLoadingEmployees = () => {
 		try {
 			const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "employees" ) );
 			employeesSnapshot.forEach((doc) => {
-				console.log(doc.id);
+				console.log(doc.id, "=>", doc.data());
 				employees.push({
 					id: doc.id,
 					...doc.data(),
@@ -126,4 +123,7 @@ export const startLoadingEmployees = () => {
 	};
 };
 
-const loadEmployees = ( employees ) => ({});
+const loadEmployees = ( employees ) => ({
+	type: types.employeesLoad,
+	payload: employees,
+});

@@ -8,7 +8,7 @@ export const TBodyEmployees = () => {
 	return (
 		<tbody>
 			{employees.map(employee => (
-				<tr>
+				<tr key={employee.id}>
 					<td className="align-middle">{employee.rut}</td>
 					<td className="align-middle">{employee.name}</td>
 					<td className="align-middle">{employee.email}</td>

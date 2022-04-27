@@ -6,7 +6,7 @@ import { TableEmployees } from './TableEmployees';
 export const CardEmployees = () => {
     return (
         <>
-        	<Card>
+        	<Card className="h-100">
           		<Card.Body>
             		<Row>
               			<Col>
