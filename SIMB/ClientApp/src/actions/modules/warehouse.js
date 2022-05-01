@@ -3,36 +3,75 @@ import { db } from "../../firebase/firebase-config";
 import { types } from "../../types/types";
 
 
-export const startSavingWarehouse = (warehouse) => {
+export const startSavingWarehouse = ( warehouse ) => {
     
     return async ( dispatch, getState ) => {
 
-        const { uid } = getState().auth;
-
+		const { uid } = getState().auth;
 		warehouse.creationDate = new Date().getTime();
-
+		
     	try {
-      		const docRef = await addDoc(
-        	collection(db, uid, "warehouse", "warehouses"), warehouse);
 
-      		console.log(docRef);
+			const docRef = await addDoc( collection( db, uid, "warehouse", "warehouses" ), warehouse );
+			warehouse.id = docRef.id;
+			dispatch( saveWarehouse( warehouse ) );
 
-	  		warehouse.id = docRef.id;
-	  
-      		dispatch(saveWarehouse(warehouse));
+		} catch (error) {
+			console.log( error );
+		}
+	};
+};
+	
+export const startSavingEmployee = ( employee ) => {
+	return async ( dispatch, getState ) => {
+			
+		const { uid } = getState().auth;
+		employee.creationDate = new Date().getTime();
+	
+		try {
 
-    	} catch (error) {
-        console.log(error);
-      	}
-  	};
+			const docRef = await addDoc( collection( db, uid, "warehouse", "employees" ), employee );
+			employee.id = docRef.id;
+			dispatch( saveEmployee( employee ) );
+
+		} catch ( error ) {
+			console.log( error );
+		}
+	}
+};
+
+export const startSavingCategory = ( category ) => {
+
+	return async ( dispatch, getState ) => {
+
+		const { uid } = getState().auth;
+		category.creationDate = new Date().getTime();
+
+		try {
+
+			const docRef = await addDoc( collection( db, uid, "warehouse", "categories" ), category );
+			category.id = docRef.id;
+			dispatch( saveCategory( category ) );
+
+		} catch ( error ) {
+			console.log( error );
+		}
+	}
 };
 
 
+	
 export const saveWarehouse = ( warehouse ) => ({
-    type: types.warehouseAddNew,
-    payload: {...warehouse},
+	type: types.warehouseAddNew,
+   	payload: { ...warehouse },
 });
 
+
+
+export const saveCategory = ( category ) => ({
+	type: types.categoryAddNew,
+	payload: { ...category },
+});
 
 
 export const startLoadingWarehouses = () => {
@@ -67,28 +106,6 @@ const loadWarehouses = ( warehouses ) => ({
 
 
 
-export const startSavingEmployee = (employee) => {
-	return async ( dispatch, getState ) => {
-		
-		const { uid } = getState().auth;
-
-		employee.creationDate = new Date().getTime();
-
-		try {
-
-			const docRef = await addDoc(collection(db, uid, "warehouse", "employees"), employee);
-
-			console.log(docRef);
-
-			employee.id = docRef.id;
-
-			dispatch(saveEmployee(employee));
-
-		} catch (error) {
-			console.log(error);
-		}
-	}
-};
 
 
 const saveEmployee = ( employee ) => ({
@@ -107,7 +124,7 @@ export const startLoadingEmployees = () => {
 		try {
 			const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "employees" ) );
 			employeesSnapshot.forEach((doc) => {
-				console.log(doc.id, "=>", doc.data());
+				//console.log(doc.id, "=>", doc.data());
 				employees.push({
 					id: doc.id,
 					...doc.data(),

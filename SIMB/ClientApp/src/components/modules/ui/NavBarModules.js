@@ -17,7 +17,7 @@ export const NavBarModules = () => {
               <Link to="warehouse/admin">
                 <Button>Administrador</Button>
               </Link>
-              <Link to="/">
+              <Link to="warehouse/subadmin">
                 <Button>SubAdmin</Button>
               </Link>
               <Link to="/">
