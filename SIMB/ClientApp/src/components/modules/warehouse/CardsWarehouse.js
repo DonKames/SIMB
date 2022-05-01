@@ -7,7 +7,7 @@ export const CardsWarehouse = ( props ) => {
       		<Card.Body>
         		<Row>
             		<Col>
-                		<Card.Title className="align-middle">Bodegas</Card.Title>
+                		<Card.Title className="align-middle">{ props.title }</Card.Title>
               		</Col>
           			<Col md="auto">
             			{/* <ModalAddEmployee /> */}
@@ -15,7 +15,7 @@ export const CardsWarehouse = ( props ) => {
           			</Col>
             	</Row>
             	<Row>
-              		{props.table}
+              		{ props.table }
         		</Row>
       		</Card.Body>
         </Card>
