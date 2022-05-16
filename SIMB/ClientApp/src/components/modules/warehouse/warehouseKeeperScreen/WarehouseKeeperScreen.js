@@ -6,7 +6,7 @@ import { ModalAddCategory } from "./ModalAddCategory";
 import { ModalAddSubCategory } from "./ModalAddSubCategory";
 //import { CardCategories } from "./CardCategories"
 
-export const SubAdminScreen = () => {
+export const WarehouseKeeperScreen = () => {
 
 	const tHeadCategories = [
 		"ID",
@@ -44,4 +44,4 @@ export const SubAdminScreen = () => {
       </Col>
     </Row>
   );
-}
+};

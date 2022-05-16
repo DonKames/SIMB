@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const TBodiesWarehouse = ( slice ) => {
+export const TBodiesWarehouse = ( {slice} ) => {
   	return (
 		<tbody>
 	  		{

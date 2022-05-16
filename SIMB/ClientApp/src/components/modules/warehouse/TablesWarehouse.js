@@ -1,7 +1,7 @@
 import { Table } from "react-bootstrap";
 import { TBodiesWarehouse } from "./TBodiesWarehouse";
 
-export const TablesWarehouse = ( { tHead, slice } ) => {
+export const TablesWarehouse = ( { tHead, slice=[] } ) => {
   	return (
     	<Table>
 			<thead>

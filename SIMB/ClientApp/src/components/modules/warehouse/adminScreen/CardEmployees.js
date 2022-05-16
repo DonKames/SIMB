@@ -10,7 +10,7 @@ export const CardEmployees = () => {
           		<Card.Body>
             		<Row>
               			<Col>
-                			<Card.Title className="align-middle">Bodegas</Card.Title>
+                			<Card.Title className="align-middle">Empleados</Card.Title>
               			</Col>
               			<Col md="auto">
                 			<ModalAddEmployee />

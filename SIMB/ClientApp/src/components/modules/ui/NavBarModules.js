@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export const NavBarModules = () => {
     return (
       <Row>
-        <Navbar bg="primary" expand="lg" className="mw-100">
+        <Navbar bg="primary" expand="lg" className="mw-100 mb-3">
           <Navbar.Brand>
             <Link to="/pvt/modules/warehouse/" className="navbar-brand">
               TEST COMPANY

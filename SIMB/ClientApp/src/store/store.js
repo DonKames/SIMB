@@ -12,7 +12,6 @@ const reducers = combineReducers({
     auth: authReducer,
     ui: uiReducer,
     warehouse: warehouseReducer,
-    //notes: notesReducer
 });
 
 export const store = createStore(

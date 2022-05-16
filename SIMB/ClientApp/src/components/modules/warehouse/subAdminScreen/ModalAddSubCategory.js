@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { startSavingCategory } from "../../../../actions/modules/warehouse";
+import { startSavingSubCategory } from "../../../../actions/modules/warehouse";
 import { useForm } from "../../../../hooks/useForm";
 
-export const ModalAddCategory = () => {
+export const ModalAddSubCategory = () => {
 
 	const dispatch = useDispatch();
 
-	const [showAddForm, setShowAddForm] = useState(false);
+	const [ showAddForm, setShowAddForm ] = useState(false);
 
 	const [ formValues, handleInputChange, reset ] = useForm({
 		id: "",
@@ -22,36 +22,36 @@ export const ModalAddCategory = () => {
 		name,
 	};
 
-	const handleSaveCategory = (e) => {
+	const handleSaveSubCategory = (e) => {
 		e.preventDefault();
-		dispatch(startSavingCategory(category));
+		dispatch(startSavingSubCategory(category));
 		reset();
 	};
 
-	const handleOpenAddCategoryForm = () => {
+	const handleOpenAddSubCategoryForm = () => {
 		setShowAddForm(true);
 	};
 
-	const handleCloseAddCategoryForm = () => {
+	const handleCloseAddSubCategoryForm = () => {
 		setShowAddForm(false);
 	};
 
   	return (
       <>
-        <Button variant="primary" onClick={handleOpenAddCategoryForm}>
+        <Button variant="primary" onClick={handleOpenAddSubCategoryForm}>
           Agregar
         </Button>
-        <Modal show={showAddForm} onHide={handleCloseAddCategoryForm}>
-        	<Form onSubmit={handleSaveCategory}>
+        <Modal show={showAddForm} onHide={handleCloseAddSubCategoryForm}>
+        	<Form onSubmit={handleSaveSubCategory}>
             	<Modal.Header closeButton>
-              		<Modal.Title>Agregar Categoría</Modal.Title>
+              		<Modal.Title>Agregar Sub-Categoría</Modal.Title>
             	</Modal.Header>
             	<Modal.Body>
               	<Form.Group className="mb-3">
                 <Form.Label>ID</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="CAT-001"
+                  placeholder="SCAT-001"
                   name="id"
                   onChange={handleInputChange}
                   value={id}
@@ -69,7 +69,7 @@ export const ModalAddCategory = () => {
               </Form.Group>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="danger" onClick={handleCloseAddCategoryForm}>
+              <Button variant="danger" onClick={handleCloseAddSubCategoryForm}>
                 Cancelar
               </Button>
               <Button variant="primary" type="submit">

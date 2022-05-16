@@ -22,4 +22,10 @@ export const types = {
 
     employeeAddNew: '[Employee] Add New Employee',
     employeesLoad: '[Employee] Load Employees',
+
+    categoryAddNew: '[Category] Add New Category',
+    categoriesLoad: '[Category] Load Categories',
+
+    subCategoryAddNew: '[SubCategory] Add New SubCategory',
+    subCategoriesLoad: '[SubCategory] Load SubCategories',
 };
