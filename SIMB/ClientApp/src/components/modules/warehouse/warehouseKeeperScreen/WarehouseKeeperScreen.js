@@ -1,9 +1,9 @@
 import { Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { CardsWarehouse } from "../CardsWarehouse";
-import { TablesWarehouse } from "../TablesWarehouse";
-import { ModalAddCategory } from "./ModalAddCategory";
-import { ModalAddSubCategory } from "./ModalAddSubCategory";
+//import { TablesWarehouse } from "../TablesWarehouse";
+//import { ModalAddCategory } from "./ModalAddCategory";
+//import { ModalAddSubCategory } from "./ModalAddSubCategory";
 //import { CardCategories } from "./CardCategories"
 
 export const WarehouseKeeperScreen = () => {
@@ -31,17 +31,17 @@ export const WarehouseKeeperScreen = () => {
       <Col md="auto">
         <CardsWarehouse
           title="Categorías"
-          modal={<ModalAddCategory />}
-          table={<TablesWarehouse tHead={ tHeadCategories } slice={ categories } />}
+          // modal={<ModalAddCategory />}
+          // table={<TablesWarehouse tHead={ tHeadCategories } slice={ categories } />}
         />
       </Col>
-      <Col md="auto">
+      {/* <Col md="auto">
         <CardsWarehouse
           title="Sub-Categorías"
           modal={<ModalAddSubCategory />}
           table={<TablesWarehouse tHead={ tHeadSubCategories } slice={ subCategories } />}
         />
-      </Col>
+      </Col> */}
     </Row>
   );
 };
