@@ -30,7 +30,7 @@ export const WarehouseKeeperScreen = () => {
     <Row className="justify-content-md-evenly">
       <Col md="auto">
         <CardsWarehouse
-          title="Categorías"
+          title="Productos"
           // modal={<ModalAddCategory />}
           // table={<TablesWarehouse tHead={ tHeadCategories } slice={ categories } />}
         />

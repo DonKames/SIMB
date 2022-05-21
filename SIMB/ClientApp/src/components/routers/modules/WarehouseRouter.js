@@ -20,7 +20,7 @@ export const WarehouseRouter = () => {
 	    	<Route index element={<WarehouseScreen />} />
     		<Route path="admin" element={<AdminScreen />} />
     		<Route path="subadmin" element={<SubAdminScreen />} />
-    		<Route path="warehousekeeper" element={<WarehouseKeeperScreen />} />
+    		<Route path="keeper" element={<WarehouseKeeperScreen />} />
     	</Routes>
 	);
 };

@@ -1,53 +1,38 @@
-import { Row, Col, Table } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+
+import { CardsWarehouse } from "./CardsWarehouse";
+import { TablesWarehouse } from "./TablesWarehouse";
 
 export const WarehouseScreen = () => {
+
+	const tHeadProducts = [
+		"ID",
+		"Nombre",
+		"Categoría",
+		"Sub-Categoría",
+		"Cantidad",
+	];
+
+	const products = useSelector( state => state.warehouse.products );
+
   	return (
 	  <>
 		<Row>
-		  <Col>
-			<Table responsive>
-			  <thead>
-				<tr>
-				  <th>ID Producto</th>
-				  <th>Nombre Producto</th>
-				  <th>Categoría</th>
-				  <th>SubCategoría</th>
-				  <th>Cant</th>
-				</tr>
-			  </thead>
-			  <tbody>
-				<tr>
-				  <td>123</td>
-				  <td>Televisor Samsung 49"</td>
-				  <td>Electrodomésticos</td>
-				  <td>Televisores</td>
-				  <td>20</td>
-				</tr>
-			  </tbody>
-			</Table>
-		  </Col>
-		  <Col>
-			<Table responsive>
-			  <thead>
-				<tr>
-				  <th>Folio</th>
-				  <th>Nombre Producto</th>
-				  <th>Categoría</th>
-				  <th>SubCategoría</th>
-				  <th>Cant</th>
-				</tr>
-			  </thead>
-			  <tbody>
-				<tr>
-				  <td>123</td>
-				  <td>Televisor Samsung 49"</td>
-				  <td>Electrodomésticos</td>
-				  <td>Televisores</td>
-				  <td>20</td>
-				</tr>
-			  </tbody>
-			</Table>
-		  </Col>
+		<Col md="auto">
+        <CardsWarehouse
+          title="Productos"
+          // modal={<ModalAddCategory />}
+          table={<TablesWarehouse tHead={ tHeadProducts } slice={ products } />}
+        />
+      </Col>
+      {/* <Col md="auto">
+        <CardsWarehouse
+          title="Sub-Categorías"
+          modal={<ModalAddSubCategory />}
+          table={<TablesWarehouse tHead={ tHeadSubCategories } slice={ subCategories } />}
+        />
+      </Col> */}
 		  <Col xs="auto">La COL para la imagen</Col>
 		</Row>
 	  </>
