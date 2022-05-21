@@ -8,23 +8,26 @@ import { CardsWarehouse } from "../CardsWarehouse";
 
 export const WarehouseKeeperScreen = () => {
 
-	const tHeadCategories = [
+	const tHeadProduct = [
+		"Nombre",
+    "Categoría",
+    "Subcategoría",
+    "Precio",
+    "Stock",
+    "Acciones"
+	];
+
+	const tHeadProducts = [
 		"ID",
 		"Nombre",
 		"Acciones",
 	];
 
-	const tHeadSubCategories = [
-		"ID",
-		"Nombre",
-		"Acciones",
-	];
+	const product = useSelector( state => state.warehouse.product );
 
-	const categories = useSelector( state => state.warehouse.categories );
+	const products = useSelector( state => state.warehouse.products );
 
-	const subCategories = useSelector( state => state.warehouse.subCategories );
-
-	console.log( categories );
+	console.log( product );
 
 	return (
     <Row className="justify-content-md-evenly">
