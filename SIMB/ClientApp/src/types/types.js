@@ -28,4 +28,10 @@ export const types = {
 
     subCategoryAddNew: '[SubCategory] Add New SubCategory',
     subCategoriesLoad: '[SubCategory] Load SubCategories',
+
+    productAddNew: '[Product] Add New Product',
+    productLoad: '[Product] Load Product',
+
+    productsAddNew: '[Products] Add New Products',
+    productsLoad: '[Products] Load Products',
 };

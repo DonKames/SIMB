@@ -79,6 +79,44 @@ export const startSavingSubCategory = ( subCategory ) => {
 };
 
 
+export const startSavingProduct = ( product ) => {
+	return async ( dispatch, getState ) => {
+
+		const { uid } = getState().auth;
+		product.creationDate = new Date().getTime();
+
+		try {
+			
+			const docRef = await addDoc( collection( db, uid, "warehouse", "product" ), product );
+			product.id = docRef.id;
+			dispatch( saveProduct( product ) );
+			
+		} catch ( error ) {
+			console.log( error );
+		}
+	}
+};
+
+
+export const startSavingProducts = ( products ) => {
+	return async ( dispatch, getState ) => {
+
+		const { uid } = getState().auth;
+		products.creationDate = new Date().getTime();
+
+		try {
+			
+			const docRef = await addDoc( collection( db, uid, "warehouse", "products" ), products );
+			products.id = docRef.id;
+			dispatch( saveProducts( products ) );
+			
+		} catch ( error ) {
+			console.log( error );
+		}
+	}
+};
+
+
 
 
 export const saveWarehouse = ( warehouse ) => ({
@@ -93,15 +131,27 @@ const saveEmployee = ( employee ) => ({
 });
 
 
-export const saveCategory = ( category ) => ({
+const saveCategory = ( category ) => ({
 	type: types.categoryAddNew,
 	payload: { ...category },
 });
 
 
-export const saveSubCategory = ( subCategory ) => ({
+const saveSubCategory = ( subCategory ) => ({
 	type: types.subCategoryAddNew,
 	payload: { ...subCategory },
+});
+
+
+const saveProduct = ( product ) => ({
+	type: types.productAddNew,
+	payload: { ...product },
+});
+
+
+const saveProducts = ( products ) => ({
+	type: types.productsAddNew,
+	payload: { ...products },
 });
 
 
@@ -213,6 +263,60 @@ export const startLoadingSubCategories = () => {
 };
 
 
+export const startLoadingProduct = () => {
+	return async ( dispatch, getState ) => {
+		
+		const product = [];
+		
+		const { uid } = getState().auth;
+		
+		try {
+			const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "product" ) );
+			employeesSnapshot.forEach((doc) => {
+				//console.log(doc.id, "=>", doc.data());
+				product.push({
+					id: doc.id,
+					...doc.data(),
+				});
+			});
+			
+			console.log( product );
+			
+			dispatch(loadProduct( product ));
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+
+export const startLoadingProducts = () => {
+	return async ( dispatch, getState ) => {
+		
+		const products = [];
+		
+		const { uid } = getState().auth;
+		
+		try {
+			const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "products" ) );
+			employeesSnapshot.forEach((doc) => {
+				//console.log(doc.id, "=>", doc.data());
+				products.push({
+					id: doc.id,
+					...doc.data(),
+				});
+			});
+			
+			console.log( products );
+			
+			dispatch(loadProducts( products ));
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+
 
 
 const loadEmployees = ( employees ) => ({
@@ -236,4 +340,16 @@ const loadCategories = ( categories ) => ({
 const loadSubCategories = ( subCategories ) => ({
 	type: types.subCategoriesLoad,
 	payload: subCategories,
+});
+
+
+const loadProduct = ( product ) => ({
+	type: types.productLoad,
+	payload: product,
+});
+
+
+const loadProducts = ( products ) => ({
+	type: types.productsLoad,
+	payload: products,
 });

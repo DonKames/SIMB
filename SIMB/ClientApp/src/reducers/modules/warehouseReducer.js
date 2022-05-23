@@ -5,6 +5,8 @@ const initialState = {
     employees: [],
     categories: [],
     subCategories: [],
+    products: [],
+    product: [],
 };
 
 export const warehouseReducer = (state = initialState, action) => {
@@ -60,6 +62,30 @@ export const warehouseReducer = (state = initialState, action) => {
             return {
                 ...state,
                 subCategories: action.payload,
+            };
+
+
+        case types.productAddNew:
+            return {
+                ...state,
+                product: [ action.payload, ...state.product ],
+            };
+        case types.productLoad:
+            return {
+                ...state,
+                product: action.payload,
+            };
+
+
+        case types.productsAddNew:
+            return {
+                ...state,
+                products: [ action.payload, ...state.products ],
+            };
+        case types.productsLoad:
+            return {
+                ...state,
+                products: action.payload,
             };
 
 

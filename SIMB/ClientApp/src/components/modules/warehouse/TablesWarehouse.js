@@ -1,7 +1,7 @@
 import { Table } from "react-bootstrap";
 import { TBodiesWarehouse } from "./TBodiesWarehouse";
 
-export const TablesWarehouse = ( { tHead, slice=[] } ) => {
+export const TablesWarehouse = ( { tHead, tBody } ) => {
   	return (
     	<Table>
 			<thead>
@@ -11,7 +11,7 @@ export const TablesWarehouse = ( { tHead, slice=[] } ) => {
 					} )}
 				</tr>
 			</thead>
-			<TBodiesWarehouse slice={ slice }/>
+			{tBody}
     	</Table>
   	);
 };

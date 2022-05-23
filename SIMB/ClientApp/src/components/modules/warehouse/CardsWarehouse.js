@@ -1,21 +1,20 @@
 import { Card, Col, Row } from "react-bootstrap"
 
 
-export const CardsWarehouse = ( props ) => {
+export const CardsWarehouse = ( { title, modal, table } ) => {
   	return (
     	<Card className="h-100">
       		<Card.Body>
         		<Row>
             		<Col>
-                		<Card.Title className="align-middle">{ props.title }</Card.Title>
+                		<Card.Title className="align-middle">{ title }</Card.Title>
               		</Col>
           			<Col md="auto">
-            			{/* <ModalAddEmployee /> */}
-						{ props.modal }
+						{ modal }
           			</Col>
             	</Row>
             	<Row>
-              		{ props.table }
+              		{ table }
         		</Row>
       		</Card.Body>
         </Card>

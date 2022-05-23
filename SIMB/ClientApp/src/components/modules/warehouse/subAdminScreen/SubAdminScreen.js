@@ -2,6 +2,7 @@ import { Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { CardsWarehouse } from "../CardsWarehouse";
 import { TablesWarehouse } from "../TablesWarehouse";
+import { TBodiesWarehouse } from "../TBodiesWarehouse";
 import { ModalAddCategory } from "./ModalAddCategory";
 import { ModalAddSubCategory } from "./ModalAddSubCategory";
 //import { CardCategories } from "./CardCategories"
@@ -32,14 +33,14 @@ export const SubAdminScreen = () => {
         <CardsWarehouse
           title="Categorías"
           modal={<ModalAddCategory />}
-          table={<TablesWarehouse tHead={ tHeadCategories } slice={ categories } />}
+          table={<TablesWarehouse tHead={ tHeadCategories } tBody={<TBodiesWarehouse slice={ categories } />} />}
         />
       </Col>
       <Col md="auto">
         <CardsWarehouse
           title="Sub-Categorías"
           modal={<ModalAddSubCategory />}
-          table={<TablesWarehouse tHead={ tHeadSubCategories } slice={ subCategories } />}
+          table={<TablesWarehouse tHead={ tHeadSubCategories } tBody={<TBodiesWarehouse slice={ subCategories} />} />}
         />
       </Col>
     </Row>
