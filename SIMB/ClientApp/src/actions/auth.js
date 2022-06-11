@@ -45,6 +45,7 @@ export const startLoginEmailPassword = (email, password) => {
                 switch (e.code) {
                     case 'auth/user-not-found':
 
+                    // eslint-disable-next-line no-fallthrough
                     case 'auth/wrong-password':
                         Swal.fire('ERROR', 'Usuario o Contraseña Incorrecta', 'error');
                         break;

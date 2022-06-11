@@ -7,6 +7,7 @@ export const ProfileNavBar = () => {
 
     const auth = useSelector(state => state.auth);
 
+    console.log(auth);
     if (auth.name) {
         return (
           <>
@@ -16,8 +17,9 @@ export const ProfileNavBar = () => {
             <p className="my-auto me-2">
               {auth.name[0].toUpperCase() + auth.name.slice(1).toLowerCase()}{" "}
             </p>
-
+            
             <FontAwesomeIcon icon={faUser} className="align-self-center" />
+            <img href={auth.photoURL}></img>
           </>
         );
     }

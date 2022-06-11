@@ -5,6 +5,7 @@ import { AdminScreen } from '../../modules/warehouse/adminScreen/AdminScreen';
 import { SubAdminScreen } from '../../modules/warehouse/subAdminScreen/SubAdminScreen';
 import { WarehouseKeeperScreen } from '../../modules/warehouse/warehouseKeeperScreen/WarehouseKeeperScreen';
 import { MainScreen } from '../../modules/warehouse/mainScreen/MainScreen';
+import { LayoutModules } from '../../modules/ui/LayoutModules';
 
 export const WarehouseRouter = () => {
 
@@ -18,11 +19,13 @@ export const WarehouseRouter = () => {
 	dispatch( startLoadingProducts() );
 
 	return (
-		<Routes>
-	    	<Route index element={<MainScreen />} />
-    		<Route path="admin" element={<AdminScreen />} />
-    		<Route path="subadmin" element={<SubAdminScreen />} />
-    		<Route path="keeper" element={<WarehouseKeeperScreen />} />
-    	</Routes>
-	);
+    <Routes>
+      <Route path="/" element={<LayoutModules />}>
+        <Route index element={<MainScreen />} />
+        <Route path="admin" element={<AdminScreen />} />
+        <Route path="subadmin" element={<SubAdminScreen />} />
+        <Route path="keeper" element={<WarehouseKeeperScreen />} />
+      </Route>
+    </Routes>
+  );
 };

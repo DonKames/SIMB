@@ -6,10 +6,8 @@ import { WarehouseRouter } from './WarehouseRouter';
 export const ModulesRouter = () => {
     return (
       <Routes>
-        <Route path="/" element={<LayoutModules />}>
-          <Route index element={<ModulesScreen />} />
-          <Route path="warehouse/*" element={<WarehouseRouter />} />
-        </Route>
+        <Route index element={<ModulesScreen />} />
+        <Route path="warehouse/*" element={<WarehouseRouter />} />
       </Routes>
     );
 };
