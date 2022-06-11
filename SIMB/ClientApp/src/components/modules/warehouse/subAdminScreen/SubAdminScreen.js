@@ -25,7 +25,7 @@ export const SubAdminScreen = () => {
 
 	const subCategories = useSelector( state => state.warehouse.subCategories );
 
-	console.log( categories );
+	//console.log( categories );
 
 	return (
     <Row className="justify-content-md-evenly">
