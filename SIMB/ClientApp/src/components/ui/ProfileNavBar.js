@@ -19,7 +19,7 @@ export const ProfileNavBar = () => {
             </p>
             
             <FontAwesomeIcon icon={faUser} className="align-self-center" />
-            <img href={auth.photoURL}></img>
+            <img src={auth.img} alt="Profile" />
           </>
         );
     }

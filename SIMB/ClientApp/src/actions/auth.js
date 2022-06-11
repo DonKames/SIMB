@@ -38,7 +38,8 @@ export const startLoginEmailPassword = (email, password) => {
 
         signInWithEmailAndPassword(auth, email, password)
             .then(({ user }) => {
-                dispatch(login(user.uid, user.displayName));
+                
+                dispatch(login(user.uid, user.displayName, user.photoURL ));
                 dispatch(finishLoading());
             })
             .catch(e => {
@@ -63,19 +64,21 @@ export const startGoogleLogin = () => {
     return (dispatch) => {
         signInWithPopup(auth, googleAuthProvider)
             .then(({ user }) => {
-                const { displayName, uid } = user;
+                console.log(user + " - google login");
+                const { displayName, uid, photoURL } = user;
                 dispatch(
-                    login(uid, displayName)
+                    login(uid, displayName, photoURL)
                 )
             })
     }
 };
 
-export const login = (uid, displayName) => ({
+export const login = (uid, displayName, photoURL) => ({
     type: types.login,
     payload: {
         uid,
-        displayName
+        displayName,
+        photoURL,
     }
 });
 

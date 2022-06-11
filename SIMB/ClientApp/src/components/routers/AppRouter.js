@@ -26,7 +26,7 @@ export const AppRouter = () => {
             if (user?.uid) {
 
                 setIsLoggedIn(true);
-                dispatch(login(user.uid, user.displayName));
+                dispatch(login(user.uid, user.displayName, user.photoURL));
 
                 //ESTE TMBN FUNCA
                 // const notes = loadNotes( user.uid );
