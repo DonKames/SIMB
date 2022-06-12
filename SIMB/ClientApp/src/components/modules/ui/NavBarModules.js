@@ -1,8 +1,14 @@
 import React from 'react';
 import { DropdownButton, Dropdown, Nav, Navbar, Row, Button } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 export const NavBarModules = () => {
+
+	const warehouses = useSelector(state => state.warehouse.warehouses);
+
+	console.log(warehouses);
+
 		return (
 			<Row>
 				<Navbar bg="primary" expand="lg" className="mw-100 mb-3">
@@ -28,6 +34,13 @@ export const NavBarModules = () => {
 								id="dropdown-basic-button"
 								title="Bodegas"
 							>
+								{warehouses.map(warehouse => (
+									<Dropdown.Item key={warehouse.id}>
+										<Link to={`/pvt/modules/warehouse/${warehouse.id}`}>
+											{warehouse.name}
+										</Link>
+									</Dropdown.Item>
+								))}
 								<Dropdown.Item href="#/action-1">Action</Dropdown.Item>
 								<Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
 								<Dropdown.Item href="#/action-3">Something else</Dropdown.Item>

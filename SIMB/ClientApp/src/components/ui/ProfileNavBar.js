@@ -17,9 +17,11 @@ export const ProfileNavBar = () => {
             <p className="my-auto me-2">
               {auth.name[0].toUpperCase() + auth.name.slice(1).toLowerCase()}{" "}
             </p>
-            
+            {auth.img ? 
+            <img src={auth.img} alt="Profile" className="rounded-circle img-fluid" style={{height: 40}} />
+            :
             <FontAwesomeIcon icon={faUser} className="align-self-center" />
-            <img src={auth.img} alt="Profile" />
+            }
           </>
         );
     }
