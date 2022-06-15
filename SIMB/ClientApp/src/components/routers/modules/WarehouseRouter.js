@@ -18,6 +18,7 @@ export const WarehouseRouter = () => {
 	dispatch( startLoadingProduct() );
 	dispatch( startLoadingProducts() );
 
+// TODO:Agregar dispatch para cargar la bodega por defecto.
 	return (
     <Routes>
       <Route path="/" element={<LayoutModules />}>
