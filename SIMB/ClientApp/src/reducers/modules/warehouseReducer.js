@@ -1,7 +1,8 @@
 import { types } from "../../types/types";
 
 const initialState = {
-    warehouse: '',
+    
+    mainWarehouse: null, //Main Warehouse name.
     warehouses: [],
     employees: [],
     categories: [],

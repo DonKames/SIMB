@@ -19,6 +19,10 @@ export const types = {
     //Module Warehouse
     warehouseAddNew: '[Warehouse] Add New Warehouse',
     warehousesLoad: '[Warehouse] Load Warehouses',
+    warehouseDelete: '[Warehouse] Delete Warehouse',
+    warehouseUpdate: '[Warehouse] Update Warehouse',
+    warehouseLogoutCleaning: '[Warehouse] Logout Cleaning',
+    warehouseChangeMainWarehouse: '[Warehouse] Change Main Warehouse',
 
     employeeAddNew: '[Employee] Add New Employee',
     employeesLoad: '[Employee] Load Employees',
