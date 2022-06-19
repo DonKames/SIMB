@@ -1,5 +1,4 @@
 import { addDoc, collection, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
-import { useSelector } from "react-redux";
 import { db } from "../../firebase/firebase-config";
 import { types } from "../../types/types";
 
@@ -7,7 +6,6 @@ import { types } from "../../types/types";
 
 export const startSavingWarehouse = ( warehouse ) => {
 	return async ( dispatch, getState ) => {
-		const algo = useSelector( state => state.warehouse.warehouse );
 		
 		const { uid } = getState().auth;
 		warehouse.creationDate = new Date().getTime();
@@ -46,13 +44,17 @@ export const startSavingEmployee = ( employee ) => {
 
 export const startSavingCategory = ( category ) => {
 	return async ( dispatch, getState ) => {
+		
+		const warehouseId = getState().warehouse.warehouse.mainWarehouse;
+
+		console.log(warehouseId);
 
 		const { uid } = getState().auth;
 		category.creationDate = new Date().getTime();
 
 		try {
 			
-			const docRef = await addDoc( collection( db, uid, "warehouse", "categories" ), category );
+			const docRef = await addDoc( collection( db, uid, "warehouse", "warehouses", warehouseId, "categories" ), category );
 			category.id = docRef.id;
 			dispatch( saveCategory( category ) );
 			
@@ -216,11 +218,13 @@ export const startLoadingCategories = () => {
 	return async ( dispatch, getState ) => {
 		
 		const categories = [];
-		
 		const { uid } = getState().auth;
+		const warehouseId = await getState().warehouse;
 		
+		console.log(warehouseId);
+
 		try {
-			const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "categories" ) );
+			const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "warehouses", warehouseId, "categories" ) );
 			employeesSnapshot.forEach((doc) => {
 				//console.log(doc.id, "=>", doc.data());
 				categories.push({

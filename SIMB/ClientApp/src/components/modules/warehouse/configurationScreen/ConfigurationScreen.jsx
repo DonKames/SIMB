@@ -42,7 +42,7 @@ export const ConfigurationScreen = () => {
                 <Form.Select aria-label="Select Main Warehouse" onChange={e => handleSelectMainWarehouse(e.target.value)}>
                   <option>Elija la Bodega Principal</option>
                   {warehouses.map((warehouse) => (
-                    <option key={warehouse.id}>{warehouse.name}</option>
+                    <option key={warehouse.id} value={warehouse.id}>{warehouse.name}</option>
                   ))}
                 </Form.Select>
 				</Col>

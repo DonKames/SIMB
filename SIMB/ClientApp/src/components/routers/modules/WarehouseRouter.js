@@ -8,7 +8,7 @@ import { MainScreen } from '../../modules/warehouse/mainScreen/MainScreen';
 import { LayoutModules } from '../../modules/ui/LayoutModules';
 import { ConfigurationScreen } from '../../modules/warehouse/configurationScreen/ConfigurationScreen';
 
-export const WarehouseRouter = () => {
+export const WarehouseRouter = async () => {
 
 	const dispatch = useDispatch();
 
@@ -18,7 +18,6 @@ export const WarehouseRouter = () => {
 	dispatch( startLoadingSubCategories() );
 	dispatch( startLoadingProduct() );
 	dispatch( startLoadingProducts() );
-  dispatch( startLoadingWarehouse() );
 
 // TODO:Agregar dispatch para cargar la bodega por defecto.
 	return (
