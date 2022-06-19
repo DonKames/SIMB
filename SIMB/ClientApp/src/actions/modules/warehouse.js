@@ -1,11 +1,14 @@
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
+import { useSelector } from "react-redux";
 import { db } from "../../firebase/firebase-config";
 import { types } from "../../types/types";
 
 
-export const startSavingWarehouse = ( warehouse ) => {
-    return async ( dispatch, getState ) => {
 
+export const startSavingWarehouse = ( warehouse ) => {
+	return async ( dispatch, getState ) => {
+		const algo = useSelector( state => state.warehouse.warehouse );
+		
 		const { uid } = getState().auth;
 		warehouse.creationDate = new Date().getTime();
 		
@@ -352,4 +355,56 @@ const loadProduct = ( product ) => ({
 const loadProducts = ( products ) => ({
 	type: types.productsLoad,
 	payload: products,
+});
+
+
+export const startChangingMainWarehouse = ( mainWarehouse ) => {
+	return async ( dispatch, getState ) => {
+		
+		//console.log(mainWarehouse);
+		const { uid } = getState().auth;
+		
+		try {
+			await updateDoc( doc( db, uid, "warehouse" ), { mainWarehouse: mainWarehouse } );
+			dispatch(changeMainWarehouse(mainWarehouse));
+		} catch (error) {
+			console.log(error);
+		}
+	}
+};
+
+
+export const changeMainWarehouse = ( mainWarehouse ) => ({
+	type: types.warehouseSetMain,
+	payload: mainWarehouse,
+});
+
+
+
+
+
+
+//!De aquí para abajo es de test.
+
+export const startLoadingWarehouse = () => {
+	return async ( dispatch, getState ) => {
+
+		const { uid } = getState().auth;
+		try {
+			const warehouseSnapshot = await getDoc( doc( db, uid, "warehouse" ) );
+			
+			const warehouse = warehouseSnapshot.data();
+			console.log(warehouseSnapshot.data());
+			
+			dispatch(loadWarehouse(warehouse));
+		} catch (error) {
+			console.log(error);
+		}
+	}
+};
+
+
+const loadWarehouse = ( warehouse ) => ({
+    type: types.warehouseLoad,
+    payload: warehouse,
 });

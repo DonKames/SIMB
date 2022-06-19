@@ -2,7 +2,7 @@ import { types } from "../../types/types";
 
 const initialState = {
     
-    mainWarehouse: null, //Main Warehouse name.
+    warehouse: null, //Main Warehouse name.
     warehouses: [],
     employees: [],
     categories: [],
@@ -19,6 +19,11 @@ export const warehouseReducer = (state = initialState, action) => {
                 ...state,
                 warehouses: action.payload,
             };
+        case types.warehouseLoad:
+            return {
+                ...state,
+                warehouse: action.payload,
+            };
         case types.warehouseAddNew:
             return {
                 ...state,
@@ -29,6 +34,14 @@ export const warehouseReducer = (state = initialState, action) => {
                 ...state,
                 [action.payload.id]: action.payload
             };
+        case types.warehouseSetMain:
+            return{
+                ...state,
+                warehouse: {
+                    ...state.warehouse,
+                    mainWarehouse: action.payload
+                }
+            }
 
 
         case types.employeeAddNew:

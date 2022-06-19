@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { NavBarModules } from './NavBarModules';
+import { NavBarModules } from './NavBarWarehouse';
 
 export const LayoutModules = () => {
     return(
