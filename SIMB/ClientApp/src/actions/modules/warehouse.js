@@ -222,9 +222,10 @@ export const startLoadingCategories = () => {
 		const warehouseId = await getState().warehouse;
 		
 		console.log(warehouseId);
+		console.log(uid)
 
 		try {
-			const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "warehouses", warehouseId, "categories" ) );
+			const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "categories" ) );
 			employeesSnapshot.forEach((doc) => {
 				//console.log(doc.id, "=>", doc.data());
 				categories.push({
@@ -316,7 +317,7 @@ export const startLoadingProducts = () => {
 			
 			console.log( products );
 			
-			dispatch(loadProducts( products ));
+			dispatch( loadProducts( products ) );
 		} catch (error) {
 			console.log(error);
 		}
@@ -394,13 +395,20 @@ export const startLoadingWarehouse = () => {
 	return async ( dispatch, getState ) => {
 
 		const { uid } = getState().auth;
+		
+		console.log(uid);
+		
+		
+		
 		try {
 			const warehouseSnapshot = await getDoc( doc( db, uid, "warehouse" ) );
 			
 			const warehouse = warehouseSnapshot.data();
-			console.log(warehouseSnapshot.data());
+			//console.log(warehouseSnapshot.data());
 			
 			dispatch(loadWarehouse(warehouse));
+			const warehouseId = await getState().warehouse.warehouse;
+			console.log(warehouseId)
 		} catch (error) {
 			console.log(error);
 		}

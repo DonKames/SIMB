@@ -11,8 +11,9 @@ export const ModulesRouter = () => {
 
   const dispatch = useDispatch();
 
-  dispatch( startLoadingWarehouse() );
+  //dispatch( startLoadingWarehouse() );
   
+
     return (
       <Routes>
         <Route index element={<ModulesScreen />} />
