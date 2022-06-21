@@ -5,11 +5,10 @@ import { DropdownButton, Dropdown, Nav, Navbar, Row, Button } from 'react-bootst
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+
 export const NavBarModules = () => {
 
 	const warehouses = useSelector(state => state.warehouse.warehouses);
-
-	console.log(warehouses);
 
 		return (
 			<Row>

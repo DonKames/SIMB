@@ -69,11 +69,12 @@ export const startSavingSubCategory = ( subCategory ) => {
 	return async ( dispatch, getState ) => {
 
 		const { uid } = getState().auth;
+		const warehouseId = getState().warehouse.warehouse.mainWarehouse;
 		subCategory.creationDate = new Date().getTime();
 
 		try {
 			
-			const docRef = await addDoc( collection( db, uid, "warehouse", "subCategories" ), subCategory );
+			const docRef = await addDoc( collection( db, uid, "warehouse", "warehouses", warehouseId, "subCategories" ), subCategory );
 			subCategory.id = docRef.id;
 			dispatch( saveSubCategory( subCategory ) );
 			
@@ -177,7 +178,7 @@ export const startLoadingWarehouses = () => {
 				});
 			});
 
-			console.log(warehouses);
+			//console.log(warehouses);
 			
 			dispatch(loadWarehouses(warehouses));
 		} catch (error) {
@@ -204,7 +205,7 @@ export const startLoadingEmployees = () => {
 				});
 			});
 
-			console.log(employees);
+			//console.log(employees);
 
 			dispatch(loadEmployees(employees));
 		} catch (error) {
@@ -214,29 +215,33 @@ export const startLoadingEmployees = () => {
 };
 
 
-export const startLoadingCategories = () => {
+export const startLoadingCategories = (warehouseId) => {
 	return async ( dispatch, getState ) => {
 		
 		const categories = [];
 		const { uid } = getState().auth;
-		const warehouseId = await getState().warehouse;
+		//console.log(warehouseId);
+		//const warehouseId = getState().warehouse.warehouse;
 		
-		console.log(warehouseId);
-		console.log(uid)
-
+		//console.log(uid);
+		
 		try {
-			const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "categories" ) );
-			employeesSnapshot.forEach((doc) => {
-				//console.log(doc.id, "=>", doc.data());
-				categories.push({
-					id: doc.id,
-					...doc.data(),
+
+			if	(warehouseId != null) {
+				const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "warehouses", warehouseId, "categories" ) );
+				
+				employeesSnapshot.forEach((doc) => {
+					//console.log(doc.id, "=>", doc.data());
+					categories.push({
+						id: doc.id,
+						...doc.data(),
+					});
 				});
-			});
-			
-			console.log(categories);
-			
-			dispatch(loadCategories(categories));
+				
+				console.log(categories);
+				
+				dispatch(loadCategories(categories));
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -396,10 +401,7 @@ export const startLoadingWarehouse = () => {
 
 		const { uid } = getState().auth;
 		
-		console.log(uid);
-		
-		
-		
+		//console.log(uid);
 		try {
 			const warehouseSnapshot = await getDoc( doc( db, uid, "warehouse" ) );
 			
@@ -407,8 +409,8 @@ export const startLoadingWarehouse = () => {
 			//console.log(warehouseSnapshot.data());
 			
 			dispatch(loadWarehouse(warehouse));
-			const warehouseId = await getState().warehouse.warehouse;
-			console.log(warehouseId)
+			//const warehouseId = getState().warehouse.warehouse;
+			//console.log(warehouseId)
 		} catch (error) {
 			console.log(error);
 		}

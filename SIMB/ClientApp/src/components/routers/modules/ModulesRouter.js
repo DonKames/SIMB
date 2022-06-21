@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { startLoadingWarehouse } from '../../../actions/modules/warehouse';
@@ -11,8 +12,9 @@ export const ModulesRouter = () => {
 
   const dispatch = useDispatch();
 
-  //dispatch( startLoadingWarehouse() );
-  
+  useEffect(() => {
+  dispatch( startLoadingWarehouse() );
+  }, [dispatch]);
 
     return (
       <Routes>
