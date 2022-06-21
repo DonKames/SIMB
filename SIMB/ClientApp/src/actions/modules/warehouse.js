@@ -89,11 +89,12 @@ export const startSavingProduct = ( product ) => {
 	return async ( dispatch, getState ) => {
 
 		const { uid } = getState().auth;
+		const warehouseId = getState().warehouse.warehouse.mainWarehouse;
 		product.creationDate = new Date().getTime();
 
 		try {
 			
-			const docRef = await addDoc( collection( db, uid, "warehouse", "product" ), product );
+			const docRef = await addDoc( collection( db, uid, "warehouse", "warehouses", warehouseId, "product" ), product );
 			product.id = docRef.id;
 			dispatch( saveProduct( product ) );
 			
@@ -108,11 +109,12 @@ export const startSavingProducts = ( products ) => {
 	return async ( dispatch, getState ) => {
 
 		const { uid } = getState().auth;
+		const warehouseId = getState().warehouse.warehouse.mainWarehouse;
 		products.creationDate = new Date().getTime();
 
 		try {
 			
-			const docRef = await addDoc( collection( db, uid, "warehouse", "products" ), products );
+			const docRef = await addDoc( collection( db, uid, "warehouse", "warehouses", warehouseId, "products" ), products );
 			products.id = docRef.id;
 			dispatch( saveProducts( products ) );
 			
@@ -249,7 +251,7 @@ export const startLoadingCategories = (warehouseId) => {
 };
 
 
-export const startLoadingSubCategories = () => {
+export const startLoadingSubCategories = (warehouseId) => {
 	return async ( dispatch, getState ) => {
 		
 		const subCategories = [];
@@ -257,7 +259,7 @@ export const startLoadingSubCategories = () => {
 		const { uid } = getState().auth;
 		
 		try {
-			const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "subCategories" ) );
+			const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "warehouses", warehouseId, "subCategories" ) );
 			employeesSnapshot.forEach((doc) => {
 				//console.log(doc.id, "=>", doc.data());
 				subCategories.push({
@@ -276,7 +278,7 @@ export const startLoadingSubCategories = () => {
 };
 
 
-export const startLoadingProduct = () => {
+export const startLoadingProduct = (warehouseId) => {
 	return async ( dispatch, getState ) => {
 		
 		const product = [];
@@ -284,7 +286,7 @@ export const startLoadingProduct = () => {
 		const { uid } = getState().auth;
 		
 		try {
-			const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "product" ) );
+			const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "warehouses", warehouseId, "product" ) );
 			employeesSnapshot.forEach((doc) => {
 				//console.log(doc.id, "=>", doc.data());
 				product.push({
@@ -303,7 +305,7 @@ export const startLoadingProduct = () => {
 };
 
 
-export const startLoadingProducts = () => {
+export const startLoadingProducts = (warehouseId) => {
 	return async ( dispatch, getState ) => {
 		
 		const products = [];
@@ -311,7 +313,7 @@ export const startLoadingProducts = () => {
 		const { uid } = getState().auth;
 		
 		try {
-			const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "products" ) );
+			const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "warehouses", warehouseId, "products" ) );
 			employeesSnapshot.forEach((doc) => {
 				//console.log(doc.id, "=>", doc.data());
 				products.push({

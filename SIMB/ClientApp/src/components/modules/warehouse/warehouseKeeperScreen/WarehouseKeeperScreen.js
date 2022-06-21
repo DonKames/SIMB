@@ -28,7 +28,7 @@ export const WarehouseKeeperScreen = () => {
 										id="toggle-check"
 										type="checkbox"
 										variant="outline-primary"
-										checked={checked}
+										checked={!checked}
 										value="1"
 										onChange={(e) => setChecked(e.currentTarget.checked)}
 									>
