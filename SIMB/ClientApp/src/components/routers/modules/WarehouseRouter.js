@@ -12,8 +12,9 @@ import { useEffect } from 'react';
 export const WarehouseRouter = () => {
   const dispatch = useDispatch();
 
-  const warehouseId = useSelector((state) => state.warehouse?.warehouse?.mainWarehouse);
-
+  const warehouseId = useSelector((state) => state.warehouse?.warehouse?.activeWarehouse);
+  console.log(warehouseId);
+  
   //dispatch( startLoadingWarehouse() );
   useEffect(() => {
     dispatch(startLoadingWarehouses());
@@ -22,7 +23,7 @@ export const WarehouseRouter = () => {
     dispatch(startLoadingProducts(warehouseId));
     dispatch(startLoadingCategories(warehouseId));
     dispatch(startLoadingSubCategories(warehouseId));
-	dispatch(setActiveWarehouse(warehouseId));
+	  dispatch(setActiveWarehouse(warehouseId));
   }, [dispatch, warehouseId]);
 
   // TODO:Agregar dispatch para cargar la bodega por defecto.

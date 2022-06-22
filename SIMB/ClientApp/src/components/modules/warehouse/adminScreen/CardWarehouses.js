@@ -1,6 +1,6 @@
 import { Card, Col, Row } from "react-bootstrap";
 import { ModalAddWarehouse } from "./ModalAddWarehouse";
-import { TableWarehouse } from "./TableWarehouses"
+import { TableWarehouses } from "./TableWarehouses.jsx";
 
 
 export const CardWarehouses = () => {
@@ -17,7 +17,7 @@ export const CardWarehouses = () => {
               			</Col>
             		</Row>
             		<Row>
-              			<TableWarehouse />
+              			<TableWarehouses />
             		</Row>
           		</Card.Body>
         	</Card>

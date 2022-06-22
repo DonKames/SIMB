@@ -2,15 +2,21 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
 import { DropdownButton, Dropdown, Nav, Navbar, Row, Button, FormSelect } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { setActiveWarehouse } from '../../../actions/modules/warehouse';
 
 
 export const NavBarModules = () => {
+	const dispatch = useDispatch();
 
 	const warehouses = useSelector(state => state.warehouse.warehouses);
 
+	const warehouseId = useSelector(state => state.warehouse.warehouse.mainWarehouse);
+	//dispatch(setActiveWarehouse(warehouseId));
+
 	const handleWarehouseChange = (e) => {
+		dispatch(setActiveWarehouse(e));
 		console.log(e);
 	}
 

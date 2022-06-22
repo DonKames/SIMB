@@ -24,9 +24,10 @@ export const warehouseReducer = (state = initialState, action) => {
                 warehouses: action.payload,
             };
         case types.warehouseLoad:
+            console.log(action.payload);
             return {
                 ...state,
-                warehouse: action.payload,
+                warehouse: {...state.warehouse, ...action.payload},
             };
         case types.warehouseAddNew:
             return {
@@ -46,14 +47,19 @@ export const warehouseReducer = (state = initialState, action) => {
                     mainWarehouse: action.payload
                 }
             };
-            case types.warehouseSetActive:
-                return{
-                    ...state,
-                    warehouse: {
-                        ...state.warehouse,
-                        activeWarehouse: action.payload
-                    }
-                };
+        case types.warehouseSetActive:
+            return{
+                ...state,
+                warehouse: {
+                    ...state.warehouse,
+                    activeWarehouse: action.payload
+                }
+            };
+        case types.warehouseDelete:
+            return{
+                ...state,
+                warehouses: state.warehouses.filter(warehouse => warehouse.id !== action.payload)
+            };
 
 
         case types.employeeAddNew:

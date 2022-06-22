@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase-config";
 import { types } from "../../types/types";
 
@@ -31,8 +31,7 @@ export const startSavingEmployee = ( employee ) => {
 	
 		try {
 
-			const docRef = await addDoc( collection( db, uid, "warehouse", "employees" ), employee );
-			employee.id = docRef.id;
+			await addDoc( collection( db, uid, "warehouse", "employees" ), employee );
 			dispatch( saveEmployee( employee ) );
 
 		} catch ( error ) {
@@ -45,7 +44,7 @@ export const startSavingEmployee = ( employee ) => {
 export const startSavingCategory = ( category ) => {
 	return async ( dispatch, getState ) => {
 		
-		const warehouseId = getState().warehouse.warehouse.mainWarehouse;
+		const warehouseId = getState().warehouse.warehouse.activeWarehouse;
 
 		console.log(warehouseId);
 
@@ -54,8 +53,9 @@ export const startSavingCategory = ( category ) => {
 
 		try {
 			
-			const docRef = await addDoc( collection( db, uid, "warehouse", "warehouses", warehouseId, "categories" ), category );
-			category.id = docRef.id;
+			await addDoc( collection( db, uid, "warehouse", "warehouses", warehouseId, "categories" ), category );
+			//console.log(category);
+			//category.id = docRef.id;
 			dispatch( saveCategory( category ) );
 			
 		} catch ( error ) {
@@ -69,8 +69,12 @@ export const startSavingSubCategory = ( subCategory ) => {
 	return async ( dispatch, getState ) => {
 
 		const { uid } = getState().auth;
-		const warehouseId = getState().warehouse.warehouse.mainWarehouse;
+		const warehouseId = getState().warehouse.warehouse.activeWarehouse;
 		subCategory.creationDate = new Date().getTime();
+
+		// const category = subCategory.category;
+		// delete subCategory.category;
+		// console.log(category);
 
 		try {
 			
@@ -180,7 +184,7 @@ export const startLoadingWarehouses = () => {
 				});
 			});
 
-			//console.log(warehouses);
+			console.log(warehouses);
 			
 			dispatch(loadWarehouses(warehouses));
 		} catch (error) {
@@ -222,25 +226,25 @@ export const startLoadingCategories = (warehouseId) => {
 		
 		const categories = [];
 		const { uid } = getState().auth;
-		//console.log(warehouseId);
+		console.log(warehouseId);
 		//const warehouseId = getState().warehouse.warehouse;
 		
 		//console.log(uid);
 		
 		try {
 
-			if	(warehouseId != null) {
+			if	(warehouseId != null && warehouseId !== "") {
 				const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "warehouses", warehouseId, "categories" ) );
 				
 				employeesSnapshot.forEach((doc) => {
 					//console.log(doc.id, "=>", doc.data());
 					categories.push({
-						id: doc.id,
 						...doc.data(),
+						id: doc.id,
 					});
 				});
 				
-				console.log(categories);
+				//console.log(categories);
 				
 				dispatch(loadCategories(categories));
 			}
@@ -257,19 +261,10 @@ export const startLoadingSubCategories = (warehouseId) => {
 		const subCategories = [];
 		
 		const { uid } = getState().auth;
-		
 		try {
-			if	(warehouseId != null) {
+			if	(warehouseId != null && warehouseId !== "") {
 				const employeesSnapshot = await getDocs(
-				collection(
-					db,
-					uid,
-					"warehouse",
-					"warehouses",
-					warehouseId,
-					"subCategories"
-				)
-				);
+				collection(db, uid, "warehouse", "warehouses", warehouseId, "subCategories"));
         employeesSnapshot.forEach((doc) => {
           //console.log(doc.id, "=>", doc.data());
           subCategories.push({
@@ -297,7 +292,7 @@ export const startLoadingProduct = (warehouseId) => {
 		const { uid } = getState().auth;
 		
 		try {
-			if	(warehouseId != null) {
+			if	(warehouseId !== null && warehouseId !== "") {
 			const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "warehouses", warehouseId, "product" ) );
 			employeesSnapshot.forEach((doc) => {
 				//console.log(doc.id, "=>", doc.data());
@@ -326,7 +321,7 @@ export const startLoadingProducts = (warehouseId) => {
 		const { uid } = getState().auth;
 		
 		try {
-			if	(warehouseId != null) {
+			if	(warehouseId != null && warehouseId !== "") {
 				const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "warehouses", warehouseId, "products" ) );
 				employeesSnapshot.forEach((doc) => {
 				//console.log(doc.id, "=>", doc.data());
@@ -385,6 +380,33 @@ const loadProducts = ( products ) => ({
 });
 
 
+
+
+export const startDeletingWarehouse = ( warehouseId ) => {
+	return async ( dispatch, getState ) => {
+		const { uid } = getState().auth;
+
+		console.log(warehouseId);
+		try {
+			await deleteDoc( doc( db, uid, "warehouse", "warehouses", warehouseId ) );
+			dispatch(deleteWarehouse(warehouseId));
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+
+
+const deleteWarehouse = ( warehouseId ) => ({
+	type: types.warehouseDelete,
+	payload: warehouseId,
+});
+
+
+
+
+
 export const startChangingMainWarehouse = ( mainWarehouse ) => {
 	return async ( dispatch, getState ) => {
 		
@@ -427,8 +449,8 @@ export const startLoadingWarehouse = () => {
 			
 			dispatch(loadWarehouse(warehouse));
 			const warehouseId = getState().warehouse.warehouse.mainWarehouse;
-			console.log(warehouseId);
-			dispatch(setActiveWarehouse(warehouseId));
+			console.log(warehouseId + "setActiveWarehouse");
+			//dispatch(setActiveWarehouse(warehouseId));
 
 		} catch (error) {
 			console.log(error);

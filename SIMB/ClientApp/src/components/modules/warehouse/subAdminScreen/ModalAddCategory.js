@@ -26,6 +26,7 @@ export const ModalAddCategory = () => {
 		e.preventDefault();
 		dispatch(startSavingCategory(category));
 		reset();
+    setShowAddForm(false);
 	};
 
 	const handleOpenAddCategoryForm = () => {
