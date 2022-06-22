@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import { startLoadingWarehouses, startLoadingEmployees, startLoadingCategories, startLoadingSubCategories, startLoadingProduct, startLoadingProducts, startLoadingWarehouse } from '../../../actions/modules/warehouse';
+import { startLoadingWarehouses, startLoadingEmployees, startLoadingCategories, startLoadingSubCategories, startLoadingProduct, startLoadingProducts, startLoadingWarehouse, setActiveWarehouse } from '../../../actions/modules/warehouse';
 import { AdminScreen } from '../../modules/warehouse/adminScreen/AdminScreen';
 import { SubAdminScreen } from '../../modules/warehouse/subAdminScreen/SubAdminScreen';
 import { WarehouseKeeperScreen } from '../../modules/warehouse/warehouseKeeperScreen/WarehouseKeeperScreen';
@@ -22,6 +22,7 @@ export const WarehouseRouter = () => {
     dispatch(startLoadingProducts(warehouseId));
     dispatch(startLoadingCategories(warehouseId));
     dispatch(startLoadingSubCategories(warehouseId));
+	dispatch(setActiveWarehouse(warehouseId));
   }, [dispatch, warehouseId]);
 
   // TODO:Agregar dispatch para cargar la bodega por defecto.

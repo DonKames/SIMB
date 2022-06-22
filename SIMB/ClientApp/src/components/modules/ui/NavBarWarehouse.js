@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
-import { DropdownButton, Dropdown, Nav, Navbar, Row, Button } from 'react-bootstrap';
+import { DropdownButton, Dropdown, Nav, Navbar, Row, Button, FormSelect } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -9,6 +9,10 @@ import { Link } from 'react-router-dom';
 export const NavBarModules = () => {
 
 	const warehouses = useSelector(state => state.warehouse.warehouses);
+
+	const handleWarehouseChange = (e) => {
+		console.log(e);
+	}
 
 		return (
 			<Row>
@@ -30,23 +34,21 @@ export const NavBarModules = () => {
 							<Link to="keeper" className="me-2">
 								<Button className='bg-gradient shadow-sm'>Bodeguero</Button>
 							</Link>
-							<DropdownButton
+							<FormSelect
 								align="end"
 								id="dropdown-basic-button"
 								title="Bodegas"
 								className="me-2 bg-gradient shadow-sm"
+								onChange={(e) => handleWarehouseChange( e.currentTarget.value )}
 							>
 								{warehouses?.map(warehouse => (
-									<Dropdown.Item key={warehouse.id}>
-										<Link to={`/pvt/modules/warehouse/${warehouse.id}`}>
+									<option key={warehouse.id} value={warehouse.id}>
+										
 											{warehouse.name}
-										</Link>
-									</Dropdown.Item>
+										
+									</option>
 								))}
-								<Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-								<Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-								<Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-							</DropdownButton>
+							</FormSelect>
 							<div className='flex-col'>
 							<Link to="configuration" className="me-2">
 								<Button variant='secondary bg-gradient'>

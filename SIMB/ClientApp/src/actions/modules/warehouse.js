@@ -259,18 +259,29 @@ export const startLoadingSubCategories = (warehouseId) => {
 		const { uid } = getState().auth;
 		
 		try {
-			const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "warehouses", warehouseId, "subCategories" ) );
-			employeesSnapshot.forEach((doc) => {
-				//console.log(doc.id, "=>", doc.data());
-				subCategories.push({
-					id: doc.id,
-					...doc.data(),
-				});
-			});
-			
-			console.log(subCategories);
-			
-			dispatch(loadSubCategories(subCategories));
+			if	(warehouseId != null) {
+				const employeesSnapshot = await getDocs(
+				collection(
+					db,
+					uid,
+					"warehouse",
+					"warehouses",
+					warehouseId,
+					"subCategories"
+				)
+				);
+        employeesSnapshot.forEach((doc) => {
+          //console.log(doc.id, "=>", doc.data());
+          subCategories.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+
+        console.log(subCategories);
+
+        dispatch(loadSubCategories(subCategories));
+      }
 		} catch (error) {
 			console.log(error);
 		}
@@ -286,6 +297,7 @@ export const startLoadingProduct = (warehouseId) => {
 		const { uid } = getState().auth;
 		
 		try {
+			if	(warehouseId != null) {
 			const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "warehouses", warehouseId, "product" ) );
 			employeesSnapshot.forEach((doc) => {
 				//console.log(doc.id, "=>", doc.data());
@@ -298,6 +310,7 @@ export const startLoadingProduct = (warehouseId) => {
 			console.log( product );
 			
 			dispatch(loadProduct( product ));
+		}
 		} catch (error) {
 			console.log(error);
 		}
@@ -313,18 +326,20 @@ export const startLoadingProducts = (warehouseId) => {
 		const { uid } = getState().auth;
 		
 		try {
-			const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "warehouses", warehouseId, "products" ) );
-			employeesSnapshot.forEach((doc) => {
+			if	(warehouseId != null) {
+				const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "warehouses", warehouseId, "products" ) );
+				employeesSnapshot.forEach((doc) => {
 				//console.log(doc.id, "=>", doc.data());
-				products.push({
-					id: doc.id,
-					...doc.data(),
+					products.push({
+						id: doc.id,
+						...doc.data(),
+					});
 				});
-			});
 			
-			console.log( products );
+				console.log( products );
 			
-			dispatch( loadProducts( products ) );
+				dispatch( loadProducts( products ) );
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -411,8 +426,10 @@ export const startLoadingWarehouse = () => {
 			//console.log(warehouseSnapshot.data());
 			
 			dispatch(loadWarehouse(warehouse));
-			//const warehouseId = getState().warehouse.warehouse;
-			//console.log(warehouseId)
+			const warehouseId = getState().warehouse.warehouse.mainWarehouse;
+			console.log(warehouseId);
+			dispatch(setActiveWarehouse(warehouseId));
+
 		} catch (error) {
 			console.log(error);
 		}
@@ -423,4 +440,10 @@ export const startLoadingWarehouse = () => {
 const loadWarehouse = ( warehouse ) => ({
     type: types.warehouseLoad,
     payload: warehouse,
+});
+
+
+export const setActiveWarehouse = ( warehouse ) => ({
+	type: types.warehouseSetActive,
+	payload: warehouse,
 });

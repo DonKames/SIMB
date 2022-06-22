@@ -3,7 +3,7 @@ import { Button, Card, Col, Form, FormControl, Row, ToggleButton } from "react-b
 
 export const WarehouseKeeperScreen = () => {
 
-	const [checked, setChecked] = useState(false);
+	const [checked, setChecked] = useState(true);
 
 	const date = new Date().toLocaleDateString();
 
@@ -25,18 +25,18 @@ export const WarehouseKeeperScreen = () => {
 								<Col className="text-end">
 									<ToggleButton
 										className="mb-2"
-										id="toggle-check"
+										id="tglAddInsumos"
 										type="checkbox"
 										variant="outline-primary"
-										checked={!checked}
+										checked={checked}
 										value="1"
-										onChange={(e) => setChecked(e.currentTarget.checked)}
+										onClick={() => setChecked(true)}
 									>
 										Seleccionado
 									</ToggleButton>
 								</Col>
 							</Row>
-						<Form>
+						<Form aria-disabled="true">
 							<Row>
 								<Col>
 									<Card.Text>{ "Fecha: " + date + " - Hora: " + time }</Card.Text>
@@ -44,39 +44,39 @@ export const WarehouseKeeperScreen = () => {
 							</Row>
 							<Row className="mb-3">
 								<Col>
-									<FormControl type="text" placeholder="ID" name="id" />
+									<FormControl type="text" placeholder="ID" name="id" disabled={!checked} />
 								</Col>
 								<Col>
-									<FormControl type="text" placeholder="Nombre" name="name" />
-								</Col>
-							</Row>
-							<Row className="mb-3">
-								<Col>
-									<FormControl type="text" placeholder="Categoría" name="category" />
-								</Col>
-								<Col>
-									<FormControl type="text" placeholder="Subcategoría" name="subCategory" />
+									<FormControl type="text" placeholder="Nombre" name="name" disabled={!checked} />
 								</Col>
 							</Row>
 							<Row className="mb-3">
 								<Col>
-									<FormControl type="text" placeholder="Cantidad" name="qty" />
+									<FormControl type="text" placeholder="Categoría" name="category" disabled={!checked} />
 								</Col>
 								<Col>
-									<FormControl type="text" placeholder="Algo falta aquí" name="???" />
+									<FormControl type="text" placeholder="Subcategoría" name="subCategory" disabled={!checked} />
 								</Col>
 							</Row>
 							<Row className="mb-3">
 								<Col>
-									<FormControl type="text" placeholder="Folio" name="folio" />
+									<FormControl type="text" placeholder="Cantidad" name="qty" disabled={!checked} />
 								</Col>
 								<Col>
-									<FormControl type="text" placeholder="LOTE" name="lote" />
+									<FormControl type="text" placeholder="Algo falta aquí" name="???" disabled={!checked} />
+								</Col>
+							</Row>
+							<Row className="mb-3">
+								<Col>
+									<FormControl type="text" placeholder="Folio" name="folio" disabled={!checked} />
+								</Col>
+								<Col>
+									<FormControl type="text" placeholder="LOTE" name="lote" disabled={!checked} />
 								</Col>
 							</Row>
 							<Row>
 								<Col>
-									<Button>Ingresar</Button>
+									<Button disabled={!checked}>Ingresar</Button>
 								</Col>
 							</Row>
 						</Form>
@@ -95,12 +95,12 @@ export const WarehouseKeeperScreen = () => {
 								<Col className="text-end">
 									<ToggleButton
 										className="mb-2"
-										id="toggle-check"
+										id="tglRemoveInsumos"
 										type="checkbox"
 										variant="outline-primary"
-										checked={checked}
+										checked={!checked}
 										value="1"
-										onChange={(e) => setChecked(e.currentTarget.checked)}
+										onClick={() => setChecked(false)}
 									>
 										Seleccionado
 									</ToggleButton>
@@ -114,39 +114,39 @@ export const WarehouseKeeperScreen = () => {
 							</Row>
 							<Row className="mb-3">
 								<Col>
-									<FormControl type="text" placeholder="ID" name="id" />
+									<FormControl type="text" placeholder="ID" name="id" disabled={checked} />
 								</Col>
 								<Col>
-									<FormControl type="text" placeholder="Nombre" name="name" />
-								</Col>
-							</Row>
-							<Row className="mb-3">
-								<Col>
-									<FormControl type="text" placeholder="Categoría" name="category" />
-								</Col>
-								<Col>
-									<FormControl type="text" placeholder="Subcategoría" name="subCategory" />
+									<FormControl type="text" placeholder="Nombre" name="name" disabled={checked} />
 								</Col>
 							</Row>
 							<Row className="mb-3">
 								<Col>
-									<FormControl type="text" placeholder="Cantidad" name="qty" />
+									<FormControl type="text" placeholder="Categoría" name="category" disabled={checked} />
 								</Col>
 								<Col>
-									<FormControl type="text" placeholder="Algo falta aquí" name="???" />
+									<FormControl type="text" placeholder="Subcategoría" name="subCategory" disabled={checked} />
 								</Col>
 							</Row>
 							<Row className="mb-3">
 								<Col>
-									<FormControl type="text" placeholder="Folio" name="folio" />
+									<FormControl type="text" placeholder="Cantidad" name="qty" disabled={checked} />
 								</Col>
 								<Col>
-									<FormControl type="text" placeholder="LOTE" name="lote" />
+									<FormControl type="text" placeholder="Algo falta aquí" name="???" disabled={checked} />
+								</Col>
+							</Row>
+							<Row className="mb-3">
+								<Col>
+									<FormControl type="text" placeholder="Folio" name="folio" disabled={checked} />
+								</Col>
+								<Col>
+									<FormControl type="text" placeholder="LOTE" name="lote" disabled={checked} />
 								</Col>
 							</Row>
 							<Row>
 								<Col>
-									<Button>Ingresar</Button>
+									<Button disabled={checked}>Ingresar</Button>
 								</Col>
 							</Row>
 						</Form>

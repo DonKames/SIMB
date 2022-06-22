@@ -2,7 +2,11 @@ import { types } from "../../types/types";
 
 const initialState = {
     
-    warehouse: null, //Main Warehouse name.
+    warehouse: {
+        subscribed: false,
+        mainWarehouse: null,
+        activeWarehouse: "",
+    }, //Main Warehouse name.
     warehouses: [],
     employees: [],
     categories: [],
@@ -41,7 +45,15 @@ export const warehouseReducer = (state = initialState, action) => {
                     ...state.warehouse,
                     mainWarehouse: action.payload
                 }
-            }
+            };
+            case types.warehouseSetActive:
+                return{
+                    ...state,
+                    warehouse: {
+                        ...state.warehouse,
+                        activeWarehouse: action.payload
+                    }
+                };
 
 
         case types.employeeAddNew:

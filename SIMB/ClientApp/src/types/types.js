@@ -24,6 +24,7 @@ export const types = {
     warehouseUpdate: '[Warehouse] Update Warehouse',
     warehouseLogoutCleaning: '[Warehouse] Logout Cleaning',
     warehouseSetMain: '[Warehouse] Set Main Warehouse',
+    warehouseSetActive: '[Warehouse] Set Active Warehouse',
 
     employeeAddNew: '[Employee] Add New Employee',
     employeesLoad: '[Employee] Load Employees',
