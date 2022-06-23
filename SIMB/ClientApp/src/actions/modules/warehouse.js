@@ -9,7 +9,8 @@ export const startSavingWarehouse = ( warehouse ) => {
 		
 		const { uid } = getState().auth;
 		warehouse.creationDate = new Date().getTime();
-		
+		warehouse.status = "enabled";
+
     	try {
 
 			const docRef = await addDoc( collection( db, uid, "warehouse", "warehouses" ), warehouse );

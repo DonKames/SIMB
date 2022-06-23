@@ -2,13 +2,15 @@ import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { startDeletingWarehouse } from "../../../../actions/modules/warehouse";
+import { ModalEditWarehouse } from "./ModalEditWarehouse";
 
 export const TBodyWarehouse = () => {
+
     const dispatch = useDispatch();
     const warehouses = useSelector(state => state.warehouse.warehouses);
 
     const handleDeleteWarehouse  = (id) => {
-        console.log(id);
+        //console.log(id);
         Swal.fire({
           	title: "¿Estas seguro?",
 	        text: "Una vez eliminado, no podrás recuperarlo",
@@ -25,6 +27,7 @@ export const TBodyWarehouse = () => {
         });
 	};
 
+
     return (
         <tbody>
             {warehouses.map(warehouse => (
@@ -37,9 +40,8 @@ export const TBodyWarehouse = () => {
                         {/* {warehouse.warehousekeeper ? warehouse.warehousekeeper : "Sin asignar" } */}
                     </td>
                     <td className="align-middle text-end" style={{minWidth: "90px"}}>
-                        <Button size="sm" variant="success">E</Button>
-                        <Button size="sm" variant="primary">-</Button>
-                        <Button size="sm" variant="danger" onClick={() => handleDeleteWarehouse(warehouse.id)}>X</Button>
+						<ModalEditWarehouse warehouse={warehouse} />
+                        <Button size="sm" variant="danger" className="ms-1" onClick={() => handleDeleteWarehouse(warehouse.id)}>X</Button>
                     </td>
                 </tr>
 

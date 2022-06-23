@@ -28,6 +28,7 @@ export const ModalAddWarehouse = () => {
 		e.preventDefault();
 		dispatch(startSavingWarehouse(warehouse));
 		reset();
+    setShowAddForm(false);
 	};
 
 	const handleOpenWarehouseForm = () => {

@@ -42,25 +42,23 @@ export const NavBarModules = () => {
 							</Link>
 							<FormSelect
 								align="end"
-								id="dropdown-basic-button"
+								id="dropdownWarehouses"
 								title="Bodegas"
 								className="me-2 bg-gradient shadow-sm"
 								onChange={(e) => handleWarehouseChange( e.currentTarget.value )}
 							>
 								{warehouses?.map(warehouse => (
 									<option key={warehouse.id} value={warehouse.id}>
-										
 											{warehouse.name}
-										
 									</option>
 								))}
 							</FormSelect>
 							<div className='flex-col'>
-							<Link to="configuration" className="me-2">
-								<Button variant='secondary bg-gradient'>
-									<FontAwesomeIcon icon={faGear} />
-								</Button>
-							</Link>
+								<Link to="configuration" className="me-2">
+									<Button variant='secondary bg-gradient'>
+										<FontAwesomeIcon icon={faGear} />
+									</Button>
+								</Link>
 							</div>
 						</Nav>
 					</Navbar.Collapse>
