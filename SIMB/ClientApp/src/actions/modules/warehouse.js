@@ -29,6 +29,7 @@ export const startSavingEmployee = ( employee ) => {
 			
 		const { uid } = getState().auth;
 		employee.creationDate = new Date().getTime();
+		employee.status = "enabled";
 	
 		try {
 
@@ -51,12 +52,13 @@ export const startSavingCategory = ( category ) => {
 
 		const { uid } = getState().auth;
 		category.creationDate = new Date().getTime();
+		category.status = "enabled";
 
 		try {
 			
-			await addDoc( collection( db, uid, "warehouse", "warehouses", warehouseId, "categories" ), category );
+			const docRef = await addDoc( collection( db, uid, "warehouse", "warehouses", warehouseId, "categories" ), category );
 			//console.log(category);
-			//category.id = docRef.id;
+			category.id = docRef.id;
 			dispatch( saveCategory( category ) );
 			
 		} catch ( error ) {
@@ -72,6 +74,7 @@ export const startSavingSubCategory = ( subCategory ) => {
 		const { uid } = getState().auth;
 		const warehouseId = getState().warehouse.warehouse.activeWarehouse;
 		subCategory.creationDate = new Date().getTime();
+		subCategory.status = "enabled";
 
 		// const category = subCategory.category;
 		// delete subCategory.category;
@@ -96,6 +99,7 @@ export const startSavingProduct = ( product ) => {
 		const { uid } = getState().auth;
 		const warehouseId = getState().warehouse.warehouse.mainWarehouse;
 		product.creationDate = new Date().getTime();
+		product.status = "enabled";
 
 		try {
 			
@@ -116,6 +120,7 @@ export const startSavingProducts = ( products ) => {
 		const { uid } = getState().auth;
 		const warehouseId = getState().warehouse.warehouse.mainWarehouse;
 		products.creationDate = new Date().getTime();
+		products.status = "enabled";
 
 		try {
 			
@@ -398,6 +403,50 @@ export const startDeletingWarehouse = ( warehouseId ) => {
 }
 
 
+export const startDeletingEmployee = ( employeeId ) => {
+	return async ( dispatch, getState ) => {
+		const { uid } = getState().auth;
+
+		console.log(employeeId);
+		try {
+			await deleteDoc( doc( db, uid, "warehouse", "employees", employeeId ) );
+			dispatch(deleteEmployee(employeeId));
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+
+export const startDeletingCategory = ( categoryId, warehouseId ) => {
+	return async ( dispatch, getState ) => {
+		const { uid } = getState().auth;
+
+		console.log(categoryId, " - ", warehouseId);
+		try {
+			await deleteDoc( doc( db, uid, "warehouse", "warehouses", warehouseId, "categories", categoryId ) );
+			//console.log(test);
+			dispatch(deleteCategory(categoryId));
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+
+
+
+const deleteCategory = ( categoryId ) => ({
+	type: types.categoryDelete,
+	payload: categoryId,
+});
+
+
+const deleteEmployee = ( employeeId ) => ({
+	type: types.employeeDelete,
+	payload: employeeId,
+});
+
 
 const deleteWarehouse = ( warehouseId ) => ({
 	type: types.warehouseDelete,
@@ -424,12 +473,83 @@ export const startChangingMainWarehouse = ( mainWarehouse ) => {
 };
 
 
+
 export const changeMainWarehouse = ( mainWarehouse ) => ({
 	type: types.warehouseSetMain,
 	payload: mainWarehouse,
 });
 
 
+
+export const startEditWarehouse = ( warehouse, formValues ) => {
+	return async ( dispatch, getState ) => {
+		const { uid } = getState().auth;
+
+		const {id, name, location, status, warehouseKeeper } = formValues;
+
+		warehouse.name = name;
+		warehouse.location = location;
+		warehouse.status = status;
+		warehouse.warehouseKeeper = warehouseKeeper;
+		//delete warehouse.id;
+		console.log(warehouse);
+
+		try {
+			console.log(warehouse);
+			const test = await updateDoc( doc( db, uid, "warehouse", "warehouses", id ), warehouse );
+			console.log(test);	
+			dispatch(editWarehouse( id, warehouse ));
+		} catch (error) {
+			console.log(error);
+		}
+	}
+};
+
+
+export const startEditEmployee = ( employee, formValues ) => {
+	return async ( dispatch, getState ) => {
+		const { uid } = getState().auth;
+
+		const {id, name, email, phone, rut, status } = formValues;
+
+		employee.id = id;
+		employee.name = name;
+		employee.email = email;
+		employee.phone = phone;
+		employee.rut = rut;
+		employee.status = status;
+
+		//delete warehouse.id;
+		console.log(employee);
+
+		try {
+			//console.log(warehouse);
+			await updateDoc( doc( db, uid, "warehouse", "employees", id ), employee );
+				
+			dispatch(editEmployee( id, employee ));
+		} catch (error) {
+			console.log(error);
+		}
+	}
+};
+
+
+const editEmployee = ( id, employee ) => ({
+	type: types.employeeEdit,
+	payload: {
+		id,
+		employee,
+	},
+});
+
+
+const editWarehouse = ( id, warehouse ) => ({
+	type: types.warehouseEdit,
+	payload: {
+		id,
+		warehouse,
+	},
+});
 
 
 

@@ -60,6 +60,12 @@ export const warehouseReducer = (state = initialState, action) => {
                 ...state,
                 warehouses: state.warehouses.filter(warehouse => warehouse.id !== action.payload)
             };
+        case types.warehouseEdit:
+            //console.log(action.payload);
+            return{
+                ...state,
+                warehouses: state.warehouses.map(warehouse => warehouse.id === action.payload.id ? action.payload.warehouse : warehouse)
+            };
 
 
         case types.employeeAddNew:
@@ -72,6 +78,11 @@ export const warehouseReducer = (state = initialState, action) => {
                 ...state,
                 employees: action.payload,
             };
+        case types.employeeEdit:
+            return{
+                ...state,
+                employees: state.employees.map(employee => employee.id === action.payload.id ? action.payload.employee : employee)
+            };
 
 
         case types.categoryAddNew:
@@ -83,6 +94,11 @@ export const warehouseReducer = (state = initialState, action) => {
             return {
                 ...state,
                 categories: action.payload,
+            };
+        case types.categoryDelete:
+            return{
+                ...state,
+                categories: state.categories.filter(category => category.id !== action.payload)
             };
 
 

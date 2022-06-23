@@ -16,6 +16,7 @@ export const types = {
     notesDelete: '[Notes] Delete note',
     notesLogoutCleaning: '[Notes] Logout Cleaning',
 
+
     //Module Warehouse
     warehouseAddNew: '[Warehouse] Add New Warehouse',
     warehousesLoad: '[Warehouse] Load Warehouses',
@@ -26,12 +27,15 @@ export const types = {
     warehouseSetMain: '[Warehouse] Set Main Warehouse',
     warehouseSetActive: '[Warehouse] Set Active Warehouse',
     warehouseStatusChange: '[Warehouse] Change Status Warehouse',
+    warehouseEdit: '[Warehouse] Edit Warehouse',
 
     employeeAddNew: '[Employee] Add New Employee',
     employeesLoad: '[Employee] Load Employees',
+    employeeEdit: '[Employee] Edit Employee',
 
     categoryAddNew: '[Category] Add New Category',
     categoriesLoad: '[Category] Load Categories',
+    categoryDelete: '[Category] Delete Category',
 
     subCategoryAddNew: '[SubCategory] Add New SubCategory',
     subCategoriesLoad: '[SubCategory] Load SubCategories',

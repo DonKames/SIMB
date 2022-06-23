@@ -15,6 +15,7 @@ export const TBodyWarehouse = () => {
           	title: "¿Estas seguro?",
 	        text: "Una vez eliminado, no podrás recuperarlo",
     	    icon: "warning",
+            iconColor: "#f44336",
         	showCancelButton: true,
           	confirmButtonColor: "#3085d6",
           	cancelButtonColor: "#d33",
@@ -35,12 +36,9 @@ export const TBodyWarehouse = () => {
                 <tr key={warehouse.id}>
                     <td className="align-middle">{warehouse.name}</td>
                     <td className="align-middle">{warehouse.location}</td>
-                    <td className="align-middle">
-                        <Form.Control></Form.Control>
-                        {/* {warehouse.warehousekeeper ? warehouse.warehousekeeper : "Sin asignar" } */}
-                    </td>
+                    <td className="align-middle">{ warehouse.status === "disabled" ? "deshabilitada" : "habilitada" }</td>
                     <td className="align-middle text-end" style={{minWidth: "90px"}}>
-						<ModalEditWarehouse warehouse={warehouse} />
+						<ModalEditWarehouse warehouseId={warehouse.id} />
                         <Button size="sm" variant="danger" className="ms-1" onClick={() => handleDeleteWarehouse(warehouse.id)}>X</Button>
                     </td>
                 </tr>

@@ -12,13 +12,13 @@ export const SubAdminScreen = () => {
 	const tHeadCategories = [
 		"ID",
 		"Nombre",
-		"Acciones",
+		"",
 	];
 
 	const tHeadSubCategories = [
 		"ID",
 		"Nombre",
-		"Acciones",
+		"",
 	];
 
 	const categories = useSelector( state => state.warehouse.categories );
@@ -40,7 +40,7 @@ export const SubAdminScreen = () => {
         <CardsWarehouse
           title="Sub-Categorías"
           modal={<ModalAddSubCategory />}
-          table={<TablesWarehouse tHead={ tHeadSubCategories } tBody={<TBodiesWarehouse slice={ subCategories} />} />}
+          table={<TablesWarehouse tHead={ tHeadSubCategories } tBody={<TBodiesWarehouse slice={ subCategories } />} />}
         />
       </Col>
     </Row>

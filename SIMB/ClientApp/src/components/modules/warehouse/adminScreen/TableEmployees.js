@@ -3,14 +3,14 @@ import { TBodyEmployees } from './TBodyEmployees';
 
 export const TableEmployees = () => {
     return (
-        <Table>
+        <Table size="sm">
         <thead>
           <tr>
             <th>RUT</th>
             <th>Nombre</th>
             <th>Email</th>
             <th>Teléfono</th>
-            <th>Deshabilitar</th>
+            <th></th>
           </tr>
         </thead>
         <TBodyEmployees />

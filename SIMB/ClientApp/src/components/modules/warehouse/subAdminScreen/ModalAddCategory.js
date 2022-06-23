@@ -11,14 +11,12 @@ export const ModalAddCategory = () => {
 	const [showAddForm, setShowAddForm] = useState(false);
 
 	const [ formValues, handleInputChange, reset ] = useForm({
-		id: "",
 		name: "",
 	});
 
-	const { id, name } = formValues;
+	const { name } = formValues;
 
 	const category = {
-		id,
 		name,
 	};
 
@@ -43,21 +41,11 @@ export const ModalAddCategory = () => {
           Agregar
         </Button>
         <Modal show={showAddForm} onHide={handleCloseAddCategoryForm}>
-        	<Form onSubmit={handleSaveCategory}>
-            	<Modal.Header closeButton>
-              		<Modal.Title>Agregar Categoría</Modal.Title>
-            	</Modal.Header>
-            	<Modal.Body>
-              	<Form.Group className="mb-3">
-                <Form.Label>ID</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="CAT-001"
-                  name="id"
-                  onChange={handleInputChange}
-                  value={id}
-                />
-              </Form.Group>
+          <Form onSubmit={handleSaveCategory}>
+            <Modal.Header closeButton>
+              <Modal.Title>Agregar Categoría</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
               <Form.Group className="mb-3">
                 <Form.Label>Nombre</Form.Label>
                 <Form.Control

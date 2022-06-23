@@ -8,7 +8,7 @@ export const TableWarehouses = () => {
           		<tr>
             		<th>Nombre</th>
             		<th>Ubicación</th>
-            		<th>Bodeguero</th>
+            		<th>Estado</th>
             		<th></th>
           		</tr>
         	</thead>

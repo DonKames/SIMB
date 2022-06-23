@@ -2,29 +2,29 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, Form } from "react-bootstrap";
 import { useForm } from "../../../../hooks/useForm";
-import { startEditWarehouse } from '../../../../actions/modules/warehouse';
+import { startEditEmployee } from '../../../../actions/modules/warehouse';
 
-export const ModalEditWarehouse = ({warehouseId}) => {
+export const ModalEditEmployee = ({employeeId}) => {
 	const dispatch = useDispatch();
 
 	const [showEditForm, setShowEditForm] = useState(false);
 	
-	const warehouse = useSelector(state => state.warehouse.warehouses).find(warehouse => warehouse.id === warehouseId);
-	const employees = useSelector(state => state.warehouse.employees);
-	
-	console.log(warehouseId);
+	const employee = useSelector(state => state.warehouse.employees).find(employee => employee.id === employeeId);
+
+	console.log(employee);
 
 	let initialState = {
-		id: warehouse.id,
-		location: warehouse.location,
-		name: warehouse.name,
-		status: warehouse.status,
-		warehouseKeeper: warehouse?.warehouseKeeper ? warehouse.warehouseKeeper.id : "",
+		email: employee.email,
+		id: employee.id,
+		name: employee.name,
+		phone: employee.phone,
+		rut: employee.rut,
+		status: employee?.status ? employee.status : "",
 	};
 
 	const [formValues, handleInputChange, reset] = useForm({ ...initialState });
 
-	const { id=warehouse.id, name=warehouse.name, location=warehouse.location, status= warehouse.status } = formValues;
+	const { email=employee.email, id=employee.id, name=employee.name, phone=employee.phone, rut=employee.rut, status=employee.status } = formValues;
 
 	
 	const handleOpenEditForm = () => {
@@ -38,21 +38,21 @@ export const ModalEditWarehouse = ({warehouseId}) => {
         setShowEditForm(false);
     };
 
-	const handleEditWarehouse = (e) => {
+	const handleEditEmployee = (e) => {
 		e.preventDefault();
-		dispatch(startEditWarehouse(warehouse, formValues));
-		console.log(formValues, " => ", warehouse);
+		dispatch(startEditEmployee(employee, formValues));
+		//console.log(formValues, " => ", employee);
 		//reset();
 		handleCloseEditForm();
 	}
 
   	return (
     <>
-        <Button size="sm" variant="success" onClick={() => handleOpenEditForm(warehouse)}>Editar</Button>
+        <Button size="sm" variant="success" onClick={() => handleOpenEditForm(employee)}>Editar</Button>
 		<Modal show={showEditForm} onHide={handleCloseEditForm}>
-			<Form onSubmit={handleEditWarehouse}>
+			<Form onSubmit={handleEditEmployee}>
 				<Modal.Header closeButton>
-					<Modal.Title>Editar Bodega</Modal.Title>
+					<Modal.Title>Editar Empleado</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 					<Form.Group className="mb-3">
@@ -67,6 +67,16 @@ export const ModalEditWarehouse = ({warehouseId}) => {
 						/>
 					</Form.Group>
 					<Form.Group className="mb-3">
+						<Form.Label>RUT</Form.Label>
+						<Form.Control
+							type="text"
+							placeholder="Rut"
+							name="rut"
+							onChange={handleInputChange}
+							value={rut}
+						/>
+					</Form.Group>
+					<Form.Group className="mb-3">
 						<Form.Label>Nombre</Form.Label>
 						<Form.Control
 							type="text"
@@ -77,13 +87,23 @@ export const ModalEditWarehouse = ({warehouseId}) => {
 						/>
 					</Form.Group>
 					<Form.Group className="mb-3">
-						<Form.Label>Ubicación</Form.Label>
+						<Form.Label>E-Mail</Form.Label>
+						<Form.Control
+							type="email"
+							placeholder="Email"
+							name="email"
+							onChange={handleInputChange}
+							value={email}
+						/>
+					</Form.Group>
+					<Form.Group className="mb-3">
+						<Form.Label>Teléfono</Form.Label>
 						<Form.Control
 							type="text"
-							placeholder="Ubicación"
-							name="location"
+							placeholder="Teléfono"
+							name="phone"
 							onChange={handleInputChange}
-							value={location}
+							value={phone}
 						/>
 					</Form.Group>
 					<Form.Group className="mb-3">
@@ -91,29 +111,6 @@ export const ModalEditWarehouse = ({warehouseId}) => {
 						<Form.Select onChange={handleInputChange} name="status" value={status}>
 							<option value="enabled">Habilitado</option>
 							<option value="disabled">Deshabilitado</option>
-						</Form.Select>
-						{/* <Form.Control
-							type="text"
-							placeholder="Estado"
-							name="status"
-							onChange={handleInputChange}
-							value={status}
-						/> */}
-					</Form.Group>
-					<Form.Group className="mb-3">
-						<Form.Label>Bodeguero</Form.Label>
-						<Form.Select
-							type="text"
-							placeholder="Bodeguero"
-							name="warehouseKeeper"
-							onChange={handleInputChange}
-							value={warehouse.warehouseKeeper}>
-								<option>Bodeguero</option>
-							{employees?.map(employee => (
-								<option key={employee.id} value={employee.id}>
-									{employee.name}
-								</option>
-							))}
 						</Form.Select>
 					</Form.Group>
 				</Modal.Body>
