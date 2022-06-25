@@ -48,7 +48,7 @@ export const ModalEditEmployee = ({employeeId}) => {
 
   	return (
     <>
-        <Button size="sm" variant="success" onClick={() => handleOpenEditForm(employee)}>Editar</Button>
+        <Button size="sm" variant="success" onClick={handleOpenEditForm}>Editar</Button>
 		<Modal show={showEditForm} onHide={handleCloseEditForm}>
 			<Form onSubmit={handleEditEmployee}>
 				<Modal.Header closeButton>
@@ -124,6 +124,6 @@ export const ModalEditEmployee = ({employeeId}) => {
 		</Modal.Footer>
 			</Form>
 		</Modal>
-    </>
-  )
+	</>
+  	);
 }

@@ -534,6 +534,42 @@ export const startEditEmployee = ( employee, formValues ) => {
 };
 
 
+export const startEditCategory = ( category, formValues ) => {
+	return async ( dispatch, getState ) => {
+		const { uid } = getState().auth;
+		
+		const {id, name, status } = formValues;
+
+		category.id = id;
+		category.name = name;
+		category.status = status;
+
+		//delete warehouse.id;
+		console.log(category);
+
+		try {
+			//console.log(warehouse);
+			await updateDoc( doc( db, uid, "warehouse", "warehouses", category.warehouseId, "categories", id ), category );
+
+			dispatch(editCategory( id, category ));
+		} catch (error) {
+			console.log(error);
+		}
+	}
+};
+
+
+
+
+const editWarehouse = ( id, warehouse ) => ({
+	type: types.warehouseEdit,
+	payload: {
+		id,
+		warehouse,
+	},
+});
+
+
 const editEmployee = ( id, employee ) => ({
 	type: types.employeeEdit,
 	payload: {
@@ -543,12 +579,9 @@ const editEmployee = ( id, employee ) => ({
 });
 
 
-const editWarehouse = ( id, warehouse ) => ({
-	type: types.warehouseEdit,
-	payload: {
-		id,
-		warehouse,
-	},
+const editCategory = ( categoryId, category ) => ({
+	type: types.categoryEdit,
+	payload: { categoryId, category },
 });
 
 

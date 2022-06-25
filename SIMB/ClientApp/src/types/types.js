@@ -36,6 +36,7 @@ export const types = {
     categoryAddNew: '[Category] Add New Category',
     categoriesLoad: '[Category] Load Categories',
     categoryDelete: '[Category] Delete Category',
+    categoryEdit: '[Category] Edit Category',
 
     subCategoryAddNew: '[SubCategory] Add New SubCategory',
     subCategoriesLoad: '[SubCategory] Load SubCategories',

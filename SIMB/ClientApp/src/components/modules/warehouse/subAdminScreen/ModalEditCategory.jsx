@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { startEditCategory } from "../../../../actions/modules/warehouse";
 import { useForm } from "../../../../hooks/useForm";
 
 export const ModalEditCategory = ({categoryId}) => {
@@ -24,17 +25,24 @@ export const ModalEditCategory = ({categoryId}) => {
 
     const handleCloseEditForm = () => {
         setShowEditForm(false);
-    }
+    };
 
-    const handleEditEmployee = (e) => {};
+    const handleEditCategory = (e) => {
+		e.preventDefault();
+		dispatch( startEditCategory()(category, formValues) );
+		handleCloseEditForm();
+	};
+	
 
   return (
     <>
-    <Button size="sm" variant="success" onClick={() => handleOpenEditForm(category)}>Editar</Button>
+    	<Button size="sm" variant="success" onClick={() => handleOpenEditForm(category)}>
+			Editar
+		</Button>
 		<Modal show={showEditForm} onHide={handleCloseEditForm}>
-			<Form onSubmit={handleEditEmployee}>
+			<Form onSubmit={handleEditCategory}>
 				<Modal.Header closeButton>
-					<Modal.Title>Editar Empleado</Modal.Title>
+					<Modal.Title>Editar Categoría</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 					<Form.Group className="mb-3">
@@ -59,6 +67,14 @@ export const ModalEditCategory = ({categoryId}) => {
 							value={name}
 						/>
 					</Form.Group>
+
+					<Form.Group className="mb-3">
+						<Form.Label>Estado</Form.Label>
+						<Form.Select onChange={handleInputChange} name="status" value={status}>
+							<option value="enabled">Habilitado</option>
+							<option value="disabled">Deshabilitado</option>
+						</Form.Select>
+					</Form.Group>
 				</Modal.Body>
 				<Modal.Footer>
 			<Button variant="danger" onClick={handleCloseEditForm}>
@@ -72,4 +88,4 @@ export const ModalEditCategory = ({categoryId}) => {
 		</Modal>
     </>
   )
-}
+};
