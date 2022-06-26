@@ -8,13 +8,14 @@ export const types = {
     uiStartLoading: '[UI] Start Loading',
     uiFinishLoading: '[UI] Finish Loading',
 
-    notesAddNew: '[Notes] Add New Note',
-    notesActive: '[Notes] Set Active Note',
-    notesLoad: '[Notes] Load Note',
-    notesUpdated: '[Notes] Update Note',
-    notesFileUrl: '[Notes] Update image Url',
-    notesDelete: '[Notes] Delete note',
-    notesLogoutCleaning: '[Notes] Logout Cleaning',
+    
+    // notesAddNew: '[Notes] Add New Note',
+    // notesActive: '[Notes] Set Active Note',
+    // notesLoad: '[Notes] Load Note',
+    // notesUpdated: '[Notes] Update Note',
+    // notesFileUrl: '[Notes] Update image Url',
+    // notesDelete: '[Notes] Delete note',
+    // notesLogoutCleaning: '[Notes] Logout Cleaning',
 
 
     //Module Warehouse
@@ -40,6 +41,8 @@ export const types = {
 
     subCategoryAddNew: '[SubCategory] Add New SubCategory',
     subCategoriesLoad: '[SubCategory] Load SubCategories',
+    subCategoryDelete: '[SubCategory] Delete SubCategory',
+    subCategoryEdit: '[SubCategory] Edit SubCategory',
 
     productAddNew: '[Product] Add New Product',
     productLoad: '[Product] Load Product',

@@ -245,8 +245,8 @@ export const startLoadingCategories = (warehouseId) => {
 				employeesSnapshot.forEach((doc) => {
 					//console.log(doc.id, "=>", doc.data());
 					categories.push({
-						...doc.data(),
 						id: doc.id,
+						...doc.data(),
 					});
 				});
 				
@@ -272,7 +272,7 @@ export const startLoadingSubCategories = (warehouseId) => {
 				const employeesSnapshot = await getDocs(
 				collection(db, uid, "warehouse", "warehouses", warehouseId, "subCategories"));
         employeesSnapshot.forEach((doc) => {
-          //console.log(doc.id, "=>", doc.data());
+        console.log(doc.id, "=>", doc.data());
           subCategories.push({
             id: doc.id,
             ...doc.data(),
@@ -434,11 +434,27 @@ export const startDeletingCategory = ( categoryId, warehouseId ) => {
 }
 
 
+export const startDeletingSubCategory = ( subCategoryId, warehouseId ) => {
+	return async ( dispatch, getState ) => {
+		const { uid } = getState().auth;
+
+		console.log(subCategoryId, " - ", warehouseId);
+		try {
+			await deleteDoc( doc( db, uid, "warehouse", "warehouses", warehouseId, "subCategories", subCategoryId ) );
+			//console.log(test);
+			dispatch(deleteSubCategory(subCategoryId));
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
 
 
-const deleteCategory = ( categoryId ) => ({
-	type: types.categoryDelete,
-	payload: categoryId,
+
+
+const deleteWarehouse = ( warehouseId ) => ({
+	type: types.warehouseDelete,
+	payload: warehouseId,
 });
 
 
@@ -448,9 +464,15 @@ const deleteEmployee = ( employeeId ) => ({
 });
 
 
-const deleteWarehouse = ( warehouseId ) => ({
-	type: types.warehouseDelete,
-	payload: warehouseId,
+const deleteCategory = ( categoryId ) => ({
+	type: types.categoryDelete,
+	payload: categoryId,
+});
+
+
+const deleteSubCategory = ( subCategoryId ) => ({
+	type: types.subCategoryDelete,
+	payload: subCategoryId,
 });
 
 
@@ -491,14 +513,12 @@ export const startEditWarehouse = ( warehouse, formValues ) => {
 		warehouse.location = location;
 		warehouse.status = status;
 		warehouse.warehouseKeeper = warehouseKeeper;
-		//delete warehouse.id;
-		console.log(warehouse);
 
 		try {
-			console.log(warehouse);
-			const test = await updateDoc( doc( db, uid, "warehouse", "warehouses", id ), warehouse );
-			console.log(test);	
+
+			await updateDoc( doc( db, uid, "warehouse", "warehouses", id ), warehouse );
 			dispatch(editWarehouse( id, warehouse ));
+
 		} catch (error) {
 			console.log(error);
 		}
@@ -519,11 +539,7 @@ export const startEditEmployee = ( employee, formValues ) => {
 		employee.rut = rut;
 		employee.status = status;
 
-		//delete warehouse.id;
-		console.log(employee);
-
 		try {
-			//console.log(warehouse);
 			await updateDoc( doc( db, uid, "warehouse", "employees", id ), employee );
 				
 			dispatch(editEmployee( id, employee ));
@@ -534,7 +550,7 @@ export const startEditEmployee = ( employee, formValues ) => {
 };
 
 
-export const startEditCategory = ( category, formValues ) => {
+export const startEditCategory = ( category, formValues, warehouseId ) => {
 	return async ( dispatch, getState ) => {
 		const { uid } = getState().auth;
 		
@@ -544,14 +560,33 @@ export const startEditCategory = ( category, formValues ) => {
 		category.name = name;
 		category.status = status;
 
-		//delete warehouse.id;
-		console.log(category);
+		try {
+
+			await updateDoc( doc( db, uid, "warehouse", "warehouses", warehouseId, "categories", id ), category );
+			dispatch(editCategory( id, category ));
+
+		} catch (error) {
+			console.log(error);
+		}
+	}
+};
+
+
+export const startEditSubCategory = ( subCategory, formValues, warehouseId ) => {
+	return async ( dispatch, getState ) => {
+		const { uid } = getState().auth;
+
+		const {id, name, status } = formValues;
+
+		subCategory.id = id;
+		subCategory.name = name;
+		subCategory.status = status;
 
 		try {
-			//console.log(warehouse);
-			await updateDoc( doc( db, uid, "warehouse", "warehouses", category.warehouseId, "categories", id ), category );
 
-			dispatch(editCategory( id, category ));
+			await updateDoc( doc( db, uid, "warehouse", "warehouses", warehouseId, "subCategories", id ), subCategory );
+			dispatch(editSubCategory( id, subCategory ));
+
 		} catch (error) {
 			console.log(error);
 		}
@@ -582,6 +617,12 @@ const editEmployee = ( id, employee ) => ({
 const editCategory = ( categoryId, category ) => ({
 	type: types.categoryEdit,
 	payload: { categoryId, category },
+});
+
+
+const editSubCategory = ( subCategoryId, subCategory ) => ({
+	type: types.subCategoryEdit,
+	payload: { subCategoryId, subCategory },
 });
 
 

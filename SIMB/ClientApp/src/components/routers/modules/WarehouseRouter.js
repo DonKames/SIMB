@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { startLoadingWarehouses, startLoadingEmployees, startLoadingCategories, startLoadingSubCategories, startLoadingProduct, startLoadingProducts, startLoadingWarehouse, setActiveWarehouse } from '../../../actions/modules/warehouse';
 import { AdminScreen } from '../../modules/warehouse/adminScreen/AdminScreen';
-import { SubAdminScreen } from '../../modules/warehouse/subAdminScreen/SubAdminScreen';
+import { SubAdminScreen } from '../../modules/warehouse/subAdminScreen/SubAdminScreen.jsx';
 import { WarehouseKeeperScreen } from '../../modules/warehouse/warehouseKeeperScreen/WarehouseKeeperScreen';
 import { MainScreen } from '../../modules/warehouse/mainScreen/MainScreen';
 import { LayoutModules } from '../../modules/ui/LayoutModules';

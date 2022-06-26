@@ -1,5 +1,5 @@
 import { Card, Col, Row } from 'react-bootstrap';
-import { ModalAddCategory } from './ModalAddCategory';
+import { ModalAddCategory } from './ModalAddCategory.jsx';
 
 export const CardCategories = () => {
   return (

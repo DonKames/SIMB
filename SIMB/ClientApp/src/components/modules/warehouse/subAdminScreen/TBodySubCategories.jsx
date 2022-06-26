@@ -3,17 +3,17 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 
-import { startDeletingCategory } from '../../../actions/modules/warehouse';
-import { ModalEditCategory } from './subAdminScreen/ModalEditCategory';
+import { startDeletingSubCategory } from '../../../../actions/modules/warehouse';
+import { ModalEditCategory } from '../subAdminScreen/ModalEditCategory';
 
 
-export const TBodiesWarehouse = ( {slice} ) => {
+export const TBodySubCategories = ( {slice} ) => {
 
 	const dispatch = useDispatch();
 
 	const activeWarehouse = useSelector( state => state.warehouse.warehouse.activeWarehouse );
 
-	const handleDeleteCategory = (id) => {
+	const handleDeleteSubCategory = (id) => {
 		Swal.fire({
 			title: "¿Estas seguro?",
 		  text: "Una vez eliminado, no podrás recuperarlo",
@@ -26,7 +26,7 @@ export const TBodiesWarehouse = ( {slice} ) => {
 			cancelButtonText: "Cancelar",
 	  }).then((result) => {
 			if (result.value) {
-			  dispatch(startDeletingCategory(id, activeWarehouse));
+			  dispatch(startDeletingSubCategory(id, activeWarehouse));
 			}
 	  });
 		
@@ -35,13 +35,14 @@ export const TBodiesWarehouse = ( {slice} ) => {
   	return (
 		<tbody>
 	  		{
-				slice?.map( ( category, index ) => {
+				slice?.map( ( subCategory, index ) => {
 		  			return (
 						<tr key={ index }>
-			  				<td className="align-middle">{category.id}</td>
-			  				<td className="align-middle">{category.name}</td>
-			  				<td className="align-middle"><ModalEditCategory categoryId={category.id} />
-                        <Button size="sm" variant="danger" className="ms-1" onClick={() => handleDeleteCategory(category.id)}>X</Button></td>
+			  				<td className="align-middle">{subCategory.name}</td>
+			  				<td className="align-middle text-end">
+								<ModalEditCategory subCategoryId={subCategory.id} />
+                        		<Button size="sm" variant="danger" className="ms-1" onClick={() => handleDeleteSubCategory(subCategory.id)}>X</Button>
+							</td>
 						</tr>
 		  			)
 				} )

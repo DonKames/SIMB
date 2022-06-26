@@ -36,7 +36,7 @@ export const WarehouseKeeperScreen = () => {
 									</ToggleButton>
 								</Col>
 							</Row>
-						<Form aria-disabled="true">
+						<Form>
 							<Row>
 								<Col>
 									<Card.Text>{ "Fecha: " + date + " - Hora: " + time }</Card.Text>
@@ -44,7 +44,7 @@ export const WarehouseKeeperScreen = () => {
 							</Row>
 							<Row className="mb-3">
 								<Col>
-									<FormControl type="text" placeholder="ID" name="id" disabled={!checked} />
+									<FormControl type="text" placeholder="SKU/Nro Serie" name="sku" disabled={!checked} />
 								</Col>
 								<Col>
 									<FormControl type="text" placeholder="Nombre" name="name" disabled={!checked} />
@@ -63,7 +63,7 @@ export const WarehouseKeeperScreen = () => {
 									<FormControl type="text" placeholder="Cantidad" name="qty" disabled={!checked} />
 								</Col>
 								<Col>
-									<FormControl type="text" placeholder="Algo falta aquí" name="???" disabled={!checked} />
+									<FormControl type="text" placeholder="Nro Parte" name="parte" disabled={!checked} />
 								</Col>
 							</Row>
 							<Row className="mb-3">

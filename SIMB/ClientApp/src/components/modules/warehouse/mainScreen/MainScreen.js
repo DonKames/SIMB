@@ -1,8 +1,8 @@
 import { Row, Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { CardsWarehouse } from "../CardsWarehouse";
-import { TablesWarehouse } from "../TablesWarehouse";
+import { CardsWarehouse } from "../CardsWarehouse.jsx";
+import { TablesWarehouse } from "../TablesWarehouse.jsx";
 import { ModalAddProduct } from './ModalAddProduct';
 import { ModalAddProducts } from './ModalAddProducts';
 import { TBodyProduct } from './TBodyProduct';

@@ -16,14 +16,12 @@ export const ModalAddSubCategory = () => {
 
 	const [ formValues, handleInputChange, reset ] = useForm({
 		category: "",
-		id: "",
 		name: "",
 	});
 
-	const { id, name, category } = formValues;
+	const {  name, category } = formValues;
 
 	const subCategory = {
-		id,
 		name,
 		category,
 	};
@@ -31,8 +29,7 @@ export const ModalAddSubCategory = () => {
 	const handleSaveSubCategory = (e) => {
 		e.preventDefault();
 		dispatch(startSavingSubCategory(subCategory));
-		reset();
-		setShowAddForm(false);
+		handleCloseAddSubCategoryForm();
 	};
 
 	const handleOpenAddSubCategoryForm = () => {
@@ -40,6 +37,7 @@ export const ModalAddSubCategory = () => {
 	};
 
 	const handleCloseAddSubCategoryForm = () => {
+    reset();
 		setShowAddForm(false);
 	};
 
@@ -54,6 +52,8 @@ export const ModalAddSubCategory = () => {
               <Modal.Title>Agregar Sub-Categoría</Modal.Title>
             </Modal.Header>
             <Modal.Body>
+              <Form.Group>
+                <Form.Label>Elija su Categoría</Form.Label>
 				<Form.Select name="category" value={category} onChange={handleInputChange}>
 					<option>Categoría</option>
 					{
@@ -62,16 +62,7 @@ export const ModalAddSubCategory = () => {
 						))
 					}
 				</Form.Select>
-              <Form.Group className="mb-3">
-                <Form.Label>ID</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="SCAT-001"
-                  name="id"
-                  onChange={handleInputChange}
-                  value={id}
-                />
-              </Form.Group>
+				</Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Nombre</Form.Label>
                 <Form.Control

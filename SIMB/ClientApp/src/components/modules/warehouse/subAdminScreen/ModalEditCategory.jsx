@@ -1,23 +1,22 @@
 import { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { startEditCategory } from "../../../../actions/modules/warehouse";
+import { startEditSubCategory } from "../../../../actions/modules/warehouse";
 import { useForm } from "../../../../hooks/useForm";
 
-export const ModalEditCategory = ({categoryId}) => {
-
+export const ModalEditCategory = ({subCategoryId}) => {
+	const subCategory = useSelector(state => state.warehouse.subCategories).find(subCategory => subCategory.id === subCategoryId);
+    const initialState = {
+        name: subCategory?.name,
+        id: subCategory?.id,
+        status: subCategory?.status,
+    };
     const dispatch = useDispatch();
     const [showEditForm, setShowEditForm] = useState(false);
-    const category = useSelector(state => state.warehouse.categories).find(category => category.id === categoryId);
-
-    const initialState = {
-        name: category.name,
-        id: category.id,
-        status: category.status,
-    };
     const [ formValues, handleInputChange ] = useForm({ ...initialState });
+	const warehouseId = useSelector(state => state.warehouse.warehouse.activeWarehouse);
 
-    const { id=category.id, name=category.name, status=category.status } = formValues;
+    const { id=subCategory?.id, name=subCategory?.name, status=subCategory?.status } = formValues;
 
     const handleOpenEditForm = () => {
         setShowEditForm(true);
@@ -27,20 +26,20 @@ export const ModalEditCategory = ({categoryId}) => {
         setShowEditForm(false);
     };
 
-    const handleEditCategory = (e) => {
+    const handleEditSubCategory = (e) => {
 		e.preventDefault();
-		dispatch( startEditCategory()(category, formValues) );
+		dispatch( startEditSubCategory(subCategory, formValues, warehouseId) );
 		handleCloseEditForm();
 	};
 	
 
   return (
     <>
-    	<Button size="sm" variant="success" onClick={() => handleOpenEditForm(category)}>
+    	<Button size="sm" variant="success" onClick={() => handleOpenEditForm(subCategory)}>
 			Editar
 		</Button>
 		<Modal show={showEditForm} onHide={handleCloseEditForm}>
-			<Form onSubmit={handleEditCategory}>
+			<Form onSubmit={handleEditSubCategory}>
 				<Modal.Header closeButton>
 					<Modal.Title>Editar Categoría</Modal.Title>
 				</Modal.Header>

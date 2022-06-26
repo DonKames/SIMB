@@ -100,6 +100,11 @@ export const warehouseReducer = (state = initialState, action) => {
                 ...state,
                 categories: state.categories.filter(category => category.id !== action.payload)
             };
+        case types.categoryEdit:
+            return{
+                ...state,
+                categories: state.categories.map(category => category.id === action.payload.id ? action.payload.category : category)
+            };
 
 
         case types.subCategoryAddNew:
@@ -111,6 +116,16 @@ export const warehouseReducer = (state = initialState, action) => {
             return {
                 ...state,
                 subCategories: action.payload,
+            };
+        case types.subCategoryDelete:
+            return{
+                ...state,
+                subCategories: state.subCategories.filter(subCategory => subCategory.id !== action.payload)
+            };
+        case types.subCategoryEdit:
+            return{
+                ...state,
+                subCategories: state.subCategories.map(subCategory => subCategory.id === action.payload.id ? action.payload.subCategory : subCategory)
             };
 
 

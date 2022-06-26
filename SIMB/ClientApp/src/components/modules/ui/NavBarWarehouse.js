@@ -45,6 +45,7 @@ export const NavBarModules = () => {
 								id="dropdownWarehouses"
 								title="Bodegas"
 								className="me-2 bg-gradient shadow-sm"
+								value={warehouseId ?? ''}
 								onChange={(e) => handleWarehouseChange( e.currentTarget.value )}
 							>
 								{warehouses?.map(warehouse => (
