@@ -85,7 +85,7 @@ export const ModalAddEmployee = () => {
                 <Form.Label>Teléfono</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="12.345.678-9"
+                  placeholder="+56912345678"
                   name="phone"
                   onChange={handleInputChange}
                   value={phone}

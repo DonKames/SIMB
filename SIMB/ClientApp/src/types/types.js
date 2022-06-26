@@ -46,6 +46,7 @@ export const types = {
 
     productAddNew: '[Product] Add New Product',
     productLoad: '[Product] Load Product',
+    productSkuAddNew: '[Product] Add New Product SKU',
 
     productsAddNew: '[Products] Add New Products',
     productsLoad: '[Products] Load Products',

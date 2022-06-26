@@ -97,7 +97,7 @@ export const startSavingProduct = ( product ) => {
 	return async ( dispatch, getState ) => {
 
 		const { uid } = getState().auth;
-		const warehouseId = getState().warehouse.warehouse.mainWarehouse;
+		const warehouseId = getState().warehouse.warehouse.activeWarehouse;
 		product.creationDate = new Date().getTime();
 		product.status = "enabled";
 
@@ -118,7 +118,7 @@ export const startSavingProducts = ( products ) => {
 	return async ( dispatch, getState ) => {
 
 		const { uid } = getState().auth;
-		const warehouseId = getState().warehouse.warehouse.mainWarehouse;
+		const warehouseId = getState().warehouse.warehouse.activeWarehouse;
 		products.creationDate = new Date().getTime();
 		products.status = "enabled";
 
@@ -128,6 +128,25 @@ export const startSavingProducts = ( products ) => {
 			products.id = docRef.id;
 			dispatch( saveProducts( products ) );
 			
+		} catch ( error ) {
+			console.log( error );
+		}
+	}
+};
+
+
+export const startSavingSku = ( sku ) => {
+	return async ( dispatch, getState ) => {
+
+		const { uid } = getState().auth;
+		const warehouseId = getState().warehouse.warehouse.activeWarehouse;
+
+		try {
+
+			const docRef = await addDoc( collection( db, uid, "warehouse", "warehouses", warehouseId, "sku" ), sku );
+			sku.id = docRef.id;
+			dispatch( saveSku( sku ) );
+
 		} catch ( error ) {
 			console.log( error );
 		}
@@ -170,6 +189,12 @@ const saveProduct = ( product ) => ({
 const saveProducts = ( products ) => ({
 	type: types.productsAddNew,
 	payload: { ...products },
+});
+
+
+const saveSku = ( sku ) => ({
+	type: types.productSkuAddNew,
+	payload: { ...sku },
 });
 
 

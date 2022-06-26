@@ -1,9 +1,15 @@
 import { useState } from "react";
-import { Button, Card, Col, Form, FormControl, Row, ToggleButton } from "react-bootstrap";
+import { Button, Card, Col, Container, Form, Row, ToggleButton } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { ModalAddSku } from "./ModalAddSku";
 
 export const WarehouseKeeperScreen = () => {
 
 	const [checked, setChecked] = useState(true);
+
+	const categories = useSelector((state) => state.warehouse?.categories);
+
+	const subCategories = useSelector((state) => state.warehouse?.subCategories);
 
 	const date = new Date().toLocaleDateString();
 
@@ -13,6 +19,13 @@ export const WarehouseKeeperScreen = () => {
 
 	return (
 		<Row className="justify-content-md-evenly">
+			<Container>
+				<Row>
+					<Col>
+						<ModalAddSku />
+					</Col>
+				</Row>
+			</Container>
 			<Col md="auto">
 				<Card>
 					<Card.Body>
@@ -44,34 +57,48 @@ export const WarehouseKeeperScreen = () => {
 							</Row>
 							<Row className="mb-3">
 								<Col>
-									<FormControl type="text" placeholder="SKU/Nro Serie" name="sku" disabled={!checked} />
+									<Form.Control type="text" placeholder="SKU/Nro Serie" name="sku" disabled={!checked} />
 								</Col>
 								<Col>
-									<FormControl type="text" placeholder="Nombre" name="name" disabled={!checked} />
-								</Col>
-							</Row>
-							<Row className="mb-3">
-								<Col>
-									<FormControl type="text" placeholder="Categoría" name="category" disabled={!checked} />
-								</Col>
-								<Col>
-									<FormControl type="text" placeholder="Subcategoría" name="subCategory" disabled={!checked} />
+									<Form.Control type="text" placeholder="Nombre" name="name" disabled={!checked} />
 								</Col>
 							</Row>
 							<Row className="mb-3">
 								<Col>
-									<FormControl type="text" placeholder="Cantidad" name="qty" disabled={!checked} />
+									<Form.Select type="text" placeholder="Categoría" name="category" disabled={!checked}>
+										<option value="">Seleccione una Categoría</option>
+										{categories.map((category) => (
+											<option key={category.id} value={category.id}>
+												{category.name}
+											</option>
+										))}
+									</Form.Select>
 								</Col>
 								<Col>
-									<FormControl type="text" placeholder="Nro Parte" name="parte" disabled={!checked} />
+									<Form.Select type="text" placeholder="Subcategoría" name="subCategory" disabled={!checked}>
+										<option value="">Seleccione una Subcategoría</option>
+										{subCategories.map((subCategory) => (
+											<option key={subCategory.id} value={subCategory.id}>
+												{subCategory.name}
+											</option>
+										))}
+									</Form.Select>
 								</Col>
 							</Row>
 							<Row className="mb-3">
 								<Col>
-									<FormControl type="text" placeholder="Folio" name="folio" disabled={!checked} />
+									<Form.Control type="text" placeholder="Cantidad" name="qty" disabled={!checked} />
 								</Col>
 								<Col>
-									<FormControl type="text" placeholder="LOTE" name="lote" disabled={!checked} />
+									<Form.Control type="text" placeholder="Nro Parte" name="parte" disabled={!checked} />
+								</Col>
+							</Row>
+							<Row className="mb-3">
+								<Col>
+									<Form.Control type="text" placeholder="Folio" name="folio" disabled={!checked} />
+								</Col>
+								<Col>
+									<Form.Control type="text" placeholder="LOTE" name="lote" disabled={!checked} />
 								</Col>
 							</Row>
 							<Row>
@@ -114,34 +141,34 @@ export const WarehouseKeeperScreen = () => {
 							</Row>
 							<Row className="mb-3">
 								<Col>
-									<FormControl type="text" placeholder="ID" name="id" disabled={checked} />
+									<Form.Control type="text" placeholder="ID" name="id" disabled={checked} />
 								</Col>
 								<Col>
-									<FormControl type="text" placeholder="Nombre" name="name" disabled={checked} />
-								</Col>
-							</Row>
-							<Row className="mb-3">
-								<Col>
-									<FormControl type="text" placeholder="Categoría" name="category" disabled={checked} />
-								</Col>
-								<Col>
-									<FormControl type="text" placeholder="Subcategoría" name="subCategory" disabled={checked} />
+									<Form.Control type="text" placeholder="Nombre" name="name" disabled={checked} />
 								</Col>
 							</Row>
 							<Row className="mb-3">
 								<Col>
-									<FormControl type="text" placeholder="Cantidad" name="qty" disabled={checked} />
+									<Form.Control type="text" placeholder="Categoría" name="category" disabled={checked} />
 								</Col>
 								<Col>
-									<FormControl type="text" placeholder="Algo falta aquí" name="???" disabled={checked} />
+									<Form.Control type="text" placeholder="Subcategoría" name="subCategory" disabled={checked} />
 								</Col>
 							</Row>
 							<Row className="mb-3">
 								<Col>
-									<FormControl type="text" placeholder="Folio" name="folio" disabled={checked} />
+									<Form.Control type="text" placeholder="Cantidad" name="qty" disabled={checked} />
 								</Col>
 								<Col>
-									<FormControl type="text" placeholder="LOTE" name="lote" disabled={checked} />
+									<Form.Control type="text" placeholder="Algo falta aquí" name="???" disabled={checked} />
+								</Col>
+							</Row>
+							<Row className="mb-3">
+								<Col>
+									<Form.Control type="text" placeholder="Folio" name="folio" disabled={checked} />
+								</Col>
+								<Col>
+									<Form.Control type="text" placeholder="LOTE" name="lote" disabled={checked} />
 								</Col>
 							</Row>
 							<Row>

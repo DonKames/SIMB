@@ -54,15 +54,15 @@ export const ModalAddSubCategory = () => {
             <Modal.Body>
               <Form.Group>
                 <Form.Label>Elija su Categoría</Form.Label>
-				<Form.Select name="category" value={category} onChange={handleInputChange}>
-					<option>Categoría</option>
-					{
-						categories.map((category) => (
-							<option name="category" key={category.id} value={category.id}>{category.name}</option>
-						))
-					}
-				</Form.Select>
-				</Form.Group>
+				        <Form.Select name="category" value={category} onChange={handleInputChange}>
+					        <option>Categoría</option>
+                    {
+                      categories.map((category) => (
+                        <option name="category" key={category.id} value={category.id}>{category.name}</option>
+                      ))
+                    }
+				        </Form.Select>
+				      </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Nombre</Form.Label>
                 <Form.Control

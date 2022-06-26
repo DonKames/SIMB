@@ -139,6 +139,11 @@ export const warehouseReducer = (state = initialState, action) => {
                 ...state,
                 product: action.payload,
             };
+        case types.productSkuAddNew:
+            return {
+                ...state,
+                product: [ action.payload, ...state.product ],
+            };
 
 
         case types.productsAddNew:
