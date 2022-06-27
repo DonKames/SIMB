@@ -1,22 +1,63 @@
 import { useState } from "react";
 import { Button, Card, Col, Container, Form, Row, ToggleButton } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { startUpdatingProductStock } from "../../../../actions/modules/warehouse";
+import { useForm } from "../../../../hooks/useForm";
 import { ModalAddSku } from "./ModalAddSku";
 
 export const WarehouseKeeperScreen = () => {
 
+	const dispatch = useDispatch();
+
 	const [checked, setChecked] = useState(true);
 
 	const categories = useSelector((state) => state.warehouse?.categories);
-
 	const subCategories = useSelector((state) => state.warehouse?.subCategories);
+	
+	const initialSelectedSkuState = {
+		brand: "",
+		category: "",
+		description: "",
+		format:	"",
+		id: "",
+		model: "",
+		name: "",
+		price: "",
+		quantity: "0",
+		sku: "",
+		stock: "",
+		subCategory: "",
+		type: "",
+		unit: "",
+	};
+
+	const skus = useSelector((state) => state.warehouse?.skus);
+
+	const [selectedSku, setSelectedSku] = useState(initialSelectedSkuState);
+
+	const [ formValues, handleInputChange, reset ] = useForm(selectedSku);
+
+	const { sku, name, category, subCategory, format, unit, type, brand, model, description, price, stock, quantity } = formValues;
 
 	const date = new Date().toLocaleDateString();
 
 	const time = new Date().toLocaleTimeString();
-	
-	console.log( date );
 
+	const handleSkuChange = (e) => {
+		handleInputChange(e);
+		const skuId = skus.find((sku) => sku.sku === e.target.value);
+		skuId.quantity = "0";
+		console.log(skuId);
+		setSelectedSku({ ...selectedSku, ...skuId, });
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		console.log(selectedSku);
+		dispatch(startUpdatingProductStock( quantity, selectedSku.id ));
+	}
+	
+	console.log(selectedSku);
 	return (
 		<Row className="justify-content-md-evenly">
 			<Container>
@@ -49,7 +90,7 @@ export const WarehouseKeeperScreen = () => {
 									</ToggleButton>
 								</Col>
 							</Row>
-						<Form>
+						<Form onSubmit={handleSubmit}>
 							<Row>
 								<Col>
 									<Card.Text>{ "Fecha: " + date + " - Hora: " + time }</Card.Text>
@@ -57,53 +98,57 @@ export const WarehouseKeeperScreen = () => {
 							</Row>
 							<Row className="mb-3">
 								<Col>
-									<Form.Control type="text" placeholder="SKU/Nro Serie" name="sku" disabled={!checked} />
-								</Col>
-								<Col>
-									<Form.Control type="text" placeholder="Nombre" name="name" disabled={!checked} />
-								</Col>
-							</Row>
-							<Row className="mb-3">
-								<Col>
-									<Form.Select type="text" placeholder="Categoría" name="category" disabled={!checked}>
-										<option value="">Seleccione una Categoría</option>
-										{categories.map((category) => (
-											<option key={category.id} value={category.id}>
-												{category.name}
-											</option>
+									<Form.Control type="text" placeholder="SKU/Nro Serie" name="sku" list='dlSku' autoComplete="off" onChange={(e) => handleSkuChange(e) } value={sku} disabled={!checked} />
+									<datalist id='dlSku'>
+										{skus.map((sku) => (
+											<option key={sku.id} value={sku.sku} />
 										))}
-									</Form.Select>
+									</datalist>
 								</Col>
 								<Col>
-									<Form.Select type="text" placeholder="Subcategoría" name="subCategory" disabled={!checked}>
-										<option value="">Seleccione una Subcategoría</option>
-										{subCategories.map((subCategory) => (
-											<option key={subCategory.id} value={subCategory.id}>
-												{subCategory.name}
-											</option>
+									<Form.Control type="text" placeholder="Nombre" name="name" list='dlName' autoComplete="off" onChange={handleInputChange} value={ selectedSku ? selectedSku.name : name} disabled={!checked} />
+									<datalist id='dlName'>
+										{skus.map((sku) => (
+											<option key={sku.id} value={sku.name} />
 										))}
-									</Form.Select>
+									</datalist>
 								</Col>
 							</Row>
 							<Row className="mb-3">
 								<Col>
-									<Form.Control type="text" placeholder="Cantidad" name="qty" disabled={!checked} />
+									<Form.Control type="text" placeholder="Categoría" name="category" onChange={handleInputChange} value={ selectedSku ? categories.find( category => category.id === selectedSku.category)?.name ?? category : category } disabled={!checked}  />
 								</Col>
 								<Col>
-									<Form.Control type="text" placeholder="Nro Parte" name="parte" disabled={!checked} />
+									<Form.Control type="text" placeholder="Subcategoría" name="subCategory" onChange={handleInputChange} value={ selectedSku ? subCategories.find( subCategory => subCategory.id === selectedSku.subCategory )?.name ?? subCategory : subCategory }  />
 								</Col>
 							</Row>
 							<Row className="mb-3">
 								<Col>
-									<Form.Control type="text" placeholder="Folio" name="folio" disabled={!checked} />
+									<Form.Control type="text" placeholder="Formato" name="format" onChange={handleInputChange} value={ selectedSku ? selectedSku.format : format } disabled={!checked}  />
 								</Col>
 								<Col>
-									<Form.Control type="text" placeholder="LOTE" name="lote" disabled={!checked} />
+									<Form.Control type="text" placeholder="Unidades" name="unit" onChange={handleInputChange} value={ selectedSku ? selectedSku.unit === "N/A" ? "N/A" : unit : unit }  disabled={!checked} />
+								</Col>
+								<Col>
+									<Form.Control type="text" placeholder="Tipo" name="type" onChange={handleInputChange} value={ selectedSku ? selectedSku.type : type } disabled={!checked}  />
+								</Col>
+							</Row>
+							<Row className="mb-3">
+								<Col>
+									<Form.Control type="text" placeholder="Marca" name="brand" onChange={handleInputChange} value={ selectedSku ? selectedSku.brand : brand } disabled={!checked}  />
+								</Col>
+								<Col>
+									<Form.Control type="text" placeholder="Modelo" name="model" onChange={handleInputChange} value={ selectedSku ? selectedSku.model : model } disabled={!checked}  />
+								</Col>
+							</Row>
+							<Row className="mb-3">
+								<Col>
+									<Form.Control type="number" placeholder="Cantidad" name="quantity" onChange={handleInputChange} value={ quantity ?? "0" } disabled={!checked} />
 								</Col>
 							</Row>
 							<Row>
 								<Col>
-									<Button disabled={!checked}>Ingresar</Button>
+									<Button disabled={!checked} type='submit'>Ingresar</Button>
 								</Col>
 							</Row>
 						</Form>

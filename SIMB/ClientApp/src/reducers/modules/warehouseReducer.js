@@ -10,9 +10,10 @@ const initialState = {
     warehouses: [],
     employees: [],
     categories: [],
-    subCategories: [],
     products: [],
     product: [],
+    subCategories: [],
+    skus: [],
 };
 
 export const warehouseReducer = (state = initialState, action) => {
@@ -143,6 +144,16 @@ export const warehouseReducer = (state = initialState, action) => {
             return {
                 ...state,
                 product: [ action.payload, ...state.product ],
+            };
+        case types.productSkuLoad:
+            return {
+                ...state,
+                skus: action.payload,
+            };
+        case types.productUpdateStock:
+            return{
+                ...state,
+                product: state.product.map(product => product.id === action.payload.id ? action.payload.product : product)
             };
 
 

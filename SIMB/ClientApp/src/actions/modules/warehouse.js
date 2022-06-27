@@ -373,6 +373,36 @@ export const startLoadingProducts = (warehouseId) => {
 };
 
 
+export const startLoadingSku = (warehouseId) => {
+	return async ( dispatch, getState ) => {
+
+		const sku = [];
+
+		const { uid } = getState().auth;
+
+		try {
+			if	(warehouseId != null && warehouseId !== "") {
+				const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "warehouses", warehouseId, "sku" ) );
+				employeesSnapshot.forEach((doc) => {
+					//console.log(doc.id, "=>", doc.data());
+					sku.push({
+						id: doc.id,
+						...doc.data(),
+					});
+				});
+
+				console.log( sku );
+
+				dispatch( loadSku( sku ) );
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+
+
 
 
 const loadEmployees = ( employees ) => ({
@@ -408,6 +438,12 @@ const loadProduct = ( product ) => ({
 const loadProducts = ( products ) => ({
 	type: types.productsLoad,
 	payload: products,
+});
+
+
+const loadSku = ( sku ) => ({
+	type: types.productSkuLoad,
+	payload: sku,
 });
 
 
@@ -668,8 +704,6 @@ export const startLoadingWarehouse = () => {
 			//console.log(warehouseSnapshot.data());
 			
 			dispatch(loadWarehouse(warehouse));
-			const warehouseId = getState().warehouse.warehouse.mainWarehouse;
-			console.log(warehouseId + "setActiveWarehouse");
 			//dispatch(setActiveWarehouse(warehouseId));
 
 		} catch (error) {
@@ -688,4 +722,36 @@ const loadWarehouse = ( warehouse ) => ({
 export const setActiveWarehouse = ( warehouse ) => ({
 	type: types.warehouseSetActive,
 	payload: warehouse,
+});
+
+
+
+
+export const startUpdatingProductStock = (quantity, id) => {
+	return async ( dispatch, getState ) => {
+		const { uid } = getState().auth;
+
+		const warehouseId = getState().warehouse.warehouse.activeWarehouse;
+		console.log(quantity, id);
+
+		try {
+			const warehouseSnapshot = await getDoc( doc( db, uid, "warehouse", "warehouses", warehouseId, "sku", id ) );
+			const warehouse = warehouseSnapshot.data();
+			console.log(warehouse);
+			const stock = warehouse.stock;
+			const newStock = parseInt(stock) + parseInt(quantity);
+			await updateDoc( doc( db, uid, "warehouse", "warehouses", warehouseId, "sku", id ), { stock: newStock } );
+			dispatch(updateProductStock(newStock));
+		} catch (error) {
+			console.log(error);
+		}
+	}
+}
+
+
+
+
+const updateProductStock = ( stock ) => ({
+	type: types.productUpdateStock,
+	payload: stock,
 });

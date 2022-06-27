@@ -22,7 +22,7 @@ export const ModalAddSku = () => {
 		model: "",
 		description: "",
 		price: "",
-		stock: "",
+		stock: "0",
 	});
 
 	const { sku, name, category, subCategory, format, unit, type, brand, model, description, price, stock } = formValues;
