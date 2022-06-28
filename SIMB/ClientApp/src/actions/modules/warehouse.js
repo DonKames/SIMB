@@ -28,7 +28,7 @@ export const startSavingEmployee = ( employee ) => {
 	return async ( dispatch, getState ) => {
 			
 		const { uid } = getState().auth;
-		employee.creationDate = new Date().getTime();
+		employee.creationDate = Date.now();
 		employee.status = "enabled";
 	
 		try {
@@ -154,6 +154,25 @@ export const startSavingSku = ( sku ) => {
 };
 
 
+export const startSavingSupplyHistory = ( supplyHistory ) => {
+	return async ( dispatch, getState ) => {
+
+		const { uid } = getState().auth;
+		const warehouseId = getState().warehouse.warehouse.activeWarehouse;
+
+		try {
+
+			const docRef = await addDoc( collection( db, uid, "warehouse", "warehouses", warehouseId, "supplyHistory" ), supplyHistory );
+			supplyHistory.id = docRef.id;
+			dispatch( saveSupplyHistory( supplyHistory ) );
+
+		} catch ( error ) {
+			console.log( error );
+		}
+	}
+}
+
+
 
 
 export const saveWarehouse = ( warehouse ) => ({
@@ -195,6 +214,12 @@ const saveProducts = ( products ) => ({
 const saveSku = ( sku ) => ({
 	type: types.productSkuAddNew,
 	payload: { ...sku },
+});
+
+
+const saveSupplyHistory = ( supplyHistory ) => ({
+	type: types.supplyHistoryAddNew,
+	payload: { ...supplyHistory },
 });
 
 
@@ -402,6 +427,32 @@ export const startLoadingSku = (warehouseId) => {
 }
 
 
+export const startLoadingSupplyHistory = (warehouseId) => {
+	return async ( dispatch, getState ) => {
+
+		const supplyHistory = [];
+
+		const { uid } = getState().auth;
+
+		try {
+			if	(warehouseId != null && warehouseId !== "") {
+				const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "warehouses", warehouseId, "supplyHistory" ) );
+				employeesSnapshot.forEach((doc) => {
+					//console.log(doc.id, "=>", doc.data());
+					supplyHistory.push({
+						id: doc.id,
+						...doc.data(),
+					});
+				});
+
+				dispatch( loadSupplyHistory( supplyHistory ) );
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
 
 
 
@@ -444,6 +495,12 @@ const loadProducts = ( products ) => ({
 const loadSku = ( sku ) => ({
 	type: types.productSkuLoad,
 	payload: sku,
+});
+
+
+const loadSupplyHistory = ( supplyHistory ) => ({
+	type: types.supplyHistoryLoad,
+	payload: supplyHistory,
 });
 
 
@@ -734,6 +791,12 @@ export const startUpdatingProductStock = (quantity, id) => {
 		const warehouseId = getState().warehouse.warehouse.activeWarehouse;
 		console.log(quantity, id);
 
+		const supplyHistory = {
+			date: Date.now(),
+			quantity: quantity,
+			idSupply: id,
+		};
+
 		try {
 			const warehouseSnapshot = await getDoc( doc( db, uid, "warehouse", "warehouses", warehouseId, "sku", id ) );
 			const warehouse = warehouseSnapshot.data();
@@ -741,6 +804,7 @@ export const startUpdatingProductStock = (quantity, id) => {
 			const stock = warehouse.stock;
 			const newStock = parseInt(stock) + parseInt(quantity);
 			await updateDoc( doc( db, uid, "warehouse", "warehouses", warehouseId, "sku", id ), { stock: newStock } );
+			await dispatch(startSavingSupplyHistory(supplyHistory));
 			dispatch(updateProductStock(newStock));
 		} catch (error) {
 			console.log(error);

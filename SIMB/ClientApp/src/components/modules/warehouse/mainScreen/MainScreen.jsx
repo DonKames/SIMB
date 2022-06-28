@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { CardsWarehouse } from "../CardsWarehouse.jsx";
 import { TablesWarehouse } from "../TablesWarehouse.jsx";
+import { CardSupplyHistory } from './CardSupplyHistory.jsx';
 import { ModalAddProduct } from './ModalAddProduct';
 import { ModalAddProducts } from './ModalAddProducts';
 import { TBodyProduct } from './TBodyProduct';
@@ -36,7 +37,8 @@ export const MainScreen = () => {
       <>
         <Row className="justify-content-md-evenly">
           <Col md="auto">
-            <CardsWarehouse
+            <CardSupplyHistory />
+            {/* <CardsWarehouse
               title="Producto"
               modal={<ModalAddProduct />}
               table={
@@ -46,7 +48,7 @@ export const MainScreen = () => {
                   tBody={ <TBodyProduct /> }
                 />
               }
-            />
+            /> */}
           </Col>
           <Col md="auto">
             <CardsWarehouse

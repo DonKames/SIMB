@@ -4,7 +4,7 @@ import { startLoadingWarehouses, startLoadingEmployees, startLoadingCategories, 
 import { AdminScreen } from '../../modules/warehouse/adminScreen/AdminScreen';
 import { SubAdminScreen } from '../../modules/warehouse/subAdminScreen/SubAdminScreen.jsx';
 import { WarehouseKeeperScreen } from '../../modules/warehouse/warehouseKeeperScreen/WarehouseKeeperScreen.jsx';
-import { MainScreen } from '../../modules/warehouse/mainScreen/MainScreen';
+import { MainScreen } from '../../modules/warehouse/mainScreen/MainScreen.jsx';
 import { LayoutModules } from '../../modules/ui/LayoutModules';
 import { ConfigurationScreen } from '../../modules/warehouse/configurationScreen/ConfigurationScreen';
 import { useEffect } from 'react';

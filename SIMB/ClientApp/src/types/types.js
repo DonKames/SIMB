@@ -52,4 +52,7 @@ export const types = {
 
     productsAddNew: '[Products] Add New Products',
     productsLoad: '[Products] Load Products',
+
+    supplyHistoryAddNew: '[SupplyHistory] Add New SupplyHistory',
+    supplyHistoryLoad: '[SupplyHistory] Load SupplyHistories',
 };

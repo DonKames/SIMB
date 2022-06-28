@@ -14,6 +14,7 @@ const initialState = {
     product: [],
     subCategories: [],
     skus: [],
+    supplyHistory: [],
 };
 
 export const warehouseReducer = (state = initialState, action) => {
@@ -166,6 +167,18 @@ export const warehouseReducer = (state = initialState, action) => {
             return {
                 ...state,
                 products: action.payload,
+            };
+
+        
+        case types.supplyHistoryAddNew:
+            return {
+                ...state,
+                supplyHistory: [ action.payload, ...state.supplyHistory ],
+            };
+        case types.supplyHistoryLoad:
+            return {
+                ...state,
+                supplyHistory: action.payload,
             };
 
 

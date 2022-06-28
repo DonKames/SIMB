@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import { setActiveWarehouse, startLoadingWarehouse } from '../../../actions/modules/warehouse';
+import { setActiveWarehouse, startLoadingSupplyHistory, startLoadingWarehouse } from '../../../actions/modules/warehouse';
 import { ModulesScreen } from '../../modules/ModulesScreen';
 import { WarehouseRouter } from './WarehouseRouter';
 
@@ -17,6 +17,7 @@ export const ModulesRouter = () => {
   useEffect(() => {
     dispatch( startLoadingWarehouse() );
     dispatch( setActiveWarehouse(warehouseId) );
+    dispatch( startLoadingSupplyHistory(warehouseId) );
   }, [dispatch, warehouseId]);
 
     return (
