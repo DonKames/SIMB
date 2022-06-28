@@ -13,7 +13,6 @@ export const WarehouseRouter = () => {
   const dispatch = useDispatch();
 
   const warehouseId = useSelector((state) => state.warehouse?.warehouse?.activeWarehouse);
-  console.log(warehouseId);
   
   //dispatch( startLoadingWarehouse() );
   useEffect(() => {

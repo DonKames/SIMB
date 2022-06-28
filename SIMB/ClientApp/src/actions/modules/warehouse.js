@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, orderBy, query, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase-config";
 import { types } from "../../types/types";
 
@@ -434,9 +434,11 @@ export const startLoadingSupplyHistory = (warehouseId) => {
 
 		const { uid } = getState().auth;
 
+		console.log(warehouseId);
+
 		try {
 			if	(warehouseId != null && warehouseId !== "") {
-				const employeesSnapshot = await getDocs( collection( db, uid, "warehouse", "warehouses", warehouseId, "supplyHistory" ) );
+				const employeesSnapshot = await getDocs( query(collection( db, uid, "warehouse", "warehouses", warehouseId, "supplyHistory" ), orderBy("date", "desc")));
 				employeesSnapshot.forEach((doc) => {
 					//console.log(doc.id, "=>", doc.data());
 					supplyHistory.push({
@@ -498,7 +500,7 @@ const loadSku = ( sku ) => ({
 });
 
 
-const loadSupplyHistory = ( supplyHistory ) => ({
+export const loadSupplyHistory = ( supplyHistory ) => ({
 	type: types.supplyHistoryLoad,
 	payload: supplyHistory,
 });
@@ -784,7 +786,7 @@ export const setActiveWarehouse = ( warehouse ) => ({
 
 
 
-export const startUpdatingProductStock = (quantity, id) => {
+export const startUpdatingProductStock = (quantity, id, name) => {
 	return async ( dispatch, getState ) => {
 		const { uid } = getState().auth;
 
@@ -795,6 +797,7 @@ export const startUpdatingProductStock = (quantity, id) => {
 			date: Date.now(),
 			quantity: quantity,
 			idSupply: id,
+			name: name,
 		};
 
 		try {

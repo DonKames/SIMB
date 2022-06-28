@@ -5,7 +5,7 @@ export const LayoutModules = () => {
     return(
         <div className=''>
             <NavBarModules className=''/>
-            <Outlet />
+            <Outlet className='mb-3' />
         </div>
         );
 };

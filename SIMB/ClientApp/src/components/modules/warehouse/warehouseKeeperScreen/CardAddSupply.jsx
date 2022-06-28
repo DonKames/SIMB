@@ -42,7 +42,7 @@ export const CardAddSupply = ({ checked, setChecked }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(selectedSku);
-		dispatch(startUpdatingProductStock( quantity, selectedSku.id ));
+		dispatch(startUpdatingProductStock( quantity, selectedSku.id, selectedSku.name ));
 		setSelectedSku(initialState);
 		reset();
 	}

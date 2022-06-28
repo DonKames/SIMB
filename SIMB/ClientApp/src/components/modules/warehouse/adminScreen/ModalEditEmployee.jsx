@@ -22,7 +22,7 @@ export const ModalEditEmployee = ({employeeId}) => {
 		status: employee?.status ? employee.status : "",
 	};
 
-	const [formValues, handleInputChange, reset] = useForm({ ...initialState });
+	const [formValues, handleInputChange] = useForm({ ...initialState });
 
 	const { email=employee.email, id=employee.id, name=employee.name, phone=employee.phone, rut=employee.rut, status=employee.status } = formValues;
 

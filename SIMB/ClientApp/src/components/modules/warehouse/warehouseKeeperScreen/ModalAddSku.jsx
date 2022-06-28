@@ -10,7 +10,7 @@ export const ModalAddSku = () => {
 	const categories = useSelector( (state) => state.warehouse?.categories );
 	const subCategories = useSelector( (state) => state.warehouse?.subCategories );
 
-	const [ formValues, handleInputChange, reset ] = useForm	({
+	const [ formValues, handleInputChange ] = useForm	({
 		sku: "",
 		name: "",
 		category: "",
@@ -25,7 +25,7 @@ export const ModalAddSku = () => {
 		stock: "0",
 	});
 
-	const { sku, name, category, subCategory, format, unit, type, brand, model, description, price, stock } = formValues;
+	const { sku, name, category, subCategory, format, unit, type, brand, model, description, } = formValues;
 
 	const [ showAddForm, setShowAddForm ] = useState(false);
 

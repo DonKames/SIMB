@@ -1,42 +1,14 @@
 import { Row, Col } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 
-import { CardsWarehouse } from "../CardsWarehouse.jsx";
-import { TablesWarehouse } from "../TablesWarehouse.jsx";
 import { CardSupplyHistory } from './CardSupplyHistory.jsx';
-import { ModalAddProduct } from './ModalAddProduct';
-import { ModalAddProducts } from './ModalAddProducts';
-import { TBodyProduct } from './TBodyProduct';
-import { TBodyProducts } from './TBodyProducts';
+import { CardSku } from './CardSku.jsx';
 
 export const MainScreen = () => {
-
-	const tHeadProduct = [
-		"ID",
-		"Nombre",
-		"Categoría",
-		"Sub-Categoría",
-		"Cantidad",
-	];
-
-	const tHeadProducts = [
-		"ID",
-		"Nombre",
-		"Categoría",
-		"Sub-Categoría",
-		"Cantidad",
-	];
-
-	const product = useSelector( state => state.warehouse.product );
-	
-	
-	const products = useSelector( state => state.warehouse.products );
-
 
   	return (
       <>
         <Row className="justify-content-md-evenly">
-          <Col md="auto">
+          <Col md="6" className='mb-3'>
             <CardSupplyHistory />
             {/* <CardsWarehouse
               title="Producto"
@@ -50,8 +22,9 @@ export const MainScreen = () => {
               }
             /> */}
           </Col>
-          <Col md="auto">
-            <CardsWarehouse
+          <Col md="6" className='mb-3'>
+		  <CardSku />
+            {/* <CardsWarehouse
               title="Productos"
               modal={<ModalAddProducts />}
               table={
@@ -61,15 +34,15 @@ export const MainScreen = () => {
                   tBody={ <TBodyProducts /> }
                 />
               }
-            />
+            /> */}
           </Col>
-          <Col xs="auto">
+          {/* <Col xs="4" className='mb-3'>
             <img
               className="d-block w-100"
               src="https://via.placeholder.com/600x800/373940"
               alt="First slide"
             />
-          </Col>
+          </Col> */}
         </Row>
       </>
     );
