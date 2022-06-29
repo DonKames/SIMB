@@ -11,6 +11,7 @@ export const CardAddSupply = ({ checked, setChecked }) => {
 	const categories = useSelector( state => state.warehouse?.categories );
 	const subCategories = useSelector( state => state.warehouse?.subCategories );
 	const skus = useSelector( state => state.warehouse?.skus );
+	const { employeeUid, name:employeeName } = useSelector( state => state.warehouse );
 
 	const initialState = {
 		brand: "",
@@ -42,7 +43,7 @@ export const CardAddSupply = ({ checked, setChecked }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(selectedSku);
-		dispatch(startUpdatingProductStock( quantity, selectedSku.id, selectedSku.name ));
+		dispatch(startUpdatingProductStock( quantity, selectedSku.id, selectedSku.name,  ));
 		setSelectedSku(initialState);
 		reset();
 	}
@@ -164,7 +165,7 @@ export const CardAddSupply = ({ checked, setChecked }) => {
 							</Col>
 							<Col>
 								<FloatingLabel label='Cantidad'>
-									<Form.Control type="number" placeholder="Cantidad" name="quantity" onChange={handleInputChange} value={ quantity ?? "0" } disabled={!checked} required />
+									<Form.Control type="number" placeholder="Cantidad" name="quantity" variant="success" onChange={handleInputChange} value={ quantity ?? "0" } disabled={!checked} required />
 								</FloatingLabel>
 							</Col>
 						</Row>

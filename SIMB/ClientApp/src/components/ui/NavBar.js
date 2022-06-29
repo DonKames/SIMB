@@ -18,7 +18,7 @@ export const NavBar = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ms-auto flex-row d-flex align-items-center">
-                <div className="flex-col">
+                {/* <div className="flex-col">
                   <FontAwesomeIcon icon={faSun} />
                 </div>
                 <div className="d-flex justify-content-center align-items-center">
@@ -26,7 +26,7 @@ export const NavBar = () => {
                 </div>
                 <div className="flex-col">
                   <FontAwesomeIcon icon={faMoon} />
-                </div>
+                </div> */}
                 <ProfileNavBar />
               </Nav>
             </Navbar.Collapse>

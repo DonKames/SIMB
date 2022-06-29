@@ -8,7 +8,7 @@ export const MainScreen = () => {
   	return (
       <>
         <Row className="justify-content-md-evenly">
-          <Col md="6" className='mb-3'>
+          <Col md="6" className="mb-3">
             <CardSupplyHistory />
             {/* <CardsWarehouse
               title="Producto"
@@ -22,8 +22,8 @@ export const MainScreen = () => {
               }
             /> */}
           </Col>
-          <Col md="6" className='mb-3'>
-		  <CardSku />
+          <Col md="6" className="mb-3">
+            <CardSku />
             {/* <CardsWarehouse
               title="Productos"
               modal={<ModalAddProducts />}

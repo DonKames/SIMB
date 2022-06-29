@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Button, Card, Form, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadSupplyHistory, startLoadingSupplyHistory } from '../../../../actions/modules/warehouse';
@@ -59,7 +58,7 @@ export const CardSupplyHistory = () => {
                             </th>
                             <th className='text-end'>
                                 <Button className="btn btn-info" onClick={handleFilterSupplyHistory}>Buscar</Button>
-                                <Button className="btn btn-warning" onClick={handleResetSupplyHistoryFilter}>Limpiar</Button>
+                                <Button className="ms-2 btn btn-warning" onClick={handleResetSupplyHistoryFilter}>Limpiar</Button>
                             </th>
                         </tr>
                         <tr>

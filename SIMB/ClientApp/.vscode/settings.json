@@ -4,7 +4,11 @@
         "Subcategoría"
     ],
     "cSpell.ignoreWords": [
+        "Swal",
         "firestore",
-        "skus"
+        "fontawesome",
+        "fortawesome",
+        "skus",
+        "sweetalert"
     ]
 }

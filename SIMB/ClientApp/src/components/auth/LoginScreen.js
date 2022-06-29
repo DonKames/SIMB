@@ -1,28 +1,58 @@
 import { Button, Card, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import validator from "validator";
 
 
 import { startGoogleLogin, startLoginEmailPassword } from '../../actions/auth';
+import { setError } from "../../actions/ui";
 import { useForm } from '../../hooks/useForm';
 
 export const LoginScreen = () => {
 
+    //Para enviar acciones a redux
     const dispatch = useDispatch();
 
+    //Para obtener el estado de carga
     const { loading } = useSelector(state => state.ui);
+    
+    const { msgError } = useSelector(state => state.ui);
 
+    //Hook para controlar el formulario
     const [formValues, handleInputChange] = useForm({
-        email: 'camilo@hotmail.com',
-        password: '123456'
+        // email: 'camilo@hotmail.com',
+        // password: '123456'
+        email: "",
+        password: ""
     });
 
     const { email, password } = formValues;
 
+    const isFormValid = () => {
+        if(email.trim().length === 0 || password.trim().length === 0) {
+
+            const msgError = "Todos los campos son obligatorios";
+            dispatch(setError(msgError));
+            return false;
+
+        }else if(!validator.isEmail(email)) {
+
+            const msgError = "El email no es válido";
+            dispatch(setError(msgError));
+            return false;
+
+        }
+        return true;
+    }
+    
+
     const handleLogin = (e) => {
         e.preventDefault();
-        dispatch(startLoginEmailPassword(email, password));
+        if (isFormValid()) {
+            dispatch(startLoginEmailPassword(email, password));
+        }   
     };
+    
 
     const handleGoogleLogin = () => {
         dispatch(startGoogleLogin());
@@ -39,6 +69,14 @@ export const LoginScreen = () => {
                     <Form
                         onSubmit={handleLogin}
                     >
+                        {
+                             msgError &&
+                            (
+                                <h6 className='text-danger'>
+                                {msgError}
+                                </h6>
+                            )
+                        }
                         <Form.Control
                             type='email'
                             placeholder='E-mail'
@@ -88,5 +126,5 @@ export const LoginScreen = () => {
                     </Form>
                 </Card.Body>
             </Card>
-    );
-};
+        );
+    }

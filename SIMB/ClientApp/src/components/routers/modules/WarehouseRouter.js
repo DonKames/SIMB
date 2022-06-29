@@ -16,7 +16,6 @@ export const WarehouseRouter = () => {
   
   //dispatch( startLoadingWarehouse() );
   useEffect(() => {
-    dispatch(startLoadingWarehouses());
     dispatch(startLoadingEmployees());
     dispatch(startLoadingProduct(warehouseId));
     dispatch(startLoadingProducts(warehouseId));

@@ -52,6 +52,7 @@ export const startLoginEmailPassword = (email, password) => {
                         break;
 
                     default:
+                        console.log(e);
                         Swal.fire('Error', 'Error Desconocido', 'error')
                         break;
                 }

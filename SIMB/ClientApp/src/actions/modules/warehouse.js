@@ -458,6 +458,11 @@ export const startLoadingSupplyHistory = (warehouseId) => {
 
 
 
+/**
+ * This function takes an array of employees and returns an object with a type of employeesLoad and a
+ * payload of the employees array.
+ * @param employees - This is the data that you want to pass to the reducer.
+ */
 const loadEmployees = ( employees ) => ({
 	type: types.employeesLoad,
 	payload: employees,
@@ -470,12 +475,21 @@ const loadWarehouses = ( warehouses ) => ({
 });
 
 
+/**
+ * This function takes a parameter called categories and returns an object with a type property and a
+ * payload property.
+ * @param categories - This is the data that we're going to pass to the reducer.
+ */
 const loadCategories = ( categories ) => ({
 	type: types.categoriesLoad,
 	payload: categories,
 });
 
 
+/**
+ * This function returns an object with a type property and a payload property.
+ * @param subCategories - Array of subCategories
+ */
 const loadSubCategories = ( subCategories ) => ({
 	type: types.subCategoriesLoad,
 	payload: subCategories,
@@ -494,7 +508,7 @@ const loadProducts = ( products ) => ({
 });
 
 
-const loadSku = ( sku ) => ({
+export const loadSku = ( sku ) => ({
 	type: types.productSkuLoad,
 	payload: sku,
 });
