@@ -93,3 +93,10 @@ export const startLogout = () => {
         dispatch(logout());
     };
 };
+
+
+export const startSubscribe = () => {
+    return (dispatch) => {
+        
+    }
+}
