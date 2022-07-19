@@ -28,14 +28,14 @@ export const SubAdminScreen = () => {
 
 	return (
     <Row className="justify-content-md-evenly">
-      <Col md="auto">
+      <Col sm="12" md="5" className="">
         <CardsWarehouse
           title="Categorías"
           modal={<ModalAddCategory />}
           table={<TablesWarehouse tHead={ tHeadCategories } tBody={<TBodiesWarehouse slice={ categories } />} />}
         />
       </Col>
-      <Col md="auto">
+      <Col sm="12" md="5">
         <CardsWarehouse
           title="Sub-Categorías"
           modal={<ModalAddSubCategory />}
