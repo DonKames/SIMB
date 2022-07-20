@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2';
 import { googleAuthProvider } from "../firebase/firebase-config";
 import { types } from "../types/types";
-import { finishLoading, startLoading } from './ui';
+import { finishLoading, uiStartLoading } from './ui';
 import {
     createUserWithEmailAndPassword,
     getAuth, signInWithEmailAndPassword,
@@ -34,7 +34,7 @@ export const startRegisterNameEmailPass = (name, email, password) => {
 export const startLoginEmailPassword = (email, password) => {
     return (dispatch) => {
 
-        dispatch(startLoading());
+        dispatch(uiStartLoading());
 
         signInWithEmailAndPassword(auth, email, password)
             .then(({ user }) => {

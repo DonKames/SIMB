@@ -14,16 +14,16 @@ export const ModalAddPlan = () => {
     const [showAddForm, setShowAddForm] = useState(true);
 
     const [ formValues, handleInputChange ] = useForm({
-        planId: "",
-        name: "",
-        price: "",
-        interval: "",
-        interval_count: "",
-        trial_period_days: "",
+        planId: "PlanId",
+        name: "ElNombre",
+        amount: 8000,
+        interval: 1,
+        // interval_count: 10,
+        // trial_period_days: 15,
 
     });
 
-    const { planId, name, price, interval_count, trial_period_days } = formValues;
+    const { planId, name, amount, interval,  } = formValues;
 
     const handleOpenModal = () => {
         setShowAddForm(true);
@@ -35,7 +35,7 @@ export const ModalAddPlan = () => {
 
     const handleSavePlan = (e) => {
         e.preventDefault();
-        dispatch(startSavingPlan(planId, name, price, interval_count, trial_period_days));
+        dispatch(startSavingPlan(formValues));
         console.log(formValues);
         setShowAddForm(false);
     }
@@ -74,16 +74,20 @@ export const ModalAddPlan = () => {
                 <Form.Group className="mb-3">
                     <Form.Label>Precio</Form.Label>
                     <Form.Control
-                        type="text"
+                        type="currency"
                         placeholder="Precio"
                         name="price"
                         onChange={handleInputChange}
-                        value={price}
+                        value={amount}
                     />
                 </Form.Group>
                 <Form.Group className="mb-3">
                     <Form.Label>Intervalo</Form.Label>
-                    <Form.Select>
+                    <Form.Select
+                        name="interval"
+                        onChange={handleInputChange}
+                        value={interval}
+                    >
                         <option>Seleccione el Intervalo.</option>
                         <option value="1">Diario</option>
                         <option value="2">Semanal</option>
@@ -91,7 +95,7 @@ export const ModalAddPlan = () => {
                         <option value="4">Anual</option>
                     </Form.Select>
                 </Form.Group>
-                <Form.Group className="mb-3">
+                {/* <Form.Group className="mb-3">
                     <Form.Label>Cantidad del Intervalo</Form.Label>
                     <Form.Control
                         type="number"
@@ -110,7 +114,7 @@ export const ModalAddPlan = () => {
                         onChange={handleInputChange}
                         value={trial_period_days}
                     />
-                </Form.Group>
+                </Form.Group> */}
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="danger" onClick={handleCloseModal}>
