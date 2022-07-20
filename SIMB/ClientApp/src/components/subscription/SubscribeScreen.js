@@ -6,6 +6,7 @@ export const SubscribeScreen = () => {
     return (
       <Container className="mt-2">
         <h1 className="text-center mb-1">Suscribir</h1>
+        <h3 className=''>Modulo Bodegas</h3>
         <Row className="justify-content-center">
           <Col xs={12} md={8} lg={4}>
             <Card className="mb-3">

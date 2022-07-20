@@ -761,9 +761,6 @@ const editSubCategory = ( subCategoryId, subCategory ) => ({
 
 
 
-
-//!De aquí para abajo es de test.
-
 export const startLoadingWarehouse = () => {
 	return async ( dispatch, getState ) => {
 

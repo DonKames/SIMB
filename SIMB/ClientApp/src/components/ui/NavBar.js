@@ -1,7 +1,7 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
-import { Container, Form, Nav, Navbar, Row } from 'react-bootstrap';
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+//import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
+import { Container, Nav, Navbar, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { ProfileNavBar } from './ProfileNavBar';
 

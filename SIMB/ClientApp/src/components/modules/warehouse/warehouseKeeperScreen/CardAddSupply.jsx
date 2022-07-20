@@ -11,7 +11,6 @@ export const CardAddSupply = ({ checked, setChecked }) => {
 	const categories = useSelector( state => state.warehouse?.categories );
 	const subCategories = useSelector( state => state.warehouse?.subCategories );
 	const skus = useSelector( state => state.warehouse?.skus );
-	const { employeeUid, name:employeeName } = useSelector( state => state.warehouse );
 
 	const initialState = {
 		brand: "",
@@ -32,7 +31,7 @@ export const CardAddSupply = ({ checked, setChecked }) => {
 
 	const [ formValues, handleInputChange, reset ] = useForm( initialState );
 
-	const { brand, category, description, format, model, name, price, quantity, sku, stock, subCategory, type, unit } = formValues;
+	const { brand, category, format, model, name, quantity, sku, stock, subCategory, type, unit } = formValues;
 
 	const [selectedSku, setSelectedSku] = useState(initialState);
 

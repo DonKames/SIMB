@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
-import { DropdownButton, Dropdown, Nav, Navbar, Row, Button, FormSelect } from 'react-bootstrap';
+import { Nav, Navbar, Row, Button, FormSelect } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setActiveWarehouse } from '../../../actions/modules/warehouse';

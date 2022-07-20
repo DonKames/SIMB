@@ -22,7 +22,7 @@ export const ModalEditWarehouse = ({warehouseId}) => {
 		warehouseKeeper: warehouse?.warehouseKeeper ? warehouse.warehouseKeeper.id : "",
 	};
 
-	const [formValues, handleInputChange, reset] = useForm({ ...initialState });
+	const [formValues, handleInputChange] = useForm({ ...initialState });
 
 	const { id=warehouse.id, name=warehouse.name, location=warehouse.location, status= warehouse.status } = formValues;
 

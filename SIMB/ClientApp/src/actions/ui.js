@@ -9,7 +9,7 @@ export const removeError = () => ({
     type: types.uiRemoveError
 });
 
-export const startLoading = () => ({
+export const uiStartLoading = () => ({
     type: types.uiStartLoading
 });
 

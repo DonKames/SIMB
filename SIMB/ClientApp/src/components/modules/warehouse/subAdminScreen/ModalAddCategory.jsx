@@ -38,23 +38,23 @@ export const ModalAddCategory = () => {
   	return (
       <>
         <Button variant="primary" onClick={handleOpenAddCategoryForm}>
-          Agregar
+          	Agregar
         </Button>
         <Modal show={showAddForm} onHide={handleCloseAddCategoryForm}>
-          <Form onSubmit={handleSaveCategory}>
-            <Modal.Header closeButton>
-              <Modal.Title>Agregar Categoría</Modal.Title>
-            </Modal.Header>
+          	<Form onSubmit={handleSaveCategory}>
+            	<Modal.Header closeButton>
+	        		<Modal.Title>Agregar Categoría</Modal.Title>
+    	        </Modal.Header>
             <Modal.Body>
-              <Form.Group className="mb-3">
-                <Form.Label>Nombre</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Nombre"
-                  name="name"
-                  onChange={handleInputChange}
-                  value={name}
-                />
+              	<Form.Group className="mb-3">
+                	<Form.Label>Nombre</Form.Label>
+                	<Form.Control
+						type="text"
+                		placeholder="Nombre"
+                		name="name"
+                    	onChange={handleInputChange}
+                    	value={name}
+                	/>
               </Form.Group>
             </Modal.Body>
             <Modal.Footer>

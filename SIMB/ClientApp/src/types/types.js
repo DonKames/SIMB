@@ -18,6 +18,9 @@ export const types = {
     // notesLogoutCleaning: '[Notes] Logout Cleaning',
 
 
+    subscriptionAddNewPlan: '[Subscription] Start Saving Plan',
+
+
     //Module Warehouse
     warehouseAddNew: '[Warehouse] Add New Warehouse',
     warehousesLoad: '[Warehouse] Load Warehouses',
