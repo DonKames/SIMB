@@ -25,7 +25,7 @@ export const WarehouseRouter = () => {
     dispatch(startLoadingSku(warehouseId));
   }, [dispatch, warehouseId]);
 
-  // TODO:Agregar dispatch para cargar la bodega por defecto.
+  
   return (
     <Routes>
       <Route path="/" element={<LayoutModules />}>

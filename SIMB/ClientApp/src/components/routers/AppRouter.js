@@ -8,6 +8,7 @@ import { Layout } from '../ui/Layout';
 import { HomeScreen } from '../home/HomeScreen'
 import { PrivateRoutes } from './PrivateRoutes';
 import { PublicRoutes } from './PublicRoutes';
+import { startLoadingSubscriptionState } from '../../actions/subscription';
 
 
 
@@ -20,13 +21,15 @@ export const AppRouter = () => {
     const [checking, setChecking] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+    dispatch(startLoadingSubscriptionState());
+
     useEffect(() => {
         onAuthStateChanged(auth, async (user) => {
 
             if (user?.uid) {
-
+                console.log(user);
                 setIsLoggedIn(true);
-                dispatch(login(user.uid, user.displayName, user.photoURL));
+                dispatch(login(user.uid, user.displayName, user.photoURL, user.email));
 
                 //ESTE TMBN FUNCA
                 // const notes = loadNotes( user.uid );

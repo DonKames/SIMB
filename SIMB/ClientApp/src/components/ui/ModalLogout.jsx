@@ -11,7 +11,7 @@ export const ModalLogout = ({isModalOpen, setIsModalOpen}) => {
     const handleLogoutClick = () => {
         Swal.fire({
             title: "¿Estas seguro?",
-            text: "Una vez cerrado, no podrás acceder de nuevo",
+            text: "Una vez cerrado, no podrás acceder hasta iniciar sesión nuevamente.",
             icon: "warning",
             iconColor: "#f44336",
             showCancelButton: true,

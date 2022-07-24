@@ -39,8 +39,9 @@ export const startLoginEmailPassword = (email, password) => {
         signInWithEmailAndPassword(auth, email, password)
             .then(({ user }) => {
                 
-                dispatch(login(user.uid, user.displayName, user.photoURL ));
+                dispatch(login(user.uid, user.displayName, user.photoURL, user.email ));
                 dispatch(finishLoading());
+
             })
             .catch(e => {
                 switch (e.code) {
@@ -74,12 +75,13 @@ export const startGoogleLogin = () => {
     }
 };
 
-export const login = (uid, displayName, photoURL) => ({
+export const login = (uid, displayName, photoURL, email) => ({
     type: types.login,
     payload: {
         uid,
         displayName,
         photoURL,
+        email
     }
 });
 
@@ -93,10 +95,3 @@ export const startLogout = () => {
         dispatch(logout());
     };
 };
-
-
-export const startSubscribe = () => {
-    return (dispatch) => {
-        
-    }
-}

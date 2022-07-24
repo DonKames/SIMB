@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { ModalLogout } from "./ModalLogout";
 import { useState } from "react";
+import { SubscribedMenu } from "./SubscribedMenu";
 
 export const ProfileNavBar = () => {
 
@@ -15,7 +16,8 @@ export const ProfileNavBar = () => {
     if (auth.name) {
         return (
           <>
-            <Link to="pvt/subscribe" className="nav-link  ms-3 me-2">
+            <SubscribedMenu />
+            <Link to="pvt/subscribe" className="nav-link ms-1 me-2">
               Suscribir
             </Link>
             <p className="my-auto me-2">

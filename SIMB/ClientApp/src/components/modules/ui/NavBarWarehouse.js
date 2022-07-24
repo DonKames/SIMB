@@ -12,7 +12,7 @@ export const NavBarModules = () => {
 
 	const warehouses = useSelector(state => state.warehouse.warehouses);
 
-	const warehouseId = useSelector(state => state.warehouse.warehouse.mainWarehouse);
+	const warehouseId = useSelector(state => state.warehouse.warehouse.activeWarehouse);
 	//dispatch(setActiveWarehouse(warehouseId));
 
 	const handleWarehouseChange = (e) => {

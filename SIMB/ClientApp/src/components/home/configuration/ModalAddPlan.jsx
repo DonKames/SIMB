@@ -11,19 +11,19 @@ export const ModalAddPlan = () => {
 
     const dispatch = useDispatch();
 
-    const [showAddForm, setShowAddForm] = useState(true);
+    const [showAddForm, setShowAddForm] = useState(false);
 
     const [ formValues, handleInputChange ] = useForm({
-        planId: "PlanId",
-        name: "ElNombre",
+        planId: "PlanId1",
+        name: "ElNombre1",
         amount: 8000,
         interval: 1,
-        // interval_count: 10,
-        // trial_period_days: 15,
+        interval_count: 10,
+        trial_period_days: 15,
 
     });
 
-    const { planId, name, amount, interval,  } = formValues;
+    const { planId, name, amount, interval, interval_count, trial_period_days } = formValues;
 
     const handleOpenModal = () => {
         setShowAddForm(true);
@@ -95,7 +95,7 @@ export const ModalAddPlan = () => {
                         <option value="4">Anual</option>
                     </Form.Select>
                 </Form.Group>
-                {/* <Form.Group className="mb-3">
+                <Form.Group className="mb-3">
                     <Form.Label>Cantidad del Intervalo</Form.Label>
                     <Form.Control
                         type="number"
@@ -114,7 +114,7 @@ export const ModalAddPlan = () => {
                         onChange={handleInputChange}
                         value={trial_period_days}
                     />
-                </Form.Group> */}
+                </Form.Group>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="danger" onClick={handleCloseModal}>

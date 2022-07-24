@@ -1,18 +1,157 @@
-import { HmacSHA256 } from "crypto-js";
-import { uiStartLoading } from "./ui";
-import { Client } from 'khipu-client';
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { db } from "../firebase/firebase-config";
+import { orderAscParams, sendFlow, signParams } from "../helpers/flow";
+import { types } from "../types/types";
 
-export const startSavingPlan = (planRequest) => {
-    return async (dispatch, getState) => {
 
-        const client = new Client({
-            receiverId: '422636',
-            secret: '85d05c5589a2aac5c6d3dcf7dba9023a9d92364a',
+
+export const startLoadingSubscriptionState = () => {
+    return async ( dispatch, getState ) => {
+
+		//const subscriptions = [];
+
+		const { uid } = getState().auth;
+		try {
+            
+			const subscriptionsSnapshot = await getDoc( doc( db, uid, "userInfo",  ) );
+			const subscriptions = subscriptionsSnapshot.data();
+
+			dispatch(loadSubscriptions(subscriptions));
+		} catch (error) {
+			console.log(error);
+		}
+	}
+}
+
+const loadSubscriptions = (subscriptions) => {
+    return {
+        type: types.subscriptionsLoad,
+        payload: subscriptions,
+    };
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// export const startSavingPlan = (planRequest) => {
+    
+// }
+
+
+
+
+    //! todo esto funca, el problema esta en los CORS
+    // return async (dispatch) => {
+    //     send("plans/create", planRequest, "POST")
+    //     .then(response => response.json())
+    //     .then(data => console.log(data))
+    //     .catch(error => console.log(error));
+    // };
+
+    //await fetch(baseUrl+serviceName, init)
+    //     .then(response => response.json())
+    //     .then(data => {console.log(data);})
+    //     .catch(error => {
+    //         console.log(error);
+    //     });
+    
+
+    // return async (dispatch) => {
+    //     dispatch(uiStartLoading());
+
+    //     const baseUrl = `https://sandbox.flow.cl/api/`;
+
+    //     const serviceName = `plans/create`;
+
+    //     planRequest.apiKey = process.env.REACT_APP_FLOW_API_KEY;
+
+    //     let data = orderAscParams(planRequest);
+    //     const signature = signParams(planRequest);
+
+        
+    //     data += "&s=" + signature;
+        
+    //     console.log(data);
+    //     const init = {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/x-www-form-urlencoded",
+    //         //     "Accept": "application/json",
+    //         },
+    //         // withCredentials: true,
+    //         // credentials: 'same-origin',
+    //         body: data,
+    //     };
+
+    //     await fetch(baseUrl+serviceName, init)
+    //     .then(response => response.json())
+    //     .then(data => {console.log(data);})
+    //     .catch(error => {
+    //         console.log(error);
+    //     });
+    // }
+// }
+
+export const startPayingSubscription = async (params) => {
+    
+
+        const commerceOrder = Date.now();
+        params.commerceOrder = commerceOrder;
+        params.subject = "Plan Básico";
+        params.urlConfirmation = "https://localhost:44488/";
+        params.urlReturn = "https://localhost:44488/";
+        params.apiKey = process.env.REACT_APP_FLOW_API_KEY;
+
+        return await sendFlow("payment/create", params, "POST")
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
         });
 
-        const response = await client.getBanks();
+        //return await resp;
 
-        console.log(response);
+        // let data = orderAscParams(params);
+        // const signed = signParams(params);
+        // data += "&s=" + signed;
+
+        // const testUrl = `https://sandbox.flow.cl/api/payment/create`;
+        // const init = {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/x-www-form-urlencoded",
+        //     },
+        //     body: data,
+        // };
+
+        // fetch(testUrl, init)
+        // .then(response => response.json())
+        // .then(data => {console.log(data);})
+        // .catch(error => {
+        //     console.log(error);
+        // });
+    
+}
+
+
+
+
+//!Este es el que funca.
+export const startSavingPlan = (planRequest) => {
+    return async (dispatch, getState) => {
 
         const apiKey = "26FF97AD-D223-474A-99E9-929997D26LD2";
 
@@ -20,14 +159,22 @@ export const startSavingPlan = (planRequest) => {
             "apiKey": apiKey,
             "commerceOrder": "orden-de-prueba",
             "subject": "Descripcion de la orden",
-            "amount": 100,
+            "amount": 10000,
             "email": "camilo.santander1313@gmail.com",
             "urlConfirmation": "https://localhost:44488/",
             "urlReturn": "https://localhost:44488/",
         };
 
-    const apiKeyGyp = 'YnmNGr8woHeSO8KloDjrUF0QTzXAE45A';
+        let data = orderAscParams(params);
+        const signed = signParams(params);
 
+
+        console.log(signed);
+
+        
+        data += "&s=" + signed;
+
+        //const apiKeyGyp = 'YnmNGr8woHeSO8KloDjrUF0QTzXAE45A';
 
         //const testUrl = `https://api.giphy.com/v1/gifs/trending?api_key=${apiKeyGyp}`;
         const testUrl = `https://sandbox.flow.cl/api/payment/create`;
@@ -37,18 +184,28 @@ export const startSavingPlan = (planRequest) => {
                 "Content-Type": "application/x-www-form-urlencoded",
             //     "Accept": "application/json",
             },
+            // withCredentials: true,
+            // credentials: 'same-origin',
+            body: data,
         };
-
+    
         //const myRequest = new Request(testUrl);
 
-        // const resp = await fetch(testUrl);
+        //console.log(data);
+        
 
-        // const {data} = await resp.json();
+        
+        const resp = await fetch(testUrl, init)
+        .then(response => response.json())
+        .then(data => {console.log(data);})
+        .catch(error => {
+            console.log(error);
+        });
 
-        // console.log(data);
+        
 
     };
-
+}
 
 
 
@@ -117,4 +274,4 @@ export const startSavingPlan = (planRequest) => {
     //     //     dispatch(uiFinishLoading());
     //     // }
     // }
-};
+// };

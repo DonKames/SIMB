@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 
 import { authReducer } from "../reducers/authReducer";
 import { warehouseReducer } from "../reducers/modules/warehouseReducer";
+import { subscriptionReducer } from "../reducers/subscriptionReducer";
 //import { notesReducer } from "../reducers/notesReducer";
 import { uiReducer } from "../reducers/uiReducer";
 
@@ -16,6 +17,7 @@ const reducers = combineReducers({
     auth: authReducer,
     ui: uiReducer,
     warehouse: warehouseReducer,
+    subscription: subscriptionReducer,
 });
 
 //Crear el store de Redux

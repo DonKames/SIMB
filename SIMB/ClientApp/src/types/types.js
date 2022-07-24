@@ -58,4 +58,6 @@ export const types = {
 
     supplyHistoryAddNew: '[SupplyHistory] Add New SupplyHistory',
     supplyHistoryLoad: '[SupplyHistory] Load SupplyHistories',
+
+    subscriptionsLoad: '[Subscription] Load Subscriptions',
 };
