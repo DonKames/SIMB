@@ -3,7 +3,7 @@ import { Carousel, Container } from "react-bootstrap"
 export const HomeScreen = () => {
     return (
         <>
-            <Container className='bg-light animate__animated animate__fadeIn animate__faster h-100'>
+            <Container className='animate__animated animate__fadeIn animate__faster h-100'>
                 <h1 className='text-center'>Sistema Inventario Multi Bodega</h1>
                 <Carousel fade>
                     <Carousel.Item>

@@ -8,15 +8,15 @@ import { ProfileNavBar } from './ProfileNavBar';
 export const NavBar = () => {
     return (
       <Row>
-        <Navbar bg="secondary" expand="lg" className="bg-gradient">
+        <Navbar expand="lg" className="bg-secondary bg-gradient shadow-sm">
           <Container>
             <Navbar.Brand>
               <Link to="/" className="navbar-brand">
                 SIMB
               </Link>
             </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
+            <Navbar.Toggle aria-controls="navbar" />
+            <Navbar.Collapse id="navbar">
               <Nav className="ms-auto flex-row d-flex align-items-center">
                 {/* <div className="flex-col">
                   <FontAwesomeIcon icon={faSun} />
