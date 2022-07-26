@@ -32,6 +32,7 @@ export const ModalAddEmployee = () => {
 		e.preventDefault();
 		dispatch(startSavingEmployee(employee));
 		reset();
+		handleCloseAddEmployeeForm();
 	};
 
 	const handleOpenAddEmployeeForm = () => {

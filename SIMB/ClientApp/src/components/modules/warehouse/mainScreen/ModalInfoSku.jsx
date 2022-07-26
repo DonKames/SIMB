@@ -8,6 +8,8 @@ export const ModalInfoSku = ({checked, setChecked, idSku}) => {
     const category = useSelector( state => state.warehouse.categories ).find( category => category?.id === sku?.category );
     const subCategory = useSelector( state => state.warehouse.subCategories ).find( subCategory => subCategory?.id === sku?.subCategory );
 
+    console.log(subCategory);
+
     const handleClose = () => setChecked(false);
     
   return (
@@ -34,7 +36,7 @@ export const ModalInfoSku = ({checked, setChecked, idSku}) => {
                         <p>{ sku?.name }</p>
                         <p>{ sku?.stock ? sku.stock : '0' }</p>
                         <p>{ category?.name }</p>
-                        <p>{ subCategory?.name }</p>
+                        <p>{ subCategory?.name === undefined ? "---" : subCategory.name }</p>
                         <p>{ sku?.brand }</p>
                         <p>{ sku?.model }</p>
                         <p>{ sku?.description }</p>

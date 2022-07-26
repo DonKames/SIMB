@@ -67,9 +67,9 @@ export const startGoogleLogin = () => {
         signInWithPopup(auth, googleAuthProvider)
             .then(({ user }) => {
                 console.log(user + " - google login");
-                const { displayName, uid, photoURL } = user;
+                const { displayName, uid, photoURL, email } = user;
                 dispatch(
-                    login(uid, displayName, photoURL)
+                    login(uid, displayName, photoURL, email)
                 )
             })
     }

@@ -36,8 +36,8 @@ export const BasicSubscriptionModal = () => {
         const commerceOrder = Date.now();
         params.commerceOrder = commerceOrder;
         params.subject = "Plan Básico";
-        params.urlConfirmation = "https://5a23-186-104-237-91.ngrok.io/";
-        params.urlReturn = "https://5a23-186-104-237-91.ngrok.io/";
+        params.urlConfirmation = "https://localhost:44488/";
+        params.urlReturn = "https://localhost:44488/";
         params.apiKey = process.env.REACT_APP_FLOW_API_KEY;
 
         return await sendFlow("payment/create", params, "POST")

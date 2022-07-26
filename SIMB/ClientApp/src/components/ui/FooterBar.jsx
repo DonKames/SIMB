@@ -19,20 +19,20 @@ export const FooterBar = () => {
 					<Navbar.Brand className="text-white">
 						<Link to="/" className="text-white">
 							<img
-								src="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png"
-								width="30"
-								height="30"
+								src="https://res.cloudinary.com/cloud-kames/image/upload/v1658686010/SIMB/simbLogo_vcpz3g.jpg"
+								width="100"
+								height="100"
 								alt="Keep"
 							/>
-							<span className="text-dark">
+							<div className="text-dark text-center">
 							SIMB
-							</span>
+							</div>
 						</Link>
 					</Navbar.Brand>
 					<Navbar.Toggle aria-controls="footer" />
             		<Navbar.Collapse id="footer">
 						<Nav className="ms-auto me-5">
-							<div>
+							<div >
 								<div>
 									<h6>Paginas</h6>
 								</div>

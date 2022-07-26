@@ -1,6 +1,9 @@
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, orderBy, query, updateDoc } from "firebase/firestore";
+import { useSelector } from "react-redux";
 import { db } from "../../firebase/firebase-config";
 import { types } from "../../types/types";
+
+
 
 
 
@@ -797,7 +800,7 @@ export const setActiveWarehouse = ( warehouse ) => ({
 
 
 
-export const startUpdatingProductStock = (quantity, id, name) => {
+export const startUpdatingProductStock = (quantity, id, name, warehouseId) => {
 	return async ( dispatch, getState ) => {
 		const { uid } = getState().auth;
 
@@ -820,6 +823,7 @@ export const startUpdatingProductStock = (quantity, id, name) => {
 			await updateDoc( doc( db, uid, "warehouse", "warehouses", warehouseId, "sku", id ), { stock: newStock } );
 			await dispatch(startSavingSupplyHistory(supplyHistory));
 			dispatch(updateProductStock(newStock));
+			dispatch(startLoadingSku(warehouseId));
 		} catch (error) {
 			console.log(error);
 		}

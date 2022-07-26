@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { doc, getDoc, } from "firebase/firestore";
 import { db } from "../firebase/firebase-config";
 import { orderAscParams, sendFlow, signParams } from "../helpers/flow";
 import { types } from "../types/types";

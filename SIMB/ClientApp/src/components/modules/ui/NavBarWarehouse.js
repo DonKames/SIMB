@@ -25,7 +25,7 @@ export const NavBarModules = () => {
 				<Navbar bg="secondary" expand="lg" className="mw-100 mb-3 bg-gradient">
 					<Navbar.Brand>
 						<Link to="/pvt/modules/warehouse/" className="navbar-brand">
-							TEST COMPANY
+							FAKE COMPANY
 						</Link>
 					</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />

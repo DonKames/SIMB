@@ -11,6 +11,10 @@ export const CardAddSupply = ({ checked, setChecked }) => {
 	const categories = useSelector( state => state.warehouse?.categories );
 	const subCategories = useSelector( state => state.warehouse?.subCategories );
 	const skus = useSelector( state => state.warehouse?.skus );
+	const warehouseId = useSelector(state => state.warehouse.warehouse.activeWarehouse);
+
+
+
 
 	const initialState = {
 		brand: "",
@@ -42,7 +46,7 @@ export const CardAddSupply = ({ checked, setChecked }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(selectedSku);
-		dispatch(startUpdatingProductStock( quantity, selectedSku.id, selectedSku.name,  ));
+		dispatch(startUpdatingProductStock( quantity, selectedSku.id, selectedSku.name, warehouseId  ));
 		setSelectedSku(initialState);
 		reset();
 	}
@@ -55,11 +59,27 @@ export const CardAddSupply = ({ checked, setChecked }) => {
 				sku.quantity = "0";
 				console.log(sku);
 				setSelectedSku({ ...selectedSku, ...sku, });
+				console.log(selectedSku);
 			}
 		} catch(err){
 			console.log(err);
 		}
 	};
+
+	const handleNameChange = (e) => {
+		handleInputChange(e);
+		try{
+			const sku = skus.find((sku) => sku.name === e.target.value);
+			if( sku !== undefined){
+				sku.quantity = "0";
+				console.log(sku);
+				setSelectedSku({ ...selectedSku, ...sku, });
+				console.log(selectedSku);
+			}
+		} catch(err){
+			console.log(err);
+		}
+	}
 
 
   return (
@@ -96,7 +116,7 @@ export const CardAddSupply = ({ checked, setChecked }) => {
 						<Row className="mb-3">
 							<Col>
 								<FloatingLabel label='SKU / Nro Parte'>
-									<Form.Control type="text" placeholder="SKU/Nro Serie" name="sku" list='dlSku' autoComplete="off" onChange={(e) => handleSkuChange(e) } value={sku} disabled={!checked} required />
+									<Form.Control type="text" placeholder="SKU/Nro Serie" name="sku" list='dlSku' autoComplete="off" onChange={(e) => handleSkuChange(e) } value={ selectedSku ? selectedSku.sku : sku} disabled={!checked} required />
 									<datalist id='dlSku'>
 										{skus.map((sku) => (
 											<option key={sku.id} value={sku.sku} />
@@ -106,7 +126,7 @@ export const CardAddSupply = ({ checked, setChecked }) => {
 							</Col>
 							<Col>
 								<FloatingLabel label='Nombre'>
-								<Form.Control type="text" placeholder="Nombre" name="name" list='dlName' autoComplete="off" onChange={handleInputChange} value={ selectedSku ? selectedSku.name : name} disabled={!checked} required />
+								<Form.Control type="text" placeholder="Nombre" name="name" list='dlName' autoComplete="off" onChange={(e) => handleNameChange(e)} value={ selectedSku ? selectedSku.name : name} disabled={!checked} required />
 								<datalist id='dlName'>
 									{skus.map((sku) => (
 										<option key={sku.id} value={sku.name} />

@@ -51,7 +51,7 @@ export const SubscribeScreen = () => {
                   Plan Medio
                 </Card.Title>
                 <Card.Img src="https://res.cloudinary.com/cloud-kames/image/upload/v1656463719/SIMB/Plan_2_400x600_ojqtvr.png" />
-                
+                <Card.Body className='mb-3'>
                 <ul>
                     <li>
                 -Podrás administrar hasta 2 bodegas en linea
@@ -68,8 +68,7 @@ export const SubscribeScreen = () => {
 -Acceso de dos usuarios (administrador y bodeguero)
                     </li>
                   </ul>
-                <div className="text-end">
-                </div>
+                </Card.Body>
               </Card.Body>
               <Card.Footer className="text-center">
                   <Link to="/pvt/modules">
@@ -97,8 +96,6 @@ export const SubscribeScreen = () => {
                     </li>
                   </ul>
                 </Card.Body>
-                <div className="text-end">
-                </div>
               </Card.Body>
               <Card.Footer className="text-center">
                   <Link to="/pvt/modules">

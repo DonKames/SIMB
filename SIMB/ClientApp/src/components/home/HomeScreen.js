@@ -5,7 +5,7 @@ export const HomeScreen = () => {
         <>
             <Container className='animate__animated animate__fadeIn animate__faster h-100'>
                 <h1 className='text-center'>Sistema Inventario Multi Bodega</h1>
-                <Carousel fade>
+                <Carousel fade className="shadow-sm mb-5">
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
